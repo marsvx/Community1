@@ -1,0 +1,27 @@
+services:
+  db:
+    image: postgres:latest  # Pulls the latest official PostgreSQL image
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}  # Use the username from .env file
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}  # Use the password from .env file
+      POSTGRES_DB: ${POSTGRES_DB}  # Use the database name from .env file
+    volumes:
+    # Mount local directory for persistent data. This allows us to store the db data in our local machines to keep data safe between container restarts.
+      - ./tmp/db:/var/lib/postgresql/data  #./tmp/db is the tmp/db folder in the projects root folder!/var/lib/postgresql/data is where the data is stored within the container.
+    ports:
+      - "5432:5432"  # Expose the PostgreSQL port 5432
+
+#this is our rails app container
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b '0.0.0.0'"
+    volumes:
+      - ".:/resource-finder" # Local project root mounted to /RESOURCE-FINDER in the container
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}

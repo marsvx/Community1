@@ -1,0 +1,67 @@
+erdiagram ResourceFinder
+notation=crowsfoot
+//Contributors: Lizeth A.N (Goku900)
+
+entity User {
+    id key
+    email key
+    username key
+    firstName
+    DOB
+    hashedPasswd
+    zipcode
+}
+
+relationship recommended {
+    User[0..N] -> Organization[0..N]
+}
+
+entity Organization {
+    uID key
+    name key
+    address
+    category
+    phoneNumber
+    webLink
+    servicesSummary
+}
+
+relationship associated {
+    Organization[1] -> Review[0..N]
+}
+
+entity Review {
+    orgUid key
+    uID partial-key
+    userId
+    commentID
+    starsValue
+}
+
+relationship assigned {
+    Organization[0..N] -> Category[1..N]
+}
+
+entity Category {
+    id key
+    name
+}
+
+relationship reviews {
+    User[0..N] -> Organization[0..N]
+}
+relationship writes {
+    User[1] -> Review[0..N]
+}
+
+relationship comments {
+    User[1] -> ReviewComment[0..N]
+}
+
+weak entity ReviewComment {
+    id partial-key
+    reviewId key
+    userId
+    postBody
+    timeStamp
+}

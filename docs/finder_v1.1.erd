@@ -1,0 +1,165 @@
+erdiagram ResourceFinder
+notation=crowsfoot
+//v1.1 has been revised using feedback and recommendations give by ChatGPT versions o1-preview and 4o
+//https://chatgpt.com/share/66e62720-1704-8003-a2a5-31f89e100e16
+
+entity User {
+    userId key
+    email
+    username
+    firstName
+    ageRange
+    hashedPasswd
+    zipcode
+    //standard user role, admin role, organization role
+    role
+}
+
+weak entity Favorite {
+    favoriteId key
+    //foreign keys
+    userId partial-key
+    organizationId partial-key
+    createdAt
+}
+
+relationship favorites {
+    User[1] -> Favorite[0..N]
+}
+
+relationship favorited_by {
+    Organization[1] -> Favorite[0..N]
+}
+
+entity Dependent {
+    dependentId key
+    //this is a foreign key
+    userId
+    nickName
+    ageRange
+}
+
+relationship has {
+    User[1] -> Dependent[0..N]
+}
+
+entity Events {
+    eventId key
+    //optional
+    OrganizationId
+    // optional
+    userId
+    title
+    //split into month, day, year
+    date
+    time
+    //this denotes if the event was submitted by org or user; constraint e.g. ORG or USER
+    submissionType
+    description
+    //split into street, city, state
+    location
+    //Note that the event might be virtual; boolean type
+    isVirtual
+}
+
+relationship has_event {
+    Organization[0..N] -> Events[0..N]
+}
+
+entity Recommendation {
+    //userId, organizationId are foreign keys, create a composite key from these
+    userId key
+    organizationId key
+    createdAt
+}
+
+entity Survey {
+    surveyId key
+    //foreign key
+    OrganizationId
+    createdAt
+    updatedAt
+}
+
+entity Question {
+    questionId key
+    //e.g checkbox, yes/no
+    type
+    createdAt
+}
+
+relationship asks {
+    Survey[0..N] -> Question[0..N]
+}
+
+relationship takes {
+    User[1] -> Survey[0..N]
+}
+
+relationship has_recommendations {
+    User[0..N] -> Recommendation[0..N]
+}
+
+entity Organization {
+    organizationId key
+    name
+    //split address into street, city, state, and zipcode during normalization
+    address
+    category
+    email
+    phoneNumber
+    webLink
+    servicesSummary
+    createdAt
+    updatedAt
+    //added role attribute
+    role
+    //this can be AI generated or a function needs to be written
+    avgStarValue
+}
+
+relationship associated {
+    Organization[1] -> Review[0..N]
+}
+
+weak entity Review {
+    //organizationId and userId are foreign keys
+    organizationId key
+    reviewId partial-key
+    userId key
+    commentID
+    //starsValue must have a range constraint e.g. 1-5
+    starsValue
+    createdAt
+    updatedAt
+}
+
+relationship assigned {
+    Organization[0..N] -> Category[1..N]
+}
+
+entity Category {
+    id key
+    name
+}
+
+relationship writes {
+    //A user can write 0 or many reviews
+    // A review must've been written by 1 user
+    User[1] -> Review[0..N]
+}
+
+relationship comments {
+    User[1] -> ReviewComment[0..N]
+}
+
+weak entity ReviewComment {
+    //id and reviewId can be combined to form a composite primary key
+    //reviewId is a foreign key Review(reviewId)
+    CommentId partial-key
+    reviewId key
+    userId
+    postBody
+    createdAt
+    updatedAt
+}
