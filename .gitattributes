@@ -1,0 +1,9 @@
+# Normalize all text files to LF on commit
+* text=auto
+
+# Force LF for specific file types like scripts, code, and configuration files
+*.sh text eol=lf
+*.rb text eol=lf
+*.yml text eol=lf
+*.md text eol=lf
+Dockerfile text eol=lf
