@@ -168,6 +168,7 @@ GEM
     nokogiri (1.16.7-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    ostruct (0.6.0)
     pg (1.5.8)
     pg (1.5.8-x64-mingw-ucrt)
     pry (0.14.2)
@@ -327,6 +328,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   jsbundling-rails
+  ostruct
   pg (~> 1.1)
   pry-rails
   puma (>= 5.0)
