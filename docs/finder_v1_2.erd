@@ -18,6 +18,7 @@ entity Admins{
 }
 
 entity Dependent { //need a key
+    dependentid key
     userId //foreing Key
     nickName 
     ageRange
@@ -62,6 +63,7 @@ entity Organization {
 }
 
 entity Reviews { //need to tink a good key for this one
+    reviewid key
     organizationemail //foreign key
     userId //foreing key
     title //could be Null
@@ -95,7 +97,7 @@ relationship review_event{
 }
 
 relationship add{
-    Admins[0..N] -> Question[0..N]
+    Admins[1] -> Question[0..N]
 }
 relationship has_event {
     Organization[0..N] -> Events[0..N]
@@ -104,7 +106,7 @@ relationship has_event {
 }
 
 relationship asks {
-    Survey[0..1] -> Question[0..N]
+    Survey[1] -> Question[1..N]
 }
 
 relationship takes {
@@ -112,11 +114,11 @@ relationship takes {
 }
 
 relationship associated {
-    Organization[0..1] -> Reviews[0..N]
+    Organization[1] -> Reviews[0..N]
 }
 
 relationship assigned {
-    Organization[1..N] -> Category[1..N]
+    Organization[0..N] -> Category[1..N]
     rganization_email //foreing key
     categoryabbr //foreing key
 }
@@ -126,7 +128,7 @@ relationship writes {
 }
 
 relationship review {
-    Admins[0..1] -> Reviews[0..N]
+    Admins[1] -> Reviews[0..N]
     reviewid //foreing key once defined
     usernameAdmin //foreing key role
     status //approved or denied could be boolean value
