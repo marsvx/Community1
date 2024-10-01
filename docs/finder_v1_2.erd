@@ -1,0 +1,136 @@
+erdiagram ResourceFinder
+notation=crowsfoot
+
+entity User {
+    username key
+    email
+    firstName
+    ageRange //foreing key
+    hashedPasswd
+    zipcode
+}
+
+entity Admins{
+    username_admin key
+    email
+    firstName
+    protectedPassword
+}
+
+entity Dependent { //need a key
+    dependentid key
+    userId //foreing Key
+    nickName 
+    ageRange
+}
+
+entity Events {
+    eventId key //could be serial or randomly generated
+    OrganizationId //this could be Null
+    username //foreing key and should be able to be null
+    title
+    date_time //split into month, day, year, time
+    description
+    location //split into street, city, state
+    isVirtual //Note that the event might be virtual; boolean type
+    meetinglink 
+}
+
+entity Survey {
+    surveyId key
+    userId //foreing key
+    questionId //foreing key
+    answer
+    createdAt
+    updatedAt
+}
+
+entity Question {
+    questionId key
+    question
+}
+
+entity Organization {
+    name
+    address//split address into street, city, state, and zipcode during normalization
+    email key
+    phoneNumber
+    webLink
+    servicesSummary
+    createdAt
+    updatedAt
+    avgStarValue //can be Null
+}
+
+entity Reviews { //need to tink a good key for this one
+    reviewid key
+    organizationemail //foreign key
+    userId //foreing key
+    title //could be Null
+    comment //could be Null
+    starsValue //starsValue must have a range constraint e.g. 1-5
+    createdAt
+    updatedAt
+}
+
+entity Category {
+    abbv key
+    name
+}
+
+relationship favorites {
+    User[1..N] -> Organization[0..N]
+    userId //foreing key
+    organizationId //foreing key
+    createdAt
+}
+
+relationship has {
+    User[1] -> Dependent[0..N]
+}
+
+relationship review_event{
+    Admins[0..1] -> Events[0..N]
+    eventid //forening key
+    adminid //foreing key
+    status //boolean
+}
+
+relationship add{
+    Admins[1] -> Question[0..N]
+}
+relationship has_event {
+    Organization[0..N] -> Events[0..N]
+    organizationid //foreging key
+    eventid //goreing key
+}
+
+relationship asks {
+    Survey[1] -> Question[1..N]
+}
+
+relationship takes {
+    User[1] -> Survey[0..N]
+}
+
+relationship associated {
+    Organization[1] -> Reviews[0..N]
+}
+
+relationship assigned {
+    Organization[0..N] -> Category[1..N]
+    rganization_email //foreing key
+    categoryabbr //foreing key
+}
+
+relationship writes {
+    User[1] -> Reviews[0..N]
+}
+
+relationship review {
+    Admins[1] -> Reviews[0..N]
+    reviewid //foreing key once defined
+    usernameAdmin //foreing key role
+    status //approved or denied could be boolean value
+    desicion_date
+}
