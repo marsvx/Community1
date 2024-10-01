@@ -17,53 +17,27 @@ entity Admins{
     protectedPassword
 }
 
-weak entity Favorite {
-    //favoriteId key
-    //foreign keys
-    userId partial-key
-    organizationId partial-key
-    createdAt
-}
-
-entity Dependent {
-    //dependentId key
-    //this is a foreign key
-    userId key
-    nickName key
+entity Dependent { //need a key
+    userId //foreing Key
+    nickName 
     ageRange
 }
 
 entity Events {
     eventId key //could be serial or randomly generated
-    //optional
     OrganizationId //this could be Null
-    // optional
     username //foreing key and should be able to be null
     title
-    //split into month, day, year, time
-    date_time
-    //this denotes if the event was submitted by org or user; constraint e.g. ORG or USER
-    //submissionType this can be gatter by the username or the organizationid
+    date_time //split into month, day, year, time
     description
-    //split into street, city, state
-    location
-    //Note that the event might be virtual; boolean type
-    isVirtual
+    location //split into street, city, state
+    isVirtual //Note that the event might be virtual; boolean type
     meetinglink 
 }
 
-/*entity Recommendation { I feel like this should be done by the algorithm, not need to storage as it could change
-    //userId, organizationId are foreign keys, create a composite key from these
-    userId key
-    organizationId key
-    createdAt
-}*/
-
 entity Survey {
     surveyId key
-    //foreign key
-    //OrganizationId
-    userId //foreing key optional
+    userId //foreing key
     questionId //foreing key
     answer
     createdAt
@@ -73,35 +47,26 @@ entity Survey {
 entity Question {
     questionId key
     question
-    //createdAt
 }
 
 entity Organization {
     name
-    //split address into street, city, state, and zipcode during normalization
-    address
-    categoryabbr //foreing key
+    address//split address into street, city, state, and zipcode during normalization
     email key
     phoneNumber
     webLink
     servicesSummary
     createdAt
     updatedAt
-    /*added role attribute (needed?)
-    role*/
-    //this can be AI generated or a function needs to be written
     avgStarValue //can be Null
 }
 
 entity Reviews { //need to tink a good key for this one
-    //organizationId and userId are foreign keys
     organizationemail //foreign key
-    //reviewId partial-key
     userId //foreing key
     title //could be Null
     comment //could be Null
-    //starsValue must have a range constraint e.g. 1-5
-    starsValue
+    starsValue //starsValue must have a range constraint e.g. 1-5
     createdAt
     updatedAt
 }
@@ -111,38 +76,31 @@ entity Category {
     name
 }
 
-/*weak entity ReviewComment { //need to think a good 
-    //id and reviewId can be combined to form a composite primary key
-    //reviewId is a foreign key Review(reviewId)
-    CommentId partial-key
-    reviewId key
-    userId
-    postBody
-    createdAt
-    updatedAt
-    reviewid //foreing key once defined
-    usernameAdmin //foreing key role
-    status //approved or denied could be boolean value
-    desicion_date
-}
-*/
-
 relationship favorites {
-    User[1] -> Favorite[0..N]
+    User[1..N] -> Organization[0..N]
+    userId //foreing key
+    organizationId //foreing key
+    createdAt
 }
-
-/* can organizations pick favorites
-relationship favorited_by {
-    Organization[1] -> Favorite[0..N]
-}
-*/
 
 relationship has {
     User[1] -> Dependent[0..N]
 }
 
+relationship review_event{
+    Admins[0..1] -> Events[0..N]
+    eventid //forening key
+    adminid //foreing key
+    status //boolean
+}
+
+relationship add{
+    Admins[0..N] -> Question[0..N]
+}
 relationship has_event {
     Organization[0..N] -> Events[0..N]
+    organizationid //foreging key
+    eventid //goreing key
 }
 
 relationship asks {
@@ -153,21 +111,17 @@ relationship takes {
     User[1] -> Survey[0..N]
 }
 
-/*relationship has_recommendations {
-    User[0..N] -> Recommendation[0..N]
-}*/
-
 relationship associated {
-    Organization[1] -> Reviews[0..N]
+    Organization[0..1] -> Reviews[0..N]
 }
 
 relationship assigned {
-    Organization[0..N] -> Category[1..N]
+    Organization[1..N] -> Category[1..N]
+    rganization_email //foreing key
+    categoryabbr //foreing key
 }
 
 relationship writes {
-    //A user can write 0 or many reviews
-    // A review must've been written by 1 user
     User[1] -> Reviews[0..N]
 }
 
