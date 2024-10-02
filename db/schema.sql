@@ -1,81 +1,143 @@
-CREATE TABLE User (
-    userId SERIAL PRIMARY KEY,
-    email VARCHAR(150) UNIQUE NOT NULL,
-    userName NOT NULL,
-    firstName VARCHAR(50), --not sure if we actually want this field
-    ageRange Age_Range NOT NULL, --Uses ENUM type for fixed ranges
-    hashedPasswd VARCHAR(150),
-    zipCode INTEGER,
-    userType User_Type NOT NULL --Uses ENUM type for type of user
-);
+--DB Creation:
+DROP DATABASE COmunnity IF EXISTS;
+CREATE DATABASE COmunnity;
 
+DROP TABLE IF EXISTS Users CASCADE;
+DROP TABLE IF EXISTS Admins CASCADE;
+DROP TABLE IF EXISTS Questions CASCADE;
+DROP TABLE IF EXISTS Categories CASCADE;
+DROP TABLE IF EXISTS Organizations CASCADE;
+DROP TABLE IF EXISTS Dependents CASCADE;
+DROP TABLE IF EXISTS Surveys CASCADE;
+DROP TABLE IF EXISTS Events CASCADE;
+DROP TABLE IF EXISTS Reviews CASCADE;
+DROP TABLE IF EXISTS Favorites CASCADE;
+DROP TABLE IF EXISTS Classifications CASCADE;
+
+--Types:
 -- Create fixed age range as ENUM
-CREATE TYPE Age_Range AS ENUM (); --e.g. 0-18, 19-24, 25-34
+CREATE TYPE Age_Range AS ENUM ("0-18", "19-24", "25-34", "35-70", "70-+");
 
 --Create fixed user types as ENUM
 CREATE TYPE User_Type AS ENUM ('REG', 'ORG', 'ADMIN');
 
-CREATE TABLE Favorite (
-    favoriteId SERIAL NOT NULL,
-    userId SERIAL NOT NULL,
-    organizationId  SERIAL NOT NULL,
-    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (favoriteId, userId, organizationId),
-    FOREIGN KEY (userId) REFERENCES User(userId),
-    FOREIGN KEY (organizationId) REFERENCES Organization(organizationId)
+--Tables:
+CREATE TABLE Users (
+    username VARCHAR(15) PRIMARY KEY,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    firstName VARCHAR(150) NOT NULL,
+    ageRange VARCHAR(8) NOT NULL,
+    hashedPasswd VARCHAR(80) NOT NULL,
+    zipCode INTEGER,
 );
 
-CREATE TABLE Dependent (
-    dependentId SERIAL NOT NULL,
-    userId SERIAL NOT NULL,
-    nickName VARCHAR(50) NOT NULL,
-    ageRange Age_Range NOT NULL,
-    PRIMARY KEY (dependentId, userId),
-    FOREIGN KEY (userId) REFERENCES User(userId)
+CREATE TABLE Admins(
+    username VARCHAR(15) PRIMARY KEY,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    firstName VARCHAR(150) NOT NULL,
+    protectedPassword VARCHAR(80) NOT NULL
 );
 
--- TODO: Events table
-
-
-
---TODO: Recommendation Table
-
-
-
---TODO: Survey Table
-
-
-
--- Create question type as ENUM
-CREATE TYPE question_type AS ENUM ('checkbox', 'multiple_choice', 'text', 'dropdown');
-
-CREATE TABLE Question (
-    questionId PRIMARY KEY,
-    questionText TEXT,
-    type question_type,
-    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE Questions(
+    questionID SERIAL PRIMARY KEY,
+    question VARCHAR(150) NOT NULL
 );
 
--- Create category type as ENUM
-CREATE TYPE category_type AS ENUM ('housing', 'food', 'legal', 'healthcare', 'education', 'child care');
+CREATE TABLE Categories(
+    abbv VARCHAR(5) PRIMARY KEY,
+    cat_name VARCHAR(100) NOT NULL
+);
 
-CREATE TABLE Organization (
-    organizationId SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    street VARCHAR(255),
-    city VARCHAR(100),
-    state VARCHAR(2) NOT NULL CHECK (state = 'CO')
-    zipcode VARCHAR(20),
-    category VARCHAR(100),
-    email VARCHAR(255),
-    phoneNumber VARCHAR(20),
-    webLink VARCHAR(255),
-    servicesSummary TEXT,
+CREATE TABLE Organizations (
+    org_name VARCHAR(255) NOT NULL,
+    street VARCHAR(255) NOT NULL,
+    city VARCHAR(100) NOT NULL,
+    org_state VARCHAR(2) NOT NULL CHECK (state = 'CO')
+    zipcode INTEGER NOT NULL,
+    email VARCHAR(255) PRIMARY KEY,
+    phoneNumber VARCHAR(15),
+    webLink VARCHAR(2050),
+    servicesSummary TEXT NOT NULL,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
-    avgStarValue DECIMAL(3, 2)
+    avgStarValue DECIMAL(1, 1)
 );
 
+CREATE TABLE Dependents (
+    dependentId SERIAL PRIMARY KEY,
+    userID VARCHAR(15) NOT NULL,
+    nickname VARCHAR(50) NOT NULL,
+    ageRange Age_Range VARCHAR(8) NOT NULL,
+    FOREIGN KEY (userID) REFERENCES Users(username)
+);
+
+CREATE TABLE Surveys(
+    surveyID SERIAL PRIMARY KEY,
+    userID VARCHAR(15) NOT NULL,
+    questionID INTEGER NOT NULL,
+    answer VARCHAR(255),
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (userID) REFERENCES Users(username),
+    FOREIGN KEY (questionID) REFERENCES Questions(questionID)
+);
+
+CREATE TABLE Events(
+    eventid SERIAL PRIMARY KEY,
+    organizationID VARCHAR(255),
+    userID VARCHAR(15),
+    title VARCHAR(150) NOT NULL,
+    eventDate DATE NOT NULL,
+    eventTime TIME NOT NULL,
+    eventDescription text NOT NULL,
+    street VARCHAR(255) NOT NULL,
+    city VARCHAR(100) NOT NULL,
+    eventState VARCHAR(2) NOT NULL CHECK (state = 'CO')
+    zipcode INTEGER NOT NULL,
+    isVirtual BOOLEAN NOT NULL,
+    meetingLink VARCHAR(2050),
+    eventstatus BOOLEAN NOT NULL,
+    adminID VARCHAR(15),
+    FOREIGN KEY organizationID REFERENCES Organizations(email),
+    FOREIGN KEY userID REFERENCES Users(username),
+    FOREIGN KEY adminID REFERENCES Admins(username)
+);
+
+CREATE TABLE Reviews(
+    reviewID SERIAL PRIMARY KEY,
+    organizationID VARCHAR(255),
+    userID VARCHAR(15),
+    title VARCHAR(150),
+    comment TEXT,
+    starValue DECIMAL(1, 1) NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    adminID VARCHAR(15),
+    reviewStatus BOOLEAN NOT NULL,
+    FOREIGN KEY organizationID REFERENCES Organizations(email),
+    FOREIGN KEY userID REFERENCES Users(username),
+    FOREIGN KEY adminID REFERENCES Admins(username)
+);
+
+--Relation Tables:
+CREATE TABLE Favorites(
+    favoriteID SERIAL PRIMARY KEY,
+    userID VARCHAR(15) NOT NULL,
+    organizationID VARCHAR(255) NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    FOREIGN KEY userID REFERENCES Users(username),
+    FOREIGN KEY organizationID REFERENCES Organizations(email)
+);
+
+CREATE TABLE Classifications(
+    associationID SERIAL PRIMARY KEY,
+    organizationID VARCHAR(255) NOT NULL,
+    categoryabbr VARCHAR(5) NOT NULL,
+    FOREIGN KEY organizationID REFERENCES Organizations(email),
+    FOREING KEY categoryabbr REFERENCES Categories(abbv)
+);
+
+--Triggers
 -- This is a function to update the updateAt field when a change occurs to Organization table
 CREATE OR REPLACE FUNCTION update_updated_at_column()
 RETURNS TRIGGER AS $$
@@ -88,17 +150,3 @@ $$ language 'plpgsql';
 -- Trigger for changes to any row of the Organization table
 CREATE TRIGGER update_organization_updated_at BEFORE UPDATE
 ON Organization FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
-
-
-
-
-
--- TODO: Review Table
-
-
-
---TODO: Category table
-
-
-
--- ReviewComment table
