@@ -5,7 +5,7 @@ entity User {
     username key
     email
     firstName
-    ageRange //foreing key
+    ageRange
     hashedPasswd
     zipcode
 }
@@ -33,7 +33,9 @@ entity Events {
     description
     location //split into street, city, state
     isVirtual //Note that the event might be virtual; boolean type
-    meetinglink 
+    meetinglink
+    status //boolean
+    adminid //foreing key could be null at the beginning
 }
 
 entity Survey {
@@ -69,6 +71,8 @@ entity Reviews { //need to tink a good key for this one
     title //could be Null
     comment //could be Null
     starsValue //starsValue must have a range constraint e.g. 1-5
+    usernameAdmin //foreing key role
+    status //approved or denied could be boolean value
     createdAt
     updatedAt
 }
@@ -91,18 +95,15 @@ relationship has {
 
 relationship review_event{
     Admins[0..1] -> Events[0..N]
-    eventid //forening key
-    adminid //foreing key
-    status //boolean
 }
 
 relationship add{
     Admins[1] -> Question[0..N]
 }
 relationship has_event {
-    Organization[0..N] -> Events[0..N]
-    organizationid //foreging key
-    eventid //goreing key
+    Organization[0..1] -> Events[0..N]
+    organizationid //foreing key
+    eventid //Foreing key
 }
 
 relationship asks {
@@ -119,7 +120,7 @@ relationship associated {
 
 relationship assigned {
     Organization[0..N] -> Category[1..N]
-    rganization_email //foreing key
+    organization_email //foreing key
     categoryabbr //foreing key
 }
 
@@ -129,8 +130,4 @@ relationship writes {
 
 relationship review {
     Admins[1] -> Reviews[0..N]
-    reviewid //foreing key once defined
-    usernameAdmin //foreing key role
-    status //approved or denied could be boolean value
-    desicion_date
 }
