@@ -7,6 +7,9 @@ gem "rails", "~> 7.1.0"
 
 #adding bootstraps latests stable release
 gem 'bootstrap', '~> 5.3.3'
+gem 'autoprefixer-rails'
+gem 'popper_js', '~> 2.11.8'
+gem 'execjs'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
