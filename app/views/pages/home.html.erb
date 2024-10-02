@@ -1,2 +1,28 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
+
+<div class="container mt-4">
+  <h1>Welcome to the Community Resource Finder</h1>
+  <p>Explore free and low-cost events happening in your area.</p>
+
+  <h2 class="mt-5">Upcoming Events This Week</h2>
+  <div class="row">
+    <% if @events.any? %>
+      <% @events.each do |event| %>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title"><%= event.title %></h5>
+              <p><strong>Date:</strong> <%= event.date.strftime("%A, %B %d, %Y") %></p>
+              <p><strong>Location:</strong> <%= event.location %></p>
+              <p><strong>Cost:</strong> <%= event.cost %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <p>No events available for this week.</p>
+    <% end %>
+  </div>
+</div>
+
