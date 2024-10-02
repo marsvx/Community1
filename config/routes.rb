@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :users
+  resources :organizations
   root "pages#home"
   get 'pages/home'
   resources :events
