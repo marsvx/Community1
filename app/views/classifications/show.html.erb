@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @classification %>
+
+<div>
+  <%= link_to "Edit this classification", edit_classification_path(@classification) %> |
+  <%= link_to "Back to classifications", classifications_path %>
+
+  <%= button_to "Destroy this classification", @classification, method: :delete %>
+</div>
