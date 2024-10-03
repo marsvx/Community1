@@ -28,7 +28,7 @@ CREATE TABLE Users (
     firstName VARCHAR(150) NOT NULL,
     ageRange VARCHAR(8) NOT NULL,
     hashedPasswd VARCHAR(80) NOT NULL,
-    zipCode INTEGER,
+    zipCode INTEGER
 );
 
 CREATE TABLE Admins(
@@ -52,7 +52,7 @@ CREATE TABLE Organizations (
     org_name VARCHAR(255) NOT NULL,
     street VARCHAR(255) NOT NULL,
     city VARCHAR(100) NOT NULL,
-    org_state VARCHAR(2) NOT NULL CHECK (state = 'CO')
+    org_state VARCHAR(2) NOT NULL CHECK (org_state = 'CO'),
     zipcode INTEGER NOT NULL,
     email VARCHAR(255) PRIMARY KEY,
     phoneNumber VARCHAR(15),
@@ -67,7 +67,7 @@ CREATE TABLE Dependents (
     dependentId SERIAL PRIMARY KEY,
     userID VARCHAR(15) NOT NULL,
     nickname VARCHAR(50) NOT NULL,
-    ageRange Age_Range VARCHAR(8) NOT NULL,
+    ageRange VARCHAR(8) NOT NULL,
     FOREIGN KEY (userID) REFERENCES Users(username)
 );
 
@@ -92,15 +92,15 @@ CREATE TABLE Events(
     eventDescription text NOT NULL,
     street VARCHAR(255) NOT NULL,
     city VARCHAR(100) NOT NULL,
-    eventState VARCHAR(2) NOT NULL CHECK (state = 'CO')
+    eventState VARCHAR(2) NOT NULL CHECK (eventState = 'CO'),
     zipcode INTEGER NOT NULL,
     isVirtual BOOLEAN NOT NULL,
     meetingLink VARCHAR(2050),
     eventstatus BOOLEAN NOT NULL,
     adminID VARCHAR(15),
-    FOREIGN KEY organizationID REFERENCES Organizations(email),
-    FOREIGN KEY userID REFERENCES Users(username),
-    FOREIGN KEY adminID REFERENCES Admins(username)
+    FOREIGN KEY (organizationID) REFERENCES Organizations(email),
+    FOREIGN KEY (userID) REFERENCES Users(username),
+    FOREIGN KEY (adminID) REFERENCES Admins(username)
 );
 
 CREATE TABLE Reviews(
@@ -114,9 +114,9 @@ CREATE TABLE Reviews(
     updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     adminID VARCHAR(15),
     reviewStatus BOOLEAN NOT NULL,
-    FOREIGN KEY organizationID REFERENCES Organizations(email),
-    FOREIGN KEY userID REFERENCES Users(username),
-    FOREIGN KEY adminID REFERENCES Admins(username)
+    FOREIGN KEY (organizationID) REFERENCES Organizations(email),
+    FOREIGN KEY (userID) REFERENCES Users(username),
+    FOREIGN KEY (adminID) REFERENCES Admins(username)
 );
 
 --Relation Tables:
@@ -124,17 +124,17 @@ CREATE TABLE Favorites(
     favoriteID SERIAL PRIMARY KEY,
     userID VARCHAR(15) NOT NULL,
     organizationID VARCHAR(255) NOT NULL,
-    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    FOREIGN KEY userID REFERENCES Users(username),
-    FOREIGN KEY organizationID REFERENCES Organizations(email)
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (userID) REFERENCES Users(username),
+    FOREIGN KEY (organizationID) REFERENCES Organizations(email)
 );
 
 CREATE TABLE Classifications(
     associationID SERIAL PRIMARY KEY,
     organizationID VARCHAR(255) NOT NULL,
     categoryabbr VARCHAR(5) NOT NULL,
-    FOREIGN KEY organizationID REFERENCES Organizations(email),
-    FOREING KEY categoryabbr REFERENCES Categories(abbv)
+    FOREIGN KEY (organizationID) REFERENCES Organizations(email),
+    FOREIGN KEY (categoryabbr) REFERENCES Categories(abbv)
 );
 
 --Triggers
@@ -149,4 +149,4 @@ $$ language 'plpgsql';
 
 -- Trigger for changes to any row of the Organization table
 CREATE TRIGGER update_organization_updated_at BEFORE UPDATE
-ON Organization FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+ON Organizations FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();

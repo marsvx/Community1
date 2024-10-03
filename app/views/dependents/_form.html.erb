@@ -1,0 +1,17 @@
+<%= form_with(model: dependent) do |form| %>
+  <% if dependent.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(dependent.errors.count, "error") %> prohibited this dependent from being saved:</h2>
+
+      <ul>
+        <% dependent.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
