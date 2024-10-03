@@ -37,8 +37,22 @@ Before you begin, ensure you have the following installed on your machine:
    git clone <repository_url>
 
 2. **Navigate into the Directory**
-    ```bash
+   ```bash
    cd <directory_name>
+
+3. **Verify Installation**
+   ```bash
+   docker --version
+
+   ```bash
+   rails --version
+
+   ```bash
+   psql --version
+
+3. **Start the Rails Server**
+   ```bash
+   rails s
 
 
 
