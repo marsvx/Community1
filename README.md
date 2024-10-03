@@ -21,7 +21,6 @@ Our vision is to build a stronger, more connected community by ensuring that eve
 
 ## Installation
 ## Usage
-## Contributing
 
 Things you may want to cover:
 
@@ -42,3 +41,12 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+## Contributors
+
+- NickLM1200 - Nic
+- GOKU900 - Lizeth Amateco Nava
+- Marsvx - Mauren Vasquez
+- akrajeski - Anna Krajeski
+- NatashaLeeXY - Natasha Lee
+- Ariamestra - Maria Estrada
