@@ -19,6 +19,29 @@ Our vision is to build a stronger, more connected community by ensuring that eve
 - User feedback and ratings for services
 - Mobile-friendly design for ease of access
 
+# Project Setup Instructions
+
+## Prerequisites
+Before you begin, ensure you have the following installed on your machine:
+
+- [Docker](https://www.docker.com/get-started)
+- [Ruby on Rails](https://rubyonrails.org/)
+- [PostgreSQL](https://www.postgresql.org/)
+
+## Setup Instructions
+
+1. **Clone the Repository**
+
+   Open your terminal and run the following command to clone the repository:
+   ```bash
+   git clone <repository_url>
+
+2. **Navigate into the Directory**
+    ```bash
+   cd <directory_name>
+
+
+
 ## Installation
 ## Usage
 
