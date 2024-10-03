@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  resources :classifications
+  resources :favorites
+  resources :reviews
+  resources :surveys
+  resources :dependents
+  resources :categories
+  resources :questions
+  resources :admins
   resources :users
   resources :organizations
   root "pages#home"
