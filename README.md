@@ -27,22 +27,27 @@ Before you begin, ensure you have the following installed on your machine:
 - [Docker](https://www.docker.com/get-started)
 - [Ruby on Rails](https://rubyonrails.org/)
 - [PostgreSQL](https://www.postgresql.org/)
+- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
 ## Setup Instructions
 
-1. **Clone the Repository**
+1. **Fork the Repository**
+
+   Navigate to the repository on GitHub and click the "Fork" button to create a copy of the repository under your own GitHub account.
+
+2. **Clone the Repository**
 
    Open your terminal and run the following command to clone the repository:
    ```bash
    git clone <repository_url>
    ```
 
-2. **Navigate into the Directory**
+3. **Navigate into the Directory**
    ```bash
    cd <directory_name>
    ```
 
-3. **Verify Installation**
+4. **Verify Installation**
    ```bash
    docker --version
    ```
@@ -54,11 +59,20 @@ Before you begin, ensure you have the following installed on your machine:
    ```bash
    psql --version
    ```
+5. **Set Up Environment Variables**
+   Create a .env file in the root folder using your credentials
 
-3. **Start the Rails Server**
+6. **Build and Start the Containers**
+   Build and start the containers and create the database.
+
    ```bash
-   rails s
+   docker-compose up -d
    ```
+
+7. **Access the Application**
+   Open up a browser and navigate to [http://localhost:3000/](http://localhost:3000/)
+
+
 
 
 
