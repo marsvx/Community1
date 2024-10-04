@@ -11,6 +11,7 @@ class CreateOrganizations < ActiveRecord::Migration[7.1]
       t.string :webLink, limit: 2050
       t.text :servicesSummary, null: false
       t.decimal :avgStarValue, precision: 2, scale: 1
+      t.string :admin_username, null:false #added for accountability purposes
       t.timestamps default: -> { 'CURRENT_TIMESTAMP' } # Note: This is a Rails shortcut that automatically creates two columns in the table. SO COOL! LOL, eeven if current_timestamp is not added it will do it
     end
   end
