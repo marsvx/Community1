@@ -1,7 +1,10 @@
 class User < ApplicationRecord
     has_many :dependents, class_name: 'Dependent'
     has_many :favorites, class_name: 'Favorite'
-    has_many :organizations, class_name: 'Organization', through: :favorites
+    has_many :favorite_organizations, class_name: 'Organization', through: :favorites
+    has_many :reviews, class_name: 'Review'
+    has_many :reviewed_organizations, class_name: 'Organization', through: :reviews
+    has_many :surveys, class_name: 'Survey'
     #this is an array that holds our age ranges
     AGE_RANGES = ['0-18', '19-24', '25-34', '35-70', '70-+']
 
