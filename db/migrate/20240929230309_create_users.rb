@@ -8,7 +8,7 @@ class CreateUsers < ActiveRecord::Migration[7.1]
       t.string :hashedPasswd, null: false, limit: 80
       t.integer :zipCode
     end
-     # unique index for email, not that this is not necessary for username bc an index gets created automatically
+     # unique index for email, note that this is not necessary for username bc an index gets created automatically
      # due to username being a primary_key
      add_index :users, :email, unique: true
 
