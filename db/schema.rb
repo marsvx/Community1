@@ -10,22 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_29_230308) do
+ActiveRecord::Schema[7.1].define(version: 0) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "organizations", primary_key: "email", id: { type: :string, limit: 255 }, force: :cascade do |t|
-    t.string "org_name", limit: 255, null: false
-    t.string "street", limit: 255, null: false
-    t.string "city", limit: 100, null: false
-    t.string "org_state", limit: 2, default: "CO", null: false
-    t.integer "zipcode", null: false
-    t.string "phoneNumber", limit: 15
-    t.string "webLink", limit: 2050
-    t.text "servicesSummary", null: false
-    t.decimal "avgStarValue", precision: 2, scale: 1
-    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
-    t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
-  end
 
 end
