@@ -6,6 +6,8 @@ class CreateAdmins < ActiveRecord::Migration[7.1]
       t.string :firstName, null:false, limit:150
       t.string :protectedPasswd, null:false, limit:80
     end
-    add_index :users, :email, unique: true
+    #removing as this index is created in the users migration and causing duplicate errors
+    #add_index :users, :email, unique: true
+    add_index :admins, :email, unique: true
   end
 end

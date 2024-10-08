@@ -1,4 +1,4 @@
 class Survey < ApplicationRecord
     belongs_to :user
-    belongs_to :question
+    has_many :questions, class_name: 'Question'
 end

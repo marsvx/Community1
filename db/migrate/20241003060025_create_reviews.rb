@@ -1,6 +1,6 @@
 class CreateReviews < ActiveRecord::Migration[7.1]
   def change
-    create_table :reviews, foreign_key: :reviewID do |t|
+    create_table :reviews, primary_key: :reviewID do |t|
       t.references :organizationID, foreign_key: {to_table: :organizations, primary_key: :email}, type: :string, null:true
       t.references :userID, foreign_key: {to_table: :users, primary_key: :username}, type: :string, null: true
       t.string :title, null:true, limit:150
