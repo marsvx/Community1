@@ -73,31 +73,98 @@ Before you begin, ensure you have the following installed on your machine:
    Open up a browser and navigate to [http://localhost:3000/](http://localhost:3000/)
 
 
-
-
-
-## Installation
+# Installation
 ## Usage
 
-Things you may want to cover:
+### Ruby Version
+- `ruby-3.3.5`
 
-* Ruby version
+### System Dependencies
+#### Ruby on Rails: Core Gems
 
-* System dependencies
+- **Rails Version:** 7.1.0
+- Includes edge Rails version from GitHub as an alternative option.
 
-* Configuration
+#### Front-end & CSS
+- **Bootstrap Version:** 5.3.3
+- **Autoprefixer Rails:** Adds vendor prefixes to CSS automatically.
+- **Popper.js Version:** 2.11.8 (Dependency for Bootstrap).
+- **ExecJS:** Executes JavaScript from Ruby.
 
-* Database creation
+#### Asset Pipeline
+- **Sprockets Rails:** Original asset pipeline for Rails.
 
-* Database initialization
+#### Database
+- **PostgreSQL Version:** 1.1
 
-* How to run the test suite
+#### Server
+- **Puma:** Web server for Rails. Version 5.0
 
-* Services (job queues, cache servers, search engines, etc.)
+#### JavaScript & CSS Management
+- **JSBundling Rails:** Manages JavaScript bundlers like esbuild or rollup.js.
+- **CSSBundling Rails:** Manages CSS bundlers (e.g., Tailwind CSS, Bootstrap).
 
-* Deployment instructions
+#### Import Maps & Styling
+- **Importmap Rails:** Manages JavaScript modules using import maps.
+- **Sass Rails Version:** 6 (For using Sass in Rails).
 
-* ...
+#### Hotwire (SPA Features)
+- **Turbo Rails:** For fast, SPA-like pages.
+- **Stimulus Rails:** For modest JavaScript enhancements.
+
+#### API Building
+- **Jbuilder:** For JSON APIs.
+
+#### Authentication & Authorization
+- **Devise:** Handles authentication.
+- **Pundit:** Handles authorization.
+
+#### Redis & Background Jobs
+- **Redis Version:** 4.0.1 (Redis adapter for Action Cable).
+- **Sidekiq Version:** 6.0 (Background processing using Redis).
+
+#### Optional Gems
+- **Kredis:** Higher-level data types in Redis (commented out).
+- **BCrypt:** For secure password handling (commented out).
+
+#### Time Zone Data
+- **Tzinfo-data:** For time zone info (Windows/JRuby platforms).
+
+#### Performance & Caching
+- **Bootsnap:** Speeds up boot time by caching.
+
+#### Miscellaneous
+- **Ostruct:** Added for Ruby 3.5.0 to fix warnings.
+
+---
+
+# Development & Testing
+
+#### Debugging Tools
+- **debug**
+- **web-console**
+- **byebug**
+- **pry-rails**
+
+#### Testing Tools
+- **rspec-rails**
+- **factory_bot_rails**
+- **capybara**
+- **selenium-webdriver**
+
+---
+
+# Notes
+- Remember to update gems regularly using `bundle update` to get security patches and bug fixes.
+
+---
+
+# In Progress
+- **Database Creation:** In Progress
+- **Database Initialization:** In Progress
+- **How to Run the Test Suite:** In Progress
+- **Services (job queues, cache servers, search engines, etc.):** In Progress
+- **Deployment Instructions:** In Progress
 
 ## Contributors
 
