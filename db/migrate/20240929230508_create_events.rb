@@ -14,9 +14,9 @@ class CreateEvents < ActiveRecord::Migration[7.1]
       t.boolean :eventstatus, null: false   # Event status (boolean, required because only approved events will be displayed)
       
       # Foreign key relationships
-      t.references :organizationID, foreign_key: { to_table: :organizations, primary_key: :email }, type: :string
-      t.references :userID, foreign_key: { to_table: :users, primary_key: :username }, type: :string
-      t.references :adminID, foreign_key: { to_table: :admins, primary_key: :username }, type: :string
+      t.references :organization, foreign_key: { to_table: :organizations, primary_key: :email }, type: :string
+      t.references :user, foreign_key: { to_table: :users, primary_key: :username }, type: :string
+      t.references :admin, foreign_key: { to_table: :admins, primary_key: :username }, type: :string
 
       t.timestamps
     end

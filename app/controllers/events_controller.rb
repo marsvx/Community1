@@ -4,6 +4,9 @@ class EventsController < ApplicationController
   # GET /events or /events.json
   def index
     @events = Event.all
+
+    #will query the Events table in the database and order by date and time
+    @upcoming_events = Event.where('"eventDate" >= ?', Date.today).order('"eventDate"', '"eventTime"').limit(7)
   end
 
   # GET /events/1 or /events/1.json
