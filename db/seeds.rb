@@ -24,6 +24,30 @@ Admin.find_or_create_by!(username: "admin2") do |admin|
   admin.protectedPasswd = "supersecure"
 end
 
+admin3 = Admin.find_or_create_by!(username: "admin3") do |admin|
+  admin.email = "admin3@example.com"
+  admin.firstName = "AdminThree"
+  admin.protectedPasswd = "adminpass123"
+end
+
+admin4 = Admin.find_or_create_by!(username: "admin4") do |admin|
+  admin.email = "admin4@example.com"
+  admin.firstName = "AdminFour"
+  admin.protectedPasswd = "adminpass123"
+end
+
+admin5 = Admin.find_or_create_by!(username: "admin5") do |admin|
+  admin.email = "admin5@example.com"
+  admin.firstName = "AdminFive"
+  admin.protectedPasswd = "adminpass123"
+end
+
+admin6 = Admin.find_or_create_by!(username: "admin6") do |admin|
+  admin.email = "admin6@example.com"
+  admin.firstName = "AdminSix"
+  admin.protectedPasswd = "adminpass123"
+end
+
 puts "Seeding organizations..."
 
 # Create sample organizations
@@ -53,6 +77,58 @@ Organization.find_or_create_by!(email: "org2@example.com") do |org|
   org.admin_username = "admin2"
 end
 
+org3 = Organization.find_or_create_by!(email: "org3@example.com") do |org|
+  org.org_name = "Organization 3"
+  org.street = "5678 Park Ave"
+  org.city = "Aurora"
+  org.org_state = "CO"
+  org.zipcode = 80012
+  org.phoneNumber = "555-555-5555"
+  org.webLink = "https://org3.com"
+  org.servicesSummary = "We help clean up parks."
+  org.avgStarValue = 4.8
+  org.admin_username = admin3.username
+end
+
+org4 = Organization.find_or_create_by!(email: "org4@example.com") do |org|
+  org.org_name = "Organization 4"
+  org.street = "3456 Elm St"
+  org.city = "Boulder"
+  org.org_state = "CO"
+  org.zipcode = 80301
+  org.phoneNumber = "555-555-4444"
+  org.webLink = "https://org4.com"
+  org.servicesSummary = "We offer coding bootcamps."
+  org.avgStarValue = 4.9
+  org.admin_username = admin4.username
+end
+
+org5 = Organization.find_or_create_by!(email: "org5@example.com") do |org|
+  org.org_name = "Organization 5"
+  org.street = "Virtual"
+  org.city = "Lakewood"
+  org.org_state = "CO"
+  org.zipcode = 82390
+  org.phoneNumber = "555-555-3333"
+  org.webLink = "https://org5.com"
+  org.servicesSummary = "We raise mental health awareness."
+  org.avgStarValue = 4.7
+  org.admin_username = admin5.username
+end
+
+org6 = Organization.find_or_create_by!(email: "org6@example.com") do |org|
+  org.org_name = "Organization 6"
+  org.street = "910 Willow St"
+  org.city = "Fort Collins"
+  org.org_state = "CO"
+  org.zipcode = 80524
+  org.phoneNumber = "555-555-2222"
+  org.webLink = "https://org6.com"
+  org.servicesSummary = "We provide school supplies."
+  org.avgStarValue = 4.6
+  org.admin_username = admin6.username
+end
+
 puts "Seeding users..."
 
 # Create sample users with valid age ranges
@@ -70,6 +146,38 @@ User.find_or_create_by!(username: "user2") do |user|
   user.ageRange = "25-34"
   user.hashedPasswd = "securepass"
   user.zipCode = 80012
+end
+
+user3 = User.find_or_create_by!(username: "user3") do |user|
+  user.email = "user3@example.com"
+  user.firstName = "UserThree"
+  user.ageRange = "35-70"
+  user.hashedPasswd = "password123"
+  user.zipCode = 80012
+end
+
+user4 = User.find_or_create_by!(username: "user4") do |user|
+  user.email = "user4@example.com"
+  user.firstName = "UserFour"
+  user.ageRange = "25-34"
+  user.hashedPasswd = "password123"
+  user.zipCode = 80301
+end
+
+user5 = User.find_or_create_by!(username: "user5") do |user|
+  user.email = "user5@example.com"
+  user.firstName = "UserFive"
+  user.ageRange = "19-24"
+  user.hashedPasswd = "password123"
+  user.zipCode = nil
+end
+
+user6 = User.find_or_create_by!(username: "user6") do |user|
+  user.email = "user6@example.com"
+  user.firstName = "UserSix"
+  user.ageRange = "35-70"
+  user.hashedPasswd = "password123"
+  user.zipCode = 80524
 end
 
 puts "Seeding events..."
@@ -108,10 +216,10 @@ end
 Event.find_or_create_by!(title: "Virtual Tech Meetup", eventDate: Date.today + 5) do |event|
   event.eventTime = "14:00"
   event.eventDescription = "A virtual meetup for tech enthusiasts to network and discuss the latest trends."
-  event.street = nil
-  event.city = nil
-  event.eventState = nil
-  event.zipcode = nil
+  event.street = "1234 Security Drive"
+  event.city = "Aurora"
+  event.eventState = "CO"
+  event.zipcode = 80014
   event.isVirtual = true
   event.meetingLink = "http://example.com/meetup"
   event.eventstatus = true
@@ -153,10 +261,10 @@ end
 Event.find_or_create_by!(title: "Mental Health Awareness Webinar", eventDate: Date.today + 7) do |event|
   event.eventTime = "12:00"
   event.eventDescription = "A webinar on mental health awareness and resources available in the community."
-  event.street = nil
-  event.city = nil
-  event.eventState = nil
-  event.zipcode = nil
+  event.street = "3245 Perspective Ave."
+  event.city = "Denver"
+  event.eventState = "CO"
+  event.zipcode = 80231
   event.isVirtual = true
   event.meetingLink = "http://example.com/webinar"
   event.eventstatus = true
