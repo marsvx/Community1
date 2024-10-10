@@ -1,37 +1,33 @@
 <div class="container home-page">
+  <div class="welcome">
+    <h1>Welcome to the Community Resource Finder</h1>
+    <p>Explore free and low-cost events and resources happening in Colorado.</p>
+  </div>
+
   <div class="row justify-content-between">
-    <!-- Logo and Main Buttons -->
-    <div class="col-md-6">
-      <div class="welcome">
-        <h1>Welcome to the COmmunity Resource Finder </h1>
-        <p>Explore free and low-cost events and resources happening in Colorado.</p>
-      </div>
-      <br>
-      <!-- Buttons -->
-      <div class="row">
-        <div class="col">
-          <%= button_to "Create a Profile", "#", method: :get, class: "btn btn-large main-button" %>
-        </div>
-        <div class="col">
-          <%= button_to "Continue as a Guest", "#", method: :get, class: "btn btn-large main-button" %>
-        </div>
+    <!-- Main Buttons Section -->
+    <div class="col-md-3">
+      <div class="button-section">
+        <%= button_to "Create a Profile", "#", method: :get, class: "btn btn-large main-button" %>
+        <%= button_to "Continue as a Guest", "#", method: :get, class: "btn btn-large main-button" %>
       </div>
     </div>
 
     <!-- About Us Section -->
-    <div class="col-md-6 full-height">
+    <div class="col-md-6 offset-md-3">
       <div class="about-section">
         <h2>About Us</h2>
         <p>
-        At Colorado Community Resource Finder, we are committed to empowering Colorado's low-income residents, people experiencing homelessness, immigrants and migrants by providing a centralized, user-friendly platform to discover free or low-cost resources in essential areas such as food, housing, healthcare, childcare, legal services, and education.
-        <br/>
-        <br/>
-        Our vision is to build a stronger, more connected community by ensuring that everyone in Colorado has access to the resources they need to thrive. By centralizing knowledge and creating a space for feedback and collaboration, we aim to make navigating these services easier and more transparent for all. 
+          At Colorado Community Resource Finder, we are committed to empowering Colorado's low-income residents, people experiencing homelessness, immigrants and migrants by providing a centralized, user-friendly platform to discover free or low-cost resources in essential areas such as food, housing, healthcare, childcare, legal services, and education.
+          <br/>
+          <br/>
+          Our vision is to build a stronger, more connected community by ensuring that everyone in Colorado has access to the resources they need to thrive. By centralizing knowledge and creating a space for feedback and collaboration, we aim to make navigating these services easier and more transparent for all.
         </p>
       </div>
     </div>
   </div>
 </div>
+
 
 
 

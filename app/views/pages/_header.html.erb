@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg" style="background-color: #A4C3B2;">
   <div class="container"> <!-- Add container to center and add margins -->
-    <%= link_to 'Resource Finder', root_path, class: 'navbar-brand' %>
+    <%= link_to 'COmmunity', root_path, class: 'navbar-brand' %>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -11,8 +11,21 @@
         </li>
 
         <li class="nav-item">
+          <%= link_to 'Explore', pages_explore_path, class: 'nav-link' %>
+        </li>
+
+        <li class="nav-item">
           <%= link_to 'Log In', "#", class: 'nav-link' %>
         </li>
+
+        <li class="nav-item">
+          <%= link_to 'About Us', "#", class: 'nav-link' %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to 'Create a profile', "#", class: 'nav-link' %>
+        </li>
+
       </ul>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

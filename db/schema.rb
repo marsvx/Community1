@@ -80,6 +80,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_03_060107) do
     t.string "webLink", limit: 2050
     t.text "servicesSummary", null: false
     t.decimal "avgStarValue", precision: 2, scale: 1
+    t.string "admin_username", null: false
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
   end
