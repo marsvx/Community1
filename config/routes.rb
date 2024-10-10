@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'pages/about_us'
+  get 'pages/survey'
   resources :classifications
   resources :favorites
   resources :reviews

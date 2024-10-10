@@ -51,14 +51,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_03_060107) do
     t.boolean "isVirtual", null: false
     t.string "meetingLink", limit: 2050
     t.boolean "eventstatus", null: false
-    t.string "organizationID_id"
-    t.string "userID_id"
-    t.string "adminID_id"
+    t.string "organization_id"
+    t.string "user_id"
+    t.string "admin_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["adminID_id"], name: "index_events_on_adminID_id"
-    t.index ["organizationID_id"], name: "index_events_on_organizationID_id"
-    t.index ["userID_id"], name: "index_events_on_userID_id"
+    t.index ["admin_id"], name: "index_events_on_admin_id"
+    t.index ["organization_id"], name: "index_events_on_organization_id"
+    t.index ["user_id"], name: "index_events_on_user_id"
   end
 
   create_table "favorites", primary_key: "favoriteID", force: :cascade do |t|
@@ -127,9 +127,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_03_060107) do
   add_foreign_key "classifications", "categories", column: "categoryabbr_id", primary_key: "abbv"
   add_foreign_key "classifications", "organizations", column: "organizationID_id", primary_key: "email"
   add_foreign_key "dependents", "users", column: "userID_id", primary_key: "username"
-  add_foreign_key "events", "admins", column: "adminID_id", primary_key: "username"
-  add_foreign_key "events", "organizations", column: "organizationID_id", primary_key: "email"
-  add_foreign_key "events", "users", column: "userID_id", primary_key: "username"
+  add_foreign_key "events", "admins", primary_key: "username"
+  add_foreign_key "events", "organizations", primary_key: "email"
+  add_foreign_key "events", "users", primary_key: "username"
   add_foreign_key "favorites", "organizations", column: "organizationID_id", primary_key: "email"
   add_foreign_key "favorites", "users", column: "userID_id", primary_key: "username"
   add_foreign_key "reviews", "admins", column: "adminID_id", primary_key: "username"

@@ -1,0 +1,16 @@
+.event-banner {
+    background-size: cover;
+    background-position: center;
+    height: 400px; /* Adjust height based on your design */
+    color: white;
+  }
+  
+  .carousel-caption h5 {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  
+  .carousel-caption p {
+    font-size: 1.2rem;
+  }
+  
