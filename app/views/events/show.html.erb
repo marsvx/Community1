@@ -1,6 +1,32 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @event %>
+<h1><%= @event.title %></h1>
+
+<p>
+  <strong>Description:</strong>
+  <%= @event.eventDescription %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @event.eventDate.strftime("%B %d, %Y") %>
+</p>
+
+<p>
+  <strong>Time:</strong>
+  <%= @event.eventTime.strftime("%I:%M %p") %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @event.location %> <!-- Calls `location` method from the model -->
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @event.eventstatus ? 'Active' : 'Inactive' %> <!-- Shows "Active" or "Inactive" -->
+</p>
+
 
 <div>
   <%= link_to "Edit this event", edit_event_path(@event) %> |
@@ -8,3 +34,5 @@
 
   <%= button_to "Destroy this event", @event, method: :delete %>
 </div>
+
+

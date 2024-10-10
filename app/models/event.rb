@@ -4,6 +4,10 @@ class Event < ApplicationRecord
     belongs_to :admin
 
     def location
-        "#{street}, #{city}, #{eventState}, #{zipcode}"
+      if isVirtual
+        "Virtual"
+      else
+        "#{street} #{city}, #{eventState}. #{zipcode}"
       end
+    end
 end
