@@ -14,14 +14,14 @@
     </div> 
     
     <div class="explore_button">
-        <%= button_to "Food", "#", method: :get, class:"button" %>
-        <%= button_to "Housing", "#", method: :get, class:"button" %>
-        <%= button_to "Healthcare", "#", method: :get, class:"button" %>
+        <%= button_to "Food", food_path, method: :get, class:"button" %>
+        <%= button_to "Housing", housing_path, method: :get, class:"button" %>
+        <%= button_to "Healthcare", healthcare_path, method: :get, class:"button" %>
         
         
-        <%= button_to "Education", "#", method: :get, class:"button" %>
-        <%= button_to "Childcare", "#", method: :get, class:"button" %>
-        <%= button_to "Legal Resources", "#", method: :get, class:"button" %>
+        <%= button_to "Education", education_path, method: :get, class:"button" %>
+        <%= button_to "Childcare", childcare_path, method: :get, class:"button" %>
+        <%= button_to "Legal Resources", legal_resources_path, method: :get, class:"button" %>
     </div> 
     </div>
 </body>

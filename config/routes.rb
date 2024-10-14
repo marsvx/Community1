@@ -11,10 +11,23 @@ Rails.application.routes.draw do
   resources :admins
   resources :users
   resources :organizations
+  resources :events
+
   root "pages#home"
   get 'pages/home'
-  resources :events
+
+  get 'food', to: 'pages#food', as: 'food'
+  get 'housing', to: 'pages#housing', as: 'housing'
+  get 'healthcare', to: 'pages#healthcare', as: 'healthcare'
+  get 'education', to: 'pages#education', as: 'education'
+  get 'childcare', to: 'pages#childcare', as: 'childcare'
+  get 'legal_resources', to: 'pages#legal_resources', as: 'legal_resources'
+
   get 'pages/explore'
+
+
+
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
