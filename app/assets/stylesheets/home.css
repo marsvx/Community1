@@ -1,91 +1,85 @@
 /* Container for the entire home page */
 .home-page {
-    padding: 20px;
-    background-color: #F1F5F2; /* Light greenish background */
-    border-radius: 10px;
+  padding: 10px 10px;
+  background-color: #F1F5F2; /* Light greenish background */
+  border-radius: 10px;
+  margin-top: 40px;
+  
 }
-
 /* Main buttons (General) */
 /* Increase specificity by adding parent container if needed */
 .container .main-button,
 .container .btn-login {
-    background-color: #4A6959;
-    color: white;
-    font-size: 1.2rem;
-    padding: 10px 10px;
-    border-radius: 10px;
-    border: none;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-}
+  background-color:  #4A6959;
+  color: white;
+  font-size: 1.2rem;
+  padding: 20px 20px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  margin: 40px 40px;
+  width: 400px;
 
+}
 .container .main-button:hover,
 .container .btn-login:hover {
-    background-color: #3C594A;
-    box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
+  background-color: #3C594A;
+  box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
 }
-
 .container .main-button:active,
 .container .btn-login:active {
-    background-color: #344E3E;
-    box-shadow: none;
+  background-color: #344E3E;
+  box-shadow: none;
 }
-
 .btn:focus,
 .btn:active {
-    outline: none; /* Remove focus outline */
+  outline: none; /* Remove focus outline */
 }
-
 /* Button container for side-by-side buttons */
 .button-container {
-    display: flex;
-    gap: 5px; /* Space between buttons */
+  display: flex;
+  gap: 5px; /* Space between buttons */
+  
 }
-
 .main-button {
-    flex: 1; /* Ensures equal size for both buttons */
+  flex: 1; /* Ensures equal size for both buttons */
 }
-
 /* Full height layout */
 .full-height {
-    min-height: 100vh; /* Full viewport height */
-    display: flex;
-    align-items: flex-start; /* Align content at the top */
-    justify-content: space-between;
-    flex-wrap: nowrap; /* Prevent wrapping */
+  min-height: 100vh; /* Full viewport height */
+  display: flex;
+  align-items: flex-start; /* Align content at the top */
+  justify-content: space-between;
+  flex-wrap: nowrap; /* Prevent wrapping */
 }
-
 /* About Us section container */
 .about-section-container {
-    flex-direction: column;
-    justify-content: flex-start;
-    height: auto; /* Let content determine the height */
-    flex: 1 1 auto; /* Grow as needed */
-    margin-top: 50px; /* Add space between the container and the top */
-    padding-bottom: 10px; /* Reduce the bottom padding if necessary */
+  flex-direction: column;
+  justify-content: flex-start;
+  height: auto; /* Let content determine the height */
+  flex: 1 1 auto; /* Grow as needed */
+  margin-top: 50px; /* Add space between the container and the top */
+  padding-bottom: 10px; /* Reduce the bottom padding if necessary */
 }
-
 /* About Us section */
 .about-section {
-    background-color: #A4C3B2;
-    padding: 20px;
-    border-radius: 10px;
-    width: 100%;
-    height: auto; /* Let content determine the height */
-    overflow-y: auto;
+  background-color: #A4C3B2;
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+  height: auto; /* Let content determine the height */
+  overflow-y: auto;
+  margin-top: 10px;
 }
-
 .about-section h2 {
-    font-size: 1.5rem;
-    color: #333;
+  font-size: 1.5rem;
+  color: #0b0b0b;
 }
-
 .about-section p {
-    font-size: 1rem;
-    color: #555;
-    word-wrap: break-word; /* Prevent text overflow */
+  font-size: 1rem;
+  color: #0b0b0b;
+  word-wrap: break-word; /* Prevent text overflow */
 }
-
-  
 
   
   
