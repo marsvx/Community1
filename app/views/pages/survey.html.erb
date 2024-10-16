@@ -1,5 +1,61 @@
-<h1>Pages#survey</h1>
-<p>Find me in app/views/pages/survey.html.erb</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Form</title>
+</head>
+<script> 
+    //Javascript that will give conditional answers.
+    // get values by previous answers
+    const safety_check = document.querySelector('input[name="safety_check"]:checked');
 
-<--! quiz questions, please add yours  -->
+    // hide all conditionals initially
+    document.getElementById("safety_based_section").style.display = "none";
 
+    // branching logic
+     if (safety_check) {
+                if (safety_check.value === "no") {
+                    document.getElementById("safety_based_section").style.display = "block"; // Show next question
+                }
+            }       
+</script>
+
+
+
+<body>
+    <h1>Survey Form</h1>
+    <form action="store_survey.php" method="POST"> // need a place to save the survey
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="age">Age:</label><br>
+        <input type="text" id="age" name="age" required><br><br>
+
+        <label for="gender">Gender:</label><br>
+        <select id="gender" name="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select><br><br>
+
+        <!-- Multiple Choice Questions -->
+
+        <label for="safety_check">Are you safe?</label><br>
+        <input type="radio" id="safe_pos" name="favorite_color" value="red" onclick="showNextSection()">
+        <label for="color_red">Yes</label><br>
+        <input type="radio" id="safe_neg" name="favorite_color" value="blue" onclick="showNextSection()">
+        <label for="color_blue">No</label><br>
+
+        <!-- Conditional Section Based on Safety Check (Shows if No is selected) -->
+        <div id="safety_based_section" style="display:none;">
+            <h3>Follow-up Question:</h3>
+            <label for="red_reason">etc.</label><br>
+            <input type="text" id="red_reason" name="red_reason"><br><br>
+        </div>
+
+
+        <button type="submit">Submit Survey</button>
+    </form>
+</body>
+</html>
