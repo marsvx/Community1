@@ -67,4 +67,10 @@ class SurveysController < ApplicationController
     def survey_params
       params.fetch(:survey, {})
     end
+
+    private
+
+    def survey_params
+      params.require(:survey).permit(:question1, :question2, :question3)  # Adjust according to form fields
+    end
 end

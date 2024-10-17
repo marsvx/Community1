@@ -7,10 +7,10 @@
     <title>Survey Form</title>
 </head>
 
--- add style here (CSS)
+-- add stylesheet here (CSS)
 
-<! -- !!WARNING!! Do NOT modify the functions here, they are for the entire survey -->
-<script defer> // might not need defer
+<! -- !!WARNING!! Do NOT modify the function here, it is for the entire survey -->
+<script defer> 
 
     // going to change this to branching logic and more scaleable.
     function showNext() {
@@ -26,7 +26,7 @@
 
 <body>
     <h1>Survey Form</h1>
-    <form action="store_survey.php" method="POST"> // need a place to save the survey
+    <form action="<%= survey_path %>" method="POST"> 
    
     <div id="question1">
         <label for="name">Name:</label><br>
@@ -42,8 +42,8 @@
       <label for="safety_check">Are you safe?</label><br>
       
       <!-- Yes option -->
-      <input type="radio" id="safe_pos" name="favorite_color" value="red" onclick="showNextSection()">
-      <label for="color_red">Yes</label><br>
+      <input type="radio" id="safe_pos" name="safety_check" value="yes" onclick="showNextSection()">
+      <label for="safe_pos">Yes</label><br>
 
       <!-- No Option with Redirection -->
         <input type="radio" id="safe_neg" name="safety_check" value="no" onclick="redirectToPage()">

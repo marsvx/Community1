@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :classifications
   resources :favorites
   resources :reviews
-  resources :surveys
+  resources :surveys, only: [:create]
   resources :dependents
   resources :categories
   resources :questions
