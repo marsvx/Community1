@@ -1,2 +1,4 @@
 class Question < ApplicationRecord
-end
+    belongs_to :survey
+  end
+  
