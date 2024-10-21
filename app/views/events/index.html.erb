@@ -40,12 +40,14 @@
     </h2>
     <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
       <div class="accordion-body">
-        <% @events.each do |event| %>
-          <%= render event %>
-          <p>
-            <%= link_to "Show this event", event, class: "btn btn-link" %>
-          </p>
-        <% end %>
+        <div class="event-details">
+          <% @events.each do |event| %>
+            <%= render event %>
+            <p>
+              <%= link_to "Show this event", event, class: "btn btn-link" %>
+            </p>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
