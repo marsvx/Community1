@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-lg" style="background-color: #A4C3B2;">
   <div class="container">
-    <%= link_to root_path, class: 'navbar-brand' do %>
+    <%= link_to admindashboard_path, class: 'navbar-brand' do %>
       <%= image_tag '14.png', alt: 'COmmunity Logo', class: 'logo-img' %>
-    <% end %>"
+    <% end %>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -10,7 +10,7 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <% if Current.admin %>
                 <li class = "nav-items">
-                  <%= link_to 'Dashboard', "#", class: 'nav-link' %>
+                  <%= link_to 'Dashboard', admindashboard_path, class: 'nav-link' %>
                 </li>
                 <li class = "nav-item">
                   <%= link_to 'Admins', admins_path, class:'nav-link' %>
