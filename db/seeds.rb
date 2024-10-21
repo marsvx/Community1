@@ -15,37 +15,37 @@ puts "Seeding admins..."
 Admin.find_or_create_by!(username: "admin1") do |admin|
   admin.email = "admin1@example.com"
   admin.firstName = "Admin"
-  admin.protectedPasswd = "adminpass123"
+  admin.password_digest = "adminpass123"
 end
 
 Admin.find_or_create_by!(username: "admin2") do |admin|
   admin.email = "admin2@example.com"
   admin.firstName = "SuperAdmin"
-  admin.protectedPasswd = "supersecure"
+  admin.password_digest = "supersecure"
 end
 
 admin3 = Admin.find_or_create_by!(username: "admin3") do |admin|
   admin.email = "admin3@example.com"
   admin.firstName = "AdminThree"
-  admin.protectedPasswd = "adminpass123"
+  admin.password_digest = "adminpass123"
 end
 
 admin4 = Admin.find_or_create_by!(username: "admin4") do |admin|
   admin.email = "admin4@example.com"
   admin.firstName = "AdminFour"
-  admin.protectedPasswd = "adminpass123"
+  admin.password_digest = "adminpass123"
 end
 
 admin5 = Admin.find_or_create_by!(username: "admin5") do |admin|
   admin.email = "admin5@example.com"
   admin.firstName = "AdminFive"
-  admin.protectedPasswd = "adminpass123"
+  admin.password_digest = "adminpass123"
 end
 
 admin6 = Admin.find_or_create_by!(username: "admin6") do |admin|
   admin.email = "admin6@example.com"
   admin.firstName = "AdminSix"
-  admin.protectedPasswd = "adminpass123"
+  admin.password_digest = "adminpass123"
 end
 
 puts "Seeding organizations..."
@@ -87,7 +87,7 @@ org3 = Organization.find_or_create_by!(email: "org3@example.com") do |org|
   org.webLink = "https://org3.com"
   org.servicesSummary = "We help clean up parks."
   org.avgStarValue = 4.8
-  org.admin_username = admin3.username
+  org.admin_username = "admin3"
 end
 
 org4 = Organization.find_or_create_by!(email: "org4@example.com") do |org|
@@ -100,7 +100,7 @@ org4 = Organization.find_or_create_by!(email: "org4@example.com") do |org|
   org.webLink = "https://org4.com"
   org.servicesSummary = "We offer coding bootcamps."
   org.avgStarValue = 4.9
-  org.admin_username = admin4.username
+  org.admin_username = "admin4"
 end
 
 org5 = Organization.find_or_create_by!(email: "org5@example.com") do |org|
@@ -113,7 +113,7 @@ org5 = Organization.find_or_create_by!(email: "org5@example.com") do |org|
   org.webLink = "https://org5.com"
   org.servicesSummary = "We raise mental health awareness."
   org.avgStarValue = 4.7
-  org.admin_username = admin5.username
+  org.admin_username = "admin5"
 end
 
 org6 = Organization.find_or_create_by!(email: "org6@example.com") do |org|
@@ -126,7 +126,7 @@ org6 = Organization.find_or_create_by!(email: "org6@example.com") do |org|
   org.webLink = "https://org6.com"
   org.servicesSummary = "We provide school supplies."
   org.avgStarValue = 4.6
-  org.admin_username = admin6.username
+  org.admin_username = "admin6"
 end
 
 puts "Seeding users..."
