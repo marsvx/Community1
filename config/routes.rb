@@ -4,15 +4,14 @@ Rails.application.routes.draw do
   resources :classifications
   resources :favorites
   resources :reviews
-  resources :surveys
+  resources :surveys, only: [:create]
   resources :dependents
   resources :categories
   resources :questions
-  resources :admins
   resources :users
   resources :organizations
   resources :events
-
+  resources :admins, param: :username
   root "pages#home"
   get 'pages/home'
 
@@ -36,4 +35,12 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  #get /admins
+  get "admin", to: "admins#index"
+  get "admindashboard", to: "admins#dashboard"
+
+  get "adminaccess", to: "asession#new"
+  post "adminaccess", to: "asession#create"
+  delete "adminlogout", to: "asession#destroy"
 end
