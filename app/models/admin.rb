@@ -1,6 +1,9 @@
 class Admin < ApplicationRecord
     has_secure_password
 
+    before_save :downcase_email
+    before_save :downcase_username, if: :new_record?
+
     before_destroy :prevent_base_admin_destruction
     before_update :prevent_base_admin_changes
 
