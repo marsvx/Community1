@@ -4,10 +4,10 @@ class ApplicationRecord < ActiveRecord::Base
   private
 
   def downcase_username
-    self.username = username.downcase
+    self.username = username.downcase if respond_to?(:username) && username.present?
   end
 
   def downcase_email
-    self.email = email.downcase
+    self.email = email.downcase if respond_to?(:email) && email.present?
   end
 end
