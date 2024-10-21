@@ -61,7 +61,7 @@ Organization.find_or_create_by!(email: "org1@example.com") do |org|
   org.webLink = "https://organization1.com"
   org.servicesSummary = "We provide essential community services."
   org.avgStarValue = 4.5
-  org.admin_username = "admin1"
+  org.admin_username = "admin"
 end
 
 Organization.find_or_create_by!(email: "org2@example.com") do |org|
@@ -74,7 +74,7 @@ Organization.find_or_create_by!(email: "org2@example.com") do |org|
   org.webLink = "https://organization2.com"
   org.servicesSummary = "Offering educational programs and support."
   org.avgStarValue = 4.2
-  org.admin_username = "admin2"
+  org.admin_username = "admin"
 end
 
 org3 = Organization.find_or_create_by!(email: "org3@example.com") do |org|
@@ -87,7 +87,7 @@ org3 = Organization.find_or_create_by!(email: "org3@example.com") do |org|
   org.webLink = "https://org3.com"
   org.servicesSummary = "We help clean up parks."
   org.avgStarValue = 4.8
-  org.admin_username = "admin3"
+  org.admin_username = "admin"
 end
 
 org4 = Organization.find_or_create_by!(email: "org4@example.com") do |org|
@@ -100,7 +100,7 @@ org4 = Organization.find_or_create_by!(email: "org4@example.com") do |org|
   org.webLink = "https://org4.com"
   org.servicesSummary = "We offer coding bootcamps."
   org.avgStarValue = 4.9
-  org.admin_username = "admin4"
+  org.admin_username = "admin"
 end
 
 org5 = Organization.find_or_create_by!(email: "org5@example.com") do |org|
@@ -113,7 +113,7 @@ org5 = Organization.find_or_create_by!(email: "org5@example.com") do |org|
   org.webLink = "https://org5.com"
   org.servicesSummary = "We raise mental health awareness."
   org.avgStarValue = 4.7
-  org.admin_username = "admin5"
+  org.admin_username = "admin"
 end
 
 org6 = Organization.find_or_create_by!(email: "org6@example.com") do |org|
@@ -126,7 +126,7 @@ org6 = Organization.find_or_create_by!(email: "org6@example.com") do |org|
   org.webLink = "https://org6.com"
   org.servicesSummary = "We provide school supplies."
   org.avgStarValue = 4.6
-  org.admin_username = "admin6"
+  org.admin_username = "admin"
 end
 
 puts "Seeding users..."
@@ -195,7 +195,7 @@ Event.find_or_create_by!(title: "Community Food Drive", eventDate: Date.today + 
   event.eventstatus = true
   event.organization_id = "org1@example.com"
   event.user_id = "user1"
-  event.admin_id = "admin1"
+  event.admin_id = "admin"
 end
 
 Event.find_or_create_by!(title: "Virtual Job Fair", eventDate: Date.today + 7) do |event|
@@ -210,7 +210,7 @@ Event.find_or_create_by!(title: "Virtual Job Fair", eventDate: Date.today + 7) d
   event.eventstatus = true
   event.organization_id = "org2@example.com"
   event.user_id = "user2"
-  event.admin_id = "admin2"
+  event.admin_id = "admin"
 end
 
 Event.find_or_create_by!(title: "Virtual Tech Meetup", eventDate: Date.today + 5) do |event|
@@ -225,7 +225,7 @@ Event.find_or_create_by!(title: "Virtual Tech Meetup", eventDate: Date.today + 5
   event.eventstatus = true
   event.organization_id = "org2@example.com"
   event.user_id = "user2"
-  event.admin_id = "admin2"
+  event.admin_id = "admin"
 end
 
 Event.find_or_create_by!(title: "Neighborhood Cleanup", eventDate: Date.today + 10) do |event|
@@ -240,7 +240,7 @@ Event.find_or_create_by!(title: "Neighborhood Cleanup", eventDate: Date.today + 
   event.eventstatus = true
   event.organization_id = "org3@example.com"
   event.user_id = "user3"
-  event.admin_id = "admin3"
+  event.admin_id = "admin"
 end
 
 Event.find_or_create_by!(title: "Coding Bootcamp", eventDate: Date.today + 14) do |event|
@@ -255,7 +255,7 @@ Event.find_or_create_by!(title: "Coding Bootcamp", eventDate: Date.today + 14) d
   event.eventstatus = true
   event.organization_id = "org4@example.com"
   event.user_id = "user4"
-  event.admin_id = "admin4"
+  event.admin_id = "admin"
 end
 
 Event.find_or_create_by!(title: "Mental Health Awareness Webinar", eventDate: Date.today + 7) do |event|
@@ -270,7 +270,7 @@ Event.find_or_create_by!(title: "Mental Health Awareness Webinar", eventDate: Da
   event.eventstatus = true
   event.organization_id = "org5@example.com"
   event.user_id = "user5"
-  event.admin_id = "admin5"
+  event.admin_id = "admin"
 end
 
 Event.find_or_create_by!(title: "Back-to-School Supply Drive", eventDate: Date.today + 20) do |event|
@@ -285,7 +285,7 @@ Event.find_or_create_by!(title: "Back-to-School Supply Drive", eventDate: Date.t
   event.eventstatus = true
   event.organization_id = "org6@example.com"
   event.user_id = "user6"
-  event.admin_id = "admin6"
+  event.admin_id = "admin"
 end
 
 puts "Finished seeding events!"
