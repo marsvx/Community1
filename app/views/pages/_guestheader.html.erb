@@ -17,14 +17,14 @@
         </li>
 
         <li class="nav-item">
-          <%= link_to 'Log In', "#", class: 'nav-link' %>
+          <%= link_to 'Log In', users_path, class: 'nav-link' %>
         </li>
         <li class="nav-item">
           <%= link_to 'About Us', pages_about_us_path, class: 'nav-link' %>
         </li>
 
         <li class="nav-item">
-          <%= link_to 'Create a profile', "#", class: 'nav-link' %>
+          <%= link_to 'Create a profile', new_user_path, class: 'nav-link' %>
         </li>
         <div>
           <% if Current.admin %>
