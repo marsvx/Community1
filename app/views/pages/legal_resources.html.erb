@@ -4,32 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Explore</title>
+
     <%= stylesheet_link_tag 'card', media: 'all' %>
 </head>
 <body>
     <div class="full_container">
         <header>
             <div class="header-container">
-                <h1>Leagl Resources</h1>
+                <h1>Legal Resources</h1>
             </div>
         </header>
 
         <div class="card-grid">
-            <% 4.times do %> <!-- Loop to create 4 cards -->
+            <% @organizations.each do |organization| %> <!-- Loop through each organization -->
             <div class="card">
-                <h2>Organization Name</h2>
+                <h2><%= organization.org_name %></h2> 
                 <div class="description">
-                    <p>Description/Map</p>
+                    <p><%= organization.servicesSummary %></p> 
+                    <p><%= organization.street %>, <%= organization.city %>, <%= organization.org_state %> <%= organization.zipcode %></p> 
                 </div>
                 <div class="contact-header">
-                    <div class="contact-info">Contact Information</div>
+                    <div class="contact-info">
+                        Phone: <%= organization.phoneNumber %> 
+                    </div>
                     <div class="favorite">&#9733;</div> <!-- Star icon -->
                 </div>
 
                 <div class="info-buttons">
-                    <button class="add-button">Address</button>
-                    <button class="phone-button">Phone Number</button>
-                    <button class="web-button">Website</button>
+                    <button class="add-button"><%= organization.street %></button> <!-- Address -->
+                    <button class="phone-button"><%= organization.phoneNumber %></button> <!-- Phone Number -->
+                    <button class="web-button"><a href="<%= organization.webLink %>">Website</a></button> <!-- Website -->
                 </div>
             </div>
             <% end %>
