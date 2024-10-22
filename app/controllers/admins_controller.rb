@@ -5,6 +5,7 @@ class AdminsController < ApplicationController
   # GET /admins or /admins.json
   def index
     @admins = Admin.all
+    @pending_events = Event.where(status: false)
   end
 
   # GET /admins/1 or /admins/1.json

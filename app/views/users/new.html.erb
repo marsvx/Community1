@@ -1,9 +1,94 @@
-<h1>New user</h1>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center; 
+    }
 
-<%= render "form", user: @user %>
+    form {
+      border-radius: 35px; 
+      border: 3px solid transparent; 
+      padding: 16px; 
+      background-color: #A4C3B2; 
+      max-width: 600px; 
+      width: 100%; 
+      margin: 0 auto; 
+    }
 
-<br>
+    h1 {
+      text-align: center; 
+      margin: 0; 
+    }
 
-<div>
-  <%= link_to "Back to users", users_path %>
-</div>
+    input[type=text], input[type=password], input[type=email], input[type=number] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      border-radius: 35px; 
+    }
+
+    button {
+      color: white;
+      padding: 14px 20px;
+      margin: 0; 
+      border: none;
+      cursor: pointer;
+      border-radius: 35px;
+    }
+
+    .create-profile-btn {
+      background-color: #6B9080; 
+      width: 160px; 
+      border-radius: 35px; 
+      margin-top: 20px; /* Add margin above the button */
+    }
+
+    .container {
+      padding: 16px;
+      border-radius: 35px;
+    }
+
+    label {
+      display: block; 
+      text-align: left; 
+      margin-top: 10px; 
+    }
+
+    @media screen and (max-width: 300px) {
+      .create-profile-btn {
+         width: 100%; 
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <form action="/create_profile.php" method="post">
+    <div class="container">
+      <label for="email"><b>Email</b></label>
+      <input type="email" placeholder="Enter Email" name="email" required>
+
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw" required>
+
+      <label for="confirm_psw"><b>Confirm Password</b></label>
+      <input type="password" placeholder="Confirm Password" name="confirm_psw" required>
+
+      <label for="zipcode"><b>Zipcode</b></label>
+      <input type="number" placeholder="Enter Zipcode" name="zipcode" required>
+
+      <!-- Create Profile Button with more space -->
+      <div>
+        <button type="submit" class="create-profile-btn">Create Profile</button>
+      </div>
+    </div>
+  </form>
+
+</body>
+</html>
