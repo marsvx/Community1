@@ -13,15 +13,38 @@
  *= require_tree .
  *= require_self
  */
-
- .controls button {
-    margin: 5px;
-    padding: 10px;
-    font-size: 14px;
-    cursor: pointer;
-  }
-  
-  .text-content {
-    font-size: 16px; /* Default size */
-  }
  
+ .logo-img {
+  height: 80px; /* Adjust the height to fit your navbar */
+  width: auto;  /* Maintain the aspect ratio */
+  max-width: 160px; /* Optional: Set a max-width to limit logo size */
+}
+
+/* Styling the text next to the logo */
+.logo-text {
+  font-size: 1.6rem;  /* Keep the size balanced with the logo */
+  font-weight: 600;   /* Adjust the font weight for emphasis */
+  color: #ffffff;     /* Ensure text color contrasts with the background */
+  margin-left: -15px;   /* Reduce margin to bring text closer to the logo */
+  letter-spacing: 0.05rem; /* Slight letter spacing for readability */
+  font-family: 'Roboto', sans-serif;  /* Use a clean, modern font */
+  vertical-align: middle;  /* Ensure vertical alignment with the logo */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .logo-text {
+    font-size: 1.3rem;  /* Reduce font size on smaller screens */
+  }
+}
+
+.controls button {
+  margin: 5px;
+  padding: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.text-content {
+  font-size: 16px; /* Default size */
+}
