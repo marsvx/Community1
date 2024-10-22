@@ -1,116 +1,107 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  text-align: center; 
-}
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center; 
+    }
 
-form {
-  border-radius: 35px; 
-  border: 3px solid transparent; 
-  padding: 16px; 
-  background-color: #A4C3B2; 
-  
-  max-width: 600px; 
-  width: 100%; 
-  margin: 0 auto; 
-}
-<h1>Users</h1>
+    form {
+      border-radius: 35px; 
+      border: 3px solid transparent; 
+      padding: 16px; 
+      background-color: #A4C3B2; 
+      max-width: 600px; 
+      width: 100%; 
+      margin: 0 auto; 
+    }
 
-h2 {
-  text-align: center; 
-  margin: 0; 
-}
+    h1 {
+      text-align: center; 
+      margin: 0; 
+    }
 
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  border-radius: 35px; 
-}
+    input[type=text], input[type=password] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      border-radius: 35px; 
+    }
 
-button {
-  color: white;
-  padding: 14px 20px;
-  margin: 0; 
-  border: none;
-  cursor: pointer;
-  border-radius: 35px; /* Rounded corners */
-}
+    button {
+      color: white;
+      padding: 14px 20px;
+      margin: 0; 
+      border: none;
+      cursor: pointer;
+      border-radius: 35px;
+    }
 
-.login-btn {
-  background-color: #6B9080; 
-  width: 120px; 
-  margin-right: 20px; 
-  border-radius: 35px; 
+    .login-btn {
+      background-color: #6B9080; 
+      width: 120px; 
+      margin-right: 20px; 
+      border-radius: 35px; 
+    }
 
-}
+    .create-profile-btn {
+      background-color: #6B9080; 
+      margin-right: 20px;
+      text-decoration: none; 
+      color: white; 
+      display: inline-block; 
+      padding: 14px 20px; 
+      border-radius: 35px;
+    }
 
-.create-profile-btn {
-  background-color: #6B9080; 
-  margin-right: 20px;
-  text-decoration: none; 
-  color: white; 
-  display: inline-block; 
-  padding: 14px 20px; 
-  border-radius: 35px; 
+    .container {
+      padding: 16px;
+      border-radius: 35px;
+    }
 
-}
+    span.psw {
+      display: block; 
+      text-align: right; 
+      padding-top: 8px;
+      color: #6B9080; 
+      text-decoration: none; 
+      margin-bottom: 25px;
+    }
 
-.container {
-  padding: 16px;
-  border-radius: 35px;
-}
+    label {
+      display: block; 
+      text-align: left; 
+      margin-top: 10px; 
+    }
 
-span.psw {
-  display: block; 
-  text-align: right; 
-  padding-top: 8px;
-  color: #6B9080; 
-  text-decoration: none; 
-  margin-bottom: 25px;
-}
-
-label {
-  display: block; 
-  text-align: left; 
-  margin-top: 10px; 
-}
-
-@media screen and (max-width: 300px) {
-  .create-profile-btn, .login-btn {
-     width: 100%; 
-  }
-}
-</style>
+    @media screen and (max-width: 300px) {
+      .create-profile-btn, .login-btn {
+         width: 100%; 
+      }
+    }
+  </style>
 </head>
 <body>
+  <form action="/action_page.php" method="post">
+    <div class="container">
+      <label for="uname"><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" name="uname" required>
 
-<form action="/action_page.php" method="post">
-  <!-- Green container for the form inputs -->
-  <div class="container">
-    <label for="uname"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="uname" required>
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw" required>
 
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
-
-    <!-- Link for forgotten password -->
-    <span class="psw"><a href="forgot_password.html" style="color: #6B9080; text-decoration: none;">Forgot password?</a></span>
-
-    <!-- Container for buttons -->
-    <div>
-      <a href="/new" class="create-profile-btn">Create a Profile</a>
-      <button type="submit" class="login-btn">Login</button>
+      <span class="psw"><a href="forgot_password.html" style="color: #6B9080; text-decoration: none;">Forgot password?</a></span>
+      <div>
+        <a href="<%= new_user_path %>" class="create-profile-btn">Create a Profile</a>
+        <button type="submit" class="login-btn">Login</button>
+      </div>
     </div>
-  </div>
-</form>
+  </form>
 
 </body>
 </html>
