@@ -24,6 +24,11 @@ Rails.application.routes.draw do
 
   get 'pages/explore'
 
+  get 'users/index'
+  get 'users/new'
+
+
+
 
 
 
