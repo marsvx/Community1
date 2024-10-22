@@ -18,14 +18,14 @@
         <div class="card-grid">
             <% @organizations.each do |organization| %> <!-- Loop through each organization -->
             <div class="card">
-                <h2><%= organization.org_name %></h2> <!-- Organization Name -->
+                <h2><%= organization.org_name %></h2> 
                 <div class="description">
-                    <p><%= organization.servicesSummary %></p> <!-- Services Summary -->
-                    <p><%= organization.street %>, <%= organization.city %>, <%= organization.org_state %> <%= organization.zipcode %></p> <!-- Address -->
+                    <p><%= organization.servicesSummary %></p> 
+                    <p><%= organization.street %>, <%= organization.city %>, <%= organization.org_state %> <%= organization.zipcode %></p> 
                 </div>
                 <div class="contact-header">
                     <div class="contact-info">
-                        Phone: <%= organization.phoneNumber %> <!-- Phone Number -->
+                        Phone: <%= organization.phoneNumber %> 
                     </div>
                     <div class="favorite">&#9733;</div> <!-- Star icon -->
                 </div>
