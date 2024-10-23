@@ -45,6 +45,7 @@
     <%= javascript_importmap_tags %>
   </head>
   <body>
+
     <% unless current_page_without_header? %>
       <%= render 'pages/guestheader' %>
     <% else %>
@@ -79,6 +80,7 @@
         });
       }
     </script>
-  
-    </body>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+  </body>
 </html>
