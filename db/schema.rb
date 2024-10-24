@@ -115,13 +115,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_03_060107) do
     t.index ["userID_id"], name: "index_surveys_on_userID_id"
   end
 
-  create_table "users", primary_key: "username", id: { type: :string, limit: 15 }, force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
+    t.string "username", limit: 15, null: false
     t.string "email", limit: 255, null: false
-    t.string "firstName", limit: 150, null: false
-    t.string "ageRange", limit: 8, null: false
-    t.string "hashedPasswd", limit: 80, null: false
-    t.integer "zipCode"
+    t.string "first_name", limit: 150, null: false
+    t.string "age_range", limit: 8, null: false
+    t.string "password_digest", limit: 80, null: false
+    t.integer "zipcode"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   add_foreign_key "classifications", "categories", column: "categoryabbr_id", primary_key: "abbv"

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :organizations
   resources :events
   resources :admins, param: :username
+
   root "pages#home"
   get 'pages/home'
 
@@ -43,4 +44,9 @@ Rails.application.routes.draw do
   get "adminaccess", to: "asession#new"
   post "adminaccess", to: "asession#create"
   delete "adminlogout", to: "asession#destroy"
+
+  # User session management
+  get "userlogin", to: "session#new"
+  post "userlogin", to: "session#create"
+  delete "userlogout", to: "session#destroy"
 end
