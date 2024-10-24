@@ -21,25 +21,14 @@
   
 <! -- !!END WARNING!!  -->
 
-<! -- Modify below to include additional questions -->
-
 
 <body>
     <h1>Survey Form</h1>
     <form action="<%= survey_path %>" method="POST"> 
-   
-    <div id="question1">
-   
-        <label for="name">Name:</label><br>
-        <input type="text" id="name" name="name" required><br><br>
-      
-        <input type="checkbox" id="noAnswer" name="noAnswer" value="DoNotWishToAnswer">
-        <label for="noAnswer">Do Not Wish To Answer</label><br><br>
-      
-        <button type="button" onclick="showNext()">Next</button>
-      </div>
+     <%= hidden_field_tag :userID_id, current_user.id %> <!-- logged in user -->
+     <%= hidden_field_tag :questionID_id, 1 %> <!-- question 1 -->
 
-      <div id="question2">
+      <div id="question1">
       <label for="safety_check">Are you safe?</label><br>
       
       <!-- Yes option -->
@@ -61,13 +50,41 @@
         </script>
 
      <-- End Conditional --> 
-        <div id="question3">
-        <label for="age">Age:</label><br>
-        <input type="text" id="age" name="age" required><br><br>
+
+
+    < -BEGIN BRANCHING QUESTIONS -->
+    <-- Dependents -->
+    <div id="dependents">
+    <label for="dependents">Do you have any dependents?</label><br>
+    <input type="radio" id="dep_pos" name="dependents" value="Yes"><br><br>
+    <label for="dep_pos">Yes</label><br>
+
+    <input type="radio" id="dep_neg" name="dependents" value="No"><br><br>
+    <label for="dep_neg">No</label><br>
+
+    </div>
+
+
+
+     <-- Age Range -->
+        <div id="question_age">
+        <label for="age">What is your age range?</label><br>
+        <input type="radio" id="under_eighteen" name="age" value="Under 18"><br><br>
+        <label for="under_eighteen">Under 18</label><br>
+
+        <input type="radio" id="nineteen_to_sixtyfour" name="age" value="19-64"><br><br>
+        <label for="nineteen_to_sixtyfour">19-64</label><br>
+
+        <input type="radio" id="over_sixtyfive" name="age" value="65+"><br><br>
+        <label for="over_sixtyfive">65+</label><br>
+       
         button type="button" onclick="showNext()">Next</button>
         </div>
 
-        <div id="question4">
+
+
+
+        <div id="question3">
         <label for="gender">Gender:</label><br>
         <select id="gender" name="gender">
             <option value="male">Male</option>
@@ -82,6 +99,7 @@
         <label for="otherGender">Please specify:</label><br>
         <input type="text" id="otherGender" name="otherGender"><br><br>
         </div>
+        <! -- Modify below to include additional questions -->
 
         <!-- Multiple Choice Questions -->
 
