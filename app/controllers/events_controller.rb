@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: %i[ show edit update destroy ]
+  before_action :require_login, only: [:new, :create]
 
   # GET /events or /events.json
   def index
@@ -15,6 +16,7 @@ class EventsController < ApplicationController
 
   # GET /events/new
   def new
+    puts "New action called"
     @event = Event.new
   end
 
@@ -24,6 +26,7 @@ class EventsController < ApplicationController
 
   # POST /events or /events.json
   def create
+    puts "Create action called"
     @event = Event.new(event_params)
     @event.user_id = current_user.id
     @event.admin_id = Admin.first
@@ -65,6 +68,20 @@ class EventsController < ApplicationController
   end
 
   private
+
+    def require_login
+      session[:user_id]
+      unless logged_in?
+        flash[:alert] = "You must be logged in to create an event."
+        redirect_to login_path
+      end
+    end
+
+    def logged_in?
+      false #this is temporary as the user session logic is still being worked
+      #!!session[:user_id] # This checks if the user is logged in
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_event
       @event = Event.find(params[:id])

@@ -67,4 +67,6 @@ class UsersController < ApplicationController
     def user_params
       params.fetch(:user, {})
     end
+
+    
 end
