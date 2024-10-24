@@ -71,7 +71,7 @@ class SurveysController < ApplicationController
     private
 
     def survey_params
-      params.permit(:userID_id, :questionID_id, :answer)
+      params.permit(:userID_id, :questionID_id, :answer, :dependents, :age)
 
     end
 end

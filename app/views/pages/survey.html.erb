@@ -32,7 +32,7 @@
       <label for="safety_check">Are you safe?</label><br>
       
       <!-- Yes option -->
-      <input type="radio" id="safe_pos" name="safety_check" value="yes" onclick="showNextSection()">
+      <input type="radio" id="safe_pos" name="safety_check" value="yes" onclick="showNext()">
       <label for="safe_pos">Yes</label><br>
 
       <!-- No Option with Redirection -->
@@ -54,20 +54,18 @@
 
     < -BEGIN BRANCHING QUESTIONS -->
     <-- Dependents -->
-    <div id="dependents">
+    <div id="question2">
     <label for="dependents">Do you have any dependents?</label><br>
-    <input type="radio" id="dep_pos" name="dependents" value="Yes"><br><br>
+    <input type="radio" id="dep_pos" name="dependents" value="Yes" required><br><br>
     <label for="dep_pos">Yes</label><br>
 
-    <input type="radio" id="dep_neg" name="dependents" value="No"><br><br>
+    <input type="radio" id="dep_neg" name="dependents" value="No" required><br><br>
     <label for="dep_neg">No</label><br>
 
     </div>
 
-
-
      <-- Age Range -->
-        <div id="question_age">
+        <div id="question3">
         <label for="age">What is your age range?</label><br>
         <input type="radio" id="under_eighteen" name="age" value="Under 18"><br><br>
         <label for="under_eighteen">Under 18</label><br>
@@ -81,25 +79,6 @@
         button type="button" onclick="showNext()">Next</button>
         </div>
 
-
-
-
-        <div id="question3">
-        <label for="gender">Gender:</label><br>
-        <select id="gender" name="gender">
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-
-        </select><br><br>
-        button type="button" onclick="showNext()">Next</button>
-        </div>
-
-        <div id="otherGenderDiv" style="display:none;">
-        <label for="otherGender">Please specify:</label><br>
-        <input type="text" id="otherGender" name="otherGender"><br><br>
-        </div>
-        <! -- Modify below to include additional questions -->
 
         <!-- Multiple Choice Questions -->
 
