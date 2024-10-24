@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 
   get 'pages/explore'
 
-  get 'users/index'
+  get 'login', to: 'users#index'
   get 'users/new'
 
 
