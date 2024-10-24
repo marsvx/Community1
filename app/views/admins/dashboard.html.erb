@@ -1,3 +1,13 @@
 <% if Current.admin %>
  <h2 class = "text-center"> Welcome back <%= Current.admin.firstName %></h2>
 <% end %>
+
+<p class="text-content">There are <%= Admin.count %> admins</p>
+<p class="text-content">There are <%= Category.count %> categories</p>
+<p class="text-content">There are <%= Classification.count %> clasifications</p>
+<p class="text-content">There are <%= Event.count %> Events</p>
+<p class="text-content">There are <%= Organization.count %> organizations</p>
+<p class="text-content">There are <%= Question.count %> questions</p>
+<p class="text-content">There are <%= Review.count %> reviews</p>
+<p class="text-content">There are <%= Survey.count %> surveys</p>
+<p class="text-content">There are <%= User.count %> users</p>
