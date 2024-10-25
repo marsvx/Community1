@@ -16,7 +16,6 @@ class EventsController < ApplicationController
 
   # GET /events/new
   def new
-    puts "New action called"
     @event = Event.new
   end
 
@@ -26,10 +25,23 @@ class EventsController < ApplicationController
 
   # POST /events or /events.json
   def create
-    puts "Create action called"
     @event = Event.new(event_params)
-    @event.user_id = current_user.id
-    @event.admin_id = Admin.first
+
+    if params[:event][:isVirtual] == "true"
+      @event.street = "Virtual"
+      @event.city = "Online"
+      @event.zipcode = "00000" # or any other placeholder value
+    end
+
+      # Split the combined date and time into separate columns since we are using datetime_field in the form
+    event_datetime = DateTime.parse(params[:event][:eventDate])
+    @event.meetingLink = nil unless params[:event][:isVirtual] == "true"
+    @event.eventDate = event_datetime.to_date
+    @event.eventTime = event_datetime.to_time
+
+    #@event.user_id = current_user.id
+    @event.user_id = User.first.id #this is temporary in order to test the event form, should change to above line after user session logic is complete
+    @event.admin_id = Admin.first.id
     @event.eventstatus = false
 
 
@@ -78,7 +90,7 @@ class EventsController < ApplicationController
     end
 
     def logged_in?
-      false #this is temporary as the user session logic is still being worked
+      true #this is temporary as the user session logic is still being worked
       #!!session[:user_id] # This checks if the user is logged in
     end
 
@@ -89,6 +101,6 @@ class EventsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def event_params
-      params.require(:event).permit(:title, :Eventdescription, :eventDate, :eventTime, :street, :city, :zipcode)
+      params.require(:event).permit(:title, :eventDescription, :eventDate, :eventTime, :street, :city, :zipcode, :isVirtual, :meetingLink)
     end
 end
