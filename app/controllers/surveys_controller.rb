@@ -71,6 +71,7 @@ class SurveysController < ApplicationController
     private
 
     def survey_params
-      params.require(:survey).permit(:question1, :question2, :question3)  # Adjust according to form fields
+      params.permit(:userID_id, :questionID_id, :answer, :dependents, :age)
+
     end
 end
