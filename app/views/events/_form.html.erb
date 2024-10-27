@@ -17,29 +17,42 @@
   </div>
 
   <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_area :description %>
+    <%= form.label :eventDescription, "Event Description", style: "display: block" %>
+    <%= form.text_area :eventDescription %>
   </div>
 
   <div>
-    <%= form.label :date, style: "display: block" %>
-    <%= form.datetime_field :date %>
+    <%= form.label :eventDate, "Date & Time", style: "display: block" %>
+    <%= form.datetime_field :eventDate %>
+  </div>
+
+  <div>
+    <%= form.label :isVirtual, "Is this a virtual event?", style: "display: block" %>
+    <%= form.radio_button :isVirtual, true, id: "is_virtual_yes" %>
+    <%= form.label :isVirtual, "Yes", for: "is_virtual_yes" %>
+  
+    <%= form.radio_button :isVirtual, false, id: "is_virtual_no" %>
+    <%= form.label :isVirtual, "No", for: "is_virtual_no" %>
+  </div>
+
+  <div id="virtual_event_url" style="display: none;">
+    <%= form.label :meetingLink, "Meeting Link", style: "display: block" %>
+    <%= form.text_field :meetingLink, class: "form-control" %>
   </div>
 
   <div>
     <%= form.label :street, "Street address", style: "display: block" %>
-    <%= form.text_field :street %>
+    <%= form.text_field :street, id: "street_field", class: "form-control" %>
   </div>
 
   <div>
     <%= form.label :city, style: "display: block" %>
-    <%= form.text_field :city %>
+    <%= form.text_field :city, id: "city_field", class: "form-control" %>
   </div>
 
   <div>
-    <%= form.label :zipcode, style: "display: block" %>
-    <%= form.text_field :zipcode %>
-  </div>
+    <%= form.label :zipcode, "ZIP Code", style: "display: block" %>
+    <%= form.text_field :zipcode, id: "zipcode_field", class: "form-control" %>
 
   <div>
     <%= form.submit %>
