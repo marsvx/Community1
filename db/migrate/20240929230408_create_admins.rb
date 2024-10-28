@@ -5,6 +5,7 @@ class CreateAdmins < ActiveRecord::Migration[7.1]
       t.string :firstName, null:false, limit:150
       t.string :password_digest, null:false, limit:80
       t.index :email, unique: true
+      t.timestamps
     end
 
     # Add a trigger to prevent username updates

@@ -1,3 +1,85 @@
-<% if Current.admin %>
- <h2 class = "text-center"> Welcome back <%= Current.admin.firstName %></h2>
-<% end %>
+<body class = "bodybackground">
+    <% if Current.admin %>
+        <h2 class = "text-center"> Welcome back <%= Current.admin.firstName %></h2>
+    <% end %>
+    <div class = "card-list">
+        <div class = "card-item">
+            <p class="text-content">There are <%= Admin.count %> admins registered</p>
+        </div>
+        <div class = "card-item">
+            <p class="text-content">There are <%= User.count %> users</p>
+        </div>
+        <div class = "card-item">
+            <p class="text-content">There are <%= Category.count %> categories</p>
+        </div>
+        <div class = "card-item">
+            <p class="text-content">There are <%= Classification.count %> clasifications</p>
+        </div>
+        <div class = "card-item">
+            <p class="text-content">There are <%= Organization.count %> organizations</p>
+        </div>
+        <div class = "card-item">
+            <p class="text-content">There are <%= Question.count %> questions</p>
+        </div>
+         <div class = "card-item">
+            <p class="text-content"><%= Event.count %> total events</p>
+            <p class="text-content"><%= Event.where(eventstatus: false).count %> events that need to be reviewed</p>
+            <canvas id = "eventsChart" width = "200" height = "100"></canvas>
+        </div>
+        <div class = "card-item">
+            <p class="text-content">There are <%= Review.count %> reviews</p>
+            <p class="text-content"><%= Review.where(reviewStatus: false).count %> reviews to check</p>
+            <canvas id = "reviewsChart" width = "200" height = "100"></canvas>
+        </div>
+        <div class = "card-item">
+            <p class="text-content">There are <%= Survey.count %> surveys completed</p>
+        </div>
+    </div>
+    <script>
+        const eventsTotal = <%= Event.count %>;
+        const eventsReview = <%= Event.where(eventstatus: false).count %>;
+        const eventsCtx = document.getElementById('eventsChart').getContext('2d');
+        new Chart(eventsCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Events', 'Events to approve'],
+                datasets: [{
+                    data: [eventsTotal - eventsReview, eventsReview],
+                    background: ['#4CAF50', '#FF9800']
+                }]
+            },
+            options: {
+                rotation: -90,
+                circumference: 180,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        const reviewsTotal = <%= Review.count %>;
+        const reviewsReview = <%= Review.where(reviewStatus: false).count %>;
+        const reviewsCtx = document.getElementById('reviewsChart').getContext('2d');
+        new Chart(reviewsCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Reviews', 'Reviews to approve'],
+                datasets: [{
+                    data: [reviewsTotal - reviewsReview, reviewsReview],
+                    background: ['#4CAF50', '#FF9800']
+                }]
+            },
+            options: {
+                rotation: -90,
+                circumference: 180,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
