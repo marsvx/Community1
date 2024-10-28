@@ -69,7 +69,7 @@ class AdminsController < ApplicationController
     end
     if @admin.destroy
       respond_to do |format|
-        format.html { redirect_to admindashboard_path, status: :see_other, notice: "Admin was successfully destroyed." }
+        format.html { redirect_to admins_path, status: :see_other, notice: "Admin was successfully deleted." }
         format.json { head :no_content }
       end
     else
