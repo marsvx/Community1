@@ -1,41 +1,86 @@
-<%= form_with(model: admin) do |form| %>
-  <% if admin.errors.any? %>
-    <div class = "alert alert-danger">
-      <ul>
-        <% admin.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<div>
+  <%= form_with(model: admin) do |form| %>
+    <% if admin.errors.any? %>
+      <div class = "alert alert-danger">
+        <ul>
+          <% admin.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  <p></p>
+    <div class = "col-mb-3">
+      <%= form.label :username, style: "display: block", class: "form-label" %>
+      <div class = "input-group">
+        <%= form.text_field :username, disabled: admin.persisted?, class: "form-control", placeholder: "Username" %>
+      </div>
+      <div class="col-auto">
+        <span id="passwordHelpInline" class="form-text">Once created, this cannot be changed</span>
+      </div>
+  <p></p>
+    <div class = "col-mb-3">
+      <%= form.label :email, style: "display: block", class: "form-label" %>
+      <div class = "input-group">
+        <%= form.text_field :email, class: "form-control", placeholder: "Email@domain.com" %>
+      </div>
+    </div>
+  <p></p>
+    <div class = "col-mb-3">
+      <%= form.label :firstName, "First Name", style: "display: block", class: "form-label" %>
+      <div class = "input-group">
+        <%= form.text_field :firstName, class: "form-control", placeholder: "First Name" %>
+      </div>
+    </div>
+  <p></p>
+    <div class = "col-mb-3">
+      <%= form.label :password, style: "display: block", class: "form-label" %>
+      <div class = "input-group">
+          <%= form.password_field :password, class: "form-control", id: "passwordConfirmationField", placeholder: "Password" %>
+          <button type = "button" id = "togglePasswordConfirmation" class = "btn btn-outline-secondary">
+          <i class = "bi bi-eye-slash" id = "toggleIcon"></i>
+          </button>
+      </div>
+    </div>
+  <p></p>
+    <div class = "col-mb-3">
+      <%= form.label :password_confirmation, "Password Confirmation", style: "display: block", class: "form-label" %>
+      <div class = "input-group">
+        <%= form.password_field :password_confirmation, class: "form-control", id: "passwordField", placeholder: "Password Confirmation" %>
+        <button type = "button" id = "togglePassword" class = "btn btn-outline-secondary">
+        <i class = "bi bi-eye-slash" id = "toggleIcon"></i>
+        </button>
+      </div>
+    </div>
+
+  <p></p>
+    <% button_label = admin.persisted? ? "Update Admin" : "Create Admin" %>
+    <% confirmation_message = admin.persisted? ? "Are you sure you want to update this admin?" : "Are you sure you want to create this admin?" %>
+
+    <div class="d-grid gap-2 col-6 mx-auto">
+      <%= form.submit button_label, class: "btn btn-alogin btn-lg", onclick: "return confirm('#{confirmation_message}');" %>
     </div>
   <% end %>
+  <script>
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordField = document.getElementById('passwordField');
+    const passwordToggleIcon = document.getElementById('passwordToggleIcon');
+    const togglePasswordConfirmation = document.getElementById('togglePasswordConfirmation');
+    const passwordConfirmationField = document.getElementById('passwordConfirmationField');
+    const confirmationToggleIcon = document.getElementById('confirmationToggleIcon');
 
-  <div>
-    <%= form.label :username, style: "display: block" %>
-    <%= form.text_field :username, disabled: admin.persisted? %>
-  </div>
+    togglePassword.addEventListener('click', function () {
+      const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordField.setAttribute('type', type);
+      passwordToggleIcon.classList.toggle('bi-eye');
+      passwordToggleIcon.classList.toggle('bi-eye-slash');
+    });
 
-  <div>
-    <%= form.label :email, style: "display: block" %>
-    <%= form.text_field :email %>
-  </div>
-
-  <div>
-    <%= form.label :firstName, style: "display: block" %>
-    <%= form.text_field :firstName %>
-  </div>
-
-  <div>
-    <%= form.label :password, style: "display: block" %>
-    <%= form.password_field :password %>
-  </div>
-
-  <div>
-    <%= form.label :password_confirmation, style: "display: block" %>
-    <%= form.password_field :password_confirmation %>
-  </div>
-
-<p></p>
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+    togglePasswordConfirmation.addEventListener('click', function () {
+      const type = passwordConfirmationField.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordConfirmationField.setAttribute('type', type);
+      confirmationToggleIcon.classList.toggle('bi-eye');
+      confirmationToggleIcon.classList.toggle('bi-eye-slash');
+    });
+  </script>
+</div>

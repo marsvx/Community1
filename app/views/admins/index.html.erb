@@ -1,16 +1,21 @@
-<h1>Admin Center</h1>
-
-<% if Current.admin %>
-  Welcome back <%= Current.admin.firstName %>
-<% end %>
+<h1 class = "text-center">Admins</h1>
+<%= button_to "Create new admin", new_admin_path, method: :get, class: "btn btn-alogin btn-lg" %>
 <p></p>
 <div id="admins">
-  <% @admins.each do |admin| %>
-    <%= render admin %>
-    <p>
-      <%= link_to "Show this admin", admin %>
-    </p>
-  <% end %>
+  <table class = "table">
+        <thead>
+            <tr>
+                <th scope = "col"><strong>Username:</strong></th>
+                <th scope = "col"><strong>Email:</strong></th>
+                <th scope = "col"><strong>First Name:</strong></th>
+                <th scope = "col"><strong>Created:</strong></th>
+                <th scope = "col"><strong>Last Update:</strong></th>
+            </tr>
+        </thead>
+        <tbody class = "table-group-divider">
+            <% @admins.each do |admin| %>
+              <%= render partial: "admin", locals: { admin: admin} %>
+            <% end %>
+        </tbody>
+    </table>
 </div>
-
-<%= link_to "New admin", new_admin_path %>
