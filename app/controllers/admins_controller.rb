@@ -30,7 +30,7 @@ class AdminsController < ApplicationController
     @admin = Admin.new(admin_params)
     respond_to do |format|
       if @admin.save
-        format.html { redirect_to @admin, notice: "New admin was successfully created." }
+        format.html { redirect_to admins_path, notice: "New admin was successfully created." }
         format.json { render :show, status: :created, location: @admin }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -44,7 +44,7 @@ class AdminsController < ApplicationController
     respond_to do |format|
       begin
         if @admin.update(admin_params.except(:username))
-          format.html { redirect_to @admin, notice: "Admin was successfully updated." }
+          format.html { redirect_to admins_path, notice: "Admin was successfully updated." }
           format.json { render :show, status: :ok, location: @admin }
         else
           format.html { render :edit, status: :unprocessable_entity }

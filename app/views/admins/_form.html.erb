@@ -15,7 +15,9 @@
       <div class = "input-group">
         <%= form.text_field :username, disabled: admin.persisted?, class: "form-control", placeholder: "Username" %>
       </div>
-    </div>
+      <div class="col-auto">
+        <span id="passwordHelpInline" class="form-text">Once created, this cannot be changed</span>
+      </div>
   <p></p>
     <div class = "col-mb-3">
       <%= form.label :email, style: "display: block", class: "form-label" %>
@@ -52,9 +54,12 @@
     </div>
 
   <p></p>
-      <div class = "d-grid gap-2 col-6 mx-auto">
-        <%= form.submit "Create Admin", class: "btn btn-alogin btn-lg" %>
-      </div>
+    <% button_label = admin.persisted? ? "Update Admin" : "Create Admin" %>
+    <% confirmation_message = admin.persisted? ? "Are you sure you want to update this admin?" : "Are you sure you want to create this admin?" %>
+
+    <div class="d-grid gap-2 col-6 mx-auto">
+      <%= form.submit button_label, class: "btn btn-alogin btn-lg", onclick: "return confirm('#{confirmation_message}');" %>
+    </div>
   <% end %>
   <script>
     const togglePassword = document.getElementById('togglePassword');
