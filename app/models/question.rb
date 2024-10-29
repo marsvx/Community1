@@ -1,4 +1,6 @@
 class Question < ApplicationRecord
-    belongs_to :survey
+  has_many :question_answer_rels
+  has_many :answers, through: :question_answer_rels
+  belongs_to :survey
   end
   
