@@ -7,6 +7,7 @@ class CreateUsers < ActiveRecord::Migration[7.1]
       t.string :ageRange, null: false, limit: 8
       t.string :hashedPasswd, null: false, limit: 80
       t.integer :zipCode
+      t.timestamps
     end
      # unique index for email, note that this is not necessary for username bc an index gets created automatically
      # due to username being a primary_key

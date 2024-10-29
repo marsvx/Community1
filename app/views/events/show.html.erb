@@ -25,6 +25,11 @@
   <%= @event.eventstatus ? 'Active' : 'Inactive' %> <!-- Shows "Active" or "Inactive" -->
 </p>
 
+<% if @event.meetingLink.present? %>
+  <div class="event-meeting-link">
+    <p><strong>Meeting Link:</strong> <a href="<%= @event.meetingLink %>" target="_blank"><%= @event.meetingLink %></a></p>
+  </div>
+<% end %>
 
 <div>
   <%= link_to "Edit this event", edit_event_path(@event) %> |

@@ -8,7 +8,7 @@
     <!-- Main Buttons Section -->
     <div class="col-md-3">
       <div class="button-section">
-        <%= button_to "Create a Profile", "#", method: :get, class: "btn btn-large main-button" %>  
+        <%= button_to "Create a Profile", new_user_path, method: :get, class: "btn btn-large main-button" %>  
           <div class="profile_create">
           <div style="padding-left: 55px; text-align: center;">
               <p class="text-content">
@@ -16,7 +16,7 @@
               </p>
           </div>
           </div>
-        <%= button_to "Continue as a Guest", "#", method: :get, class: "btn btn-large main-button" %>
+        <%= button_to "Continue as a Guest", pages_explore_path, method: :get, class: "btn btn-large main-button" %>
          <div class="guest">
           <div style="padding-left: 55px; text-align: center;">
               <p class="text-content">
@@ -26,6 +26,10 @@
           </div>
       </div>
     </div>
+
+
+
+
 
     <!-- About Us Section -->
     <div class="col-md-6 offset-md-3">
