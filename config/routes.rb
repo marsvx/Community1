@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :dependents
   resources :categories
   resources :questions
-  resources :users
+  resources :users, param: :username, only: [:index, :new, :create, :show, :edit, :update, :destroy]
   resources :organizations
   resources :events
   resources :admins, param: :username
@@ -29,10 +29,6 @@ Rails.application.routes.draw do
   get 'users/new'
 
 
-
-
-
-
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -51,7 +47,7 @@ Rails.application.routes.draw do
   delete "adminlogout", to: "asession#destroy"
 
   # User session management
-  get "userlogin", to: "session#new"
-  post "userlogin", to: "session#create"
-  delete "userlogout", to: "session#destroy"
+  get "login", to: "users#index"       # Use the index action for displaying login form
+  post "userlogin", to: "users#login"  # Use the new login action for logging in
+  delete "userlogout", to: "users#destroy" # Use the destroy action for user logout
 end

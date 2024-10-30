@@ -1,6 +1,17 @@
 class User < ApplicationRecord
   has_secure_password
 
+  # Associations
+  has_many :dependents, class_name: 'Dependent'
+  has_many :favorites, class_name: 'Favorite'
+  has_many :favorite_organizations, class_name: 'Organization', through: :favorites
+  has_many :reviews, class_name: 'Review'
+  has_many :reviewed_organizations, class_name: 'Organization', through: :reviews
+  has_many :surveys, class_name: 'Survey'
+  #this is an array that holds our age ranges
+  AGE_RANGES = ['Under 18', '19 - 24', '25 - 34', '35 - 70', '70 and over']
+  
+
   before_save :downcase_email
   before_save :downcase_username, if: :new_record?
 
@@ -12,6 +23,7 @@ class User < ApplicationRecord
 
   # Validations for username and email
   validates :username, presence: true, uniqueness: { case_sensitive: false }
+  validates :username, length: { maximum: 15, message: "Username is too long. It should be 15 characters or fewer." }
   validates :email, presence: true, uniqueness: { case_sensitive: false }
 
   # Validation for the presence of required fields
