@@ -1,6 +1,5 @@
 class ClassificationsController < ApplicationController
   before_action :set_classification, only: %i[ show edit update destroy ]
-
   # GET /classifications or /classifications.json
   def index
     @classifications = Classification.all
