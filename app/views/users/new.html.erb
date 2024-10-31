@@ -23,7 +23,7 @@
       margin: 0; 
     }
 
-    input[type=text], input[type=password], input[type=email], input[type=number] {
+    input[type=text], input[type=password], input[type=email], input[type=number], select {
       width: 100%;
       padding: 12px 20px;
       margin: 8px 0;
@@ -60,6 +60,12 @@
       margin-top: 10px; 
     }
 
+    .field-with-errors {
+      color: red;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
     @media screen and (max-width: 300px) {
       .create-profile-btn {
          width: 100%; 
@@ -69,26 +75,63 @@
 </head>
 <body>
 
-  <form action="/create_profile.php" method="post">
+  <%= form_with(model: @user, url: users_path, local: true) do |f| %>
     <div class="container">
+      <!-- Username Field -->
+      <label for="username"><b>Username</b></label>
+      <%= f.text_field :username, placeholder: "Enter Username", required: true %>
+      <% if @user.errors[:username].any? %>
+        <div class="field-with-errors"><%= @user.errors[:username].join(", ") %></div>
+      <% end %>
+
+      <!-- First Name Field -->
+      <label for="first_name"><b>First Name</b></label>
+      <%= f.text_field :first_name, placeholder: "Enter First Name", required: true %>
+      <% if @user.errors[:first_name].any? %>
+        <div class="field-with-errors"><%= @user.errors[:first_name].join(", ") %></div>
+      <% end %>
+
+      <!-- Email Field -->
       <label for="email"><b>Email</b></label>
-      <input type="email" placeholder="Enter Email" name="email" required>
+      <%= f.email_field :email, placeholder: "Enter Email", required: true %>
+      <% if @user.errors[:email].any? %>
+        <div class="field-with-errors"><%= @user.errors[:email].join(", ") %></div>
+      <% end %>
 
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
+      <!-- Age Range Field -->
+      <label for="age_range"><b>Age Range</b></label>
+      <%= f.select :age_range, options_for_select([['Under 18', 'Under 18'], ['18-24', '18-24'], ['25-34', '25-34'], ['35-44', '35-44'], ['45-54', '45-54'], ['55-64', '55-64'], ['65 and over', '65 and over']]), { prompt: "Select Age Range" }, required: true %>
+      <% if @user.errors[:age_range].any? %>
+        <div class="field-with-errors"><%= @user.errors[:age_range].join(", ") %></div>
+      <% end %>
 
-      <label for="confirm_psw"><b>Confirm Password</b></label>
-      <input type="password" placeholder="Confirm Password" name="confirm_psw" required>
+      <!-- Password Field -->
+      <label for="password"><b>Password</b></label>
+      <%= f.password_field :password, placeholder: "Enter Password", required: true %>
+      <% if @user.errors[:password].any? %>
+        <div class="field-with-errors"><%= @user.errors[:password].join(", ") %></div>
+      <% end %>
 
+      <!-- Password Confirmation Field -->
+      <label for="confirm_password"><b>Confirm Password</b></label>
+      <%= f.password_field :password_confirmation, placeholder: "Confirm Password", required: true %>
+      <% if @user.errors[:password_confirmation].any? %>
+        <div class="field-with-errors"><%= @user.errors[:password_confirmation].join(", ") %></div>
+      <% end %>
+
+      <!-- Zipcode Field -->
       <label for="zipcode"><b>Zipcode</b></label>
-      <input type="number" placeholder="Enter Zipcode" name="zipcode" required>
+      <%= f.number_field :zipcode, placeholder: "Enter Zipcode", required: true %>
+      <% if @user.errors[:zipcode].any? %>
+        <div class="field-with-errors"><%= @user.errors[:zipcode].join(", ") %></div>
+      <% end %>
 
       <!-- Create Profile Button with more space -->
       <div>
         <button type="submit" class="create-profile-btn">Create Profile</button>
       </div>
     </div>
-  </form>
+  <% end %>
 
 </body>
 </html>

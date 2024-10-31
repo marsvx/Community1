@@ -8,10 +8,11 @@ Rails.application.routes.draw do
   resources :dependents
   resources :categories
   resources :questions
-  resources :users
+  resources :users, param: :username, only: [:index, :new, :create, :show, :edit, :update, :destroy]
   resources :organizations
   resources :events
   resources :admins, param: :username
+
   root "pages#home"
   get 'pages/home'
 
@@ -26,10 +27,6 @@ Rails.application.routes.draw do
 
   get 'login', to: 'users#index'
   get 'users/new'
-
-
-
-
 
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -48,4 +45,9 @@ Rails.application.routes.draw do
   get "adminaccess", to: "asession#new"
   post "adminaccess", to: "asession#create"
   delete "adminlogout", to: "asession#destroy"
+
+  # User session management
+  get "login", to: "users#index"       # Use the index action for displaying login form
+  post "userlogin", to: "users#login"  # Use the new login action for logging in
+  delete "userlogout", to: "users#destroy" # Use the destroy action for user logout
 end
