@@ -30,7 +30,7 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :age_range, presence: true  # Ensure age_range is present
   validates :zipcode, presence: true     # Ensure zipcode is present
-  validates :password, presence: true, length: { minimum: 6 }  # Ensure password has a minimum length
+  validates :password_digest, presence: true, length: { minimum: 6 }  # Ensure password has a minimum length
 
   private
 
