@@ -14,7 +14,7 @@ puts "Seeding admins..."
 # Create sample admins
 Admin.find_or_create_by!(username: "admin1") do |admin|
   admin.email = "admin1@example.com"
-  admin.firstName = "Admin"
+  admin.firstname = "Admin"
   admin.password_digest = "adminpass123"
 end
 
@@ -56,7 +56,7 @@ Organization.find_or_create_by!(email: "org1@example.com") do |org|
   org.street = "1234 Main St"
   org.city = "Denver"
   org.org_state = "CO"
-  org.zipCode = 80202
+  org.zipcode = 80202
   org.phoneNumber = "123-456-7890"
   org.webLink = "https://organization1.com"
   org.servicesSummary = "We provide essential community services."
@@ -69,7 +69,7 @@ Organization.find_or_create_by!(email: "org2@example.com") do |org|
   org.street = "5678 Broadway"
   org.city = "Aurora"
   org.org_state = "CO"
-  org.zipCode = 80012
+  org.zipcode = 80012
   org.phoneNumber = "987-654-3210"
   org.webLink = "https://organization2.com"
   org.servicesSummary = "Offering educational programs and support."
@@ -82,7 +82,7 @@ org3 = Organization.find_or_create_by!(email: "org3@example.com") do |org|
   org.street = "5678 Park Ave"
   org.city = "Aurora"
   org.org_state = "CO"
-  org.zipCode = 80012
+  org.zipcode = 80012
   org.phoneNumber = "555-555-5555"
   org.webLink = "https://org3.com"
   org.servicesSummary = "We help clean up parks."
@@ -95,7 +95,7 @@ org4 = Organization.find_or_create_by!(email: "org4@example.com") do |org|
   org.street = "3456 Elm St"
   org.city = "Boulder"
   org.org_state = "CO"
-  org.zipCode = 80301
+  org.zipcode = 80301
   org.phoneNumber = "555-555-4444"
   org.webLink = "https://org4.com"
   org.servicesSummary = "We offer coding bootcamps."
@@ -108,7 +108,7 @@ org5 = Organization.find_or_create_by!(email: "org5@example.com") do |org|
   org.street = "Virtual"
   org.city = "Lakewood"
   org.org_state = "CO"
-  org.zipCode = 82390
+  org.zipcode = 82390
   org.phoneNumber = "555-555-3333"
   org.webLink = "https://org5.com"
   org.servicesSummary = "We raise mental health awareness."
@@ -121,7 +121,7 @@ org6 = Organization.find_or_create_by!(email: "org6@example.com") do |org|
   org.street = "910 Willow St"
   org.city = "Fort Collins"
   org.org_state = "CO"
-  org.zipCode = 80524
+  org.zipcode = 80524
   org.phoneNumber = "555-555-2222"
   org.webLink = "https://org6.com"
   org.servicesSummary = "We provide school supplies."
@@ -134,48 +134,48 @@ puts "Seeding users..."
 # Create sample users with valid age ranges
 User.find_or_create_by!(username: "user1") do |user|
   user.email = "user1@example.com"
-  user.firstName = "John"
-  user.ageRange = "19-24"
+  user.first_name = "John"
+  user.age_range = "19-24"
   user.password_digest = "password123"
   user.zipcode = 80202
 end
 
 User.find_or_create_by!(username: "user2") do |user|
   user.email = "user2@example.com"
-  user.firstName = "Jane"
-  user.ageRange = "25-34"
+  user.first_name = "Jane"
+  user.age_range = "25-34"
   user.password_digest = "securepass"
   user.zipcode = 80012
 end
 
 user3 = User.find_or_create_by!(username: "user3") do |user|
   user.email = "user3@example.com"
-  user.firstName = "UserThree"
-  user.ageRange = "35-70"
+  user.first_name = "UserThree"
+  user.age_range = "35-70"
   user.password_digest = "password123"
   user.zipcode = 80012
 end
 
 user4 = User.find_or_create_by!(username: "user4") do |user|
   user.email = "user4@example.com"
-  user.firstName = "UserFour"
-  user.ageRange = "25-34"
+  user.first_name = "UserFour"
+  user.age_range = "25-34"
   user.password_digest = "password123"
   user.zipcode = 80301
 end
 
 user5 = User.find_or_create_by!(username: "user5") do |user|
   user.email = "user5@example.com"
-  user.firstName = "UserFive"
-  user.ageRange = "19-24"
+  user.first_name = "UserFive"
+  user.age_range = "19-24"
   user.password_digest = "password123"
-  user.zipcode = nil
+  user.zipcode = 822276
 end
 
 user6 = User.find_or_create_by!(username: "user6") do |user|
   user.email = "user6@example.com"
-  user.firstName = "UserSix"
-  user.ageRange = "35-70"
+  user.first_name = "UserSix"
+  user.age_range = "35-70"
   user.password_digest = "password123"
   user.zipcode = 80524
 end
@@ -189,7 +189,7 @@ Event.find_or_create_by!(title: "Community Food Drive", eventDate: Date.today + 
   event.street = "1234 Main St"
   event.city = "Denver"
   event.eventState = "CO"
-  event.zipCode = 80202
+  event.zipcode = 80202
   event.isVirtual = false
   event.meetingLink = nil
   event.eventstatus = true
@@ -204,7 +204,7 @@ Event.find_or_create_by!(title: "Virtual Job Fair", eventDate: Date.today + 7) d
   event.street = "Virtual"
   event.city = "Denver"
   event.eventState = "CO"
-  event.zipCode = 80203
+  event.zipcode = 80203
   event.isVirtual = true
   event.meetingLink = "https://zoom.us/j/1234567890"
   event.eventstatus = true
@@ -219,7 +219,7 @@ Event.find_or_create_by!(title: "Virtual Tech Meetup", eventDate: Date.today + 5
   event.street = "1234 Security Drive"
   event.city = "Aurora"
   event.eventState = "CO"
-  event.zipCode = 80014
+  event.zipcode = 80014
   event.isVirtual = true
   event.meetingLink = "http://example.com/meetup"
   event.eventstatus = true
@@ -234,7 +234,7 @@ Event.find_or_create_by!(title: "Neighborhood Cleanup", eventDate: Date.today + 
   event.street = "5678 Park Ave"
   event.city = "Aurora"
   event.eventState = "CO"
-  event.zipCode = 80012
+  event.zipcode = 80012
   event.isVirtual = false
   event.meetingLink = nil
   event.eventstatus = true
@@ -249,7 +249,7 @@ Event.find_or_create_by!(title: "Coding Bootcamp", eventDate: Date.today + 14) d
   event.street = "3456 Elm St"
   event.city = "Boulder"
   event.eventState = "CO"
-  event.zipCode = 80301
+  event.zipcode = 80301
   event.isVirtual = false
   event.meetingLink = nil
   event.eventstatus = true
@@ -264,7 +264,7 @@ Event.find_or_create_by!(title: "Mental Health Awareness Webinar", eventDate: Da
   event.street = "3245 Perspective Ave."
   event.city = "Denver"
   event.eventState = "CO"
-  event.zipCode = 80231
+  event.zipcode = 80231
   event.isVirtual = true
   event.meetingLink = "http://example.com/webinar"
   event.eventstatus = true
@@ -279,7 +279,7 @@ Event.find_or_create_by!(title: "Back-to-School Supply Drive", eventDate: Date.t
   event.street = "910 Willow St"
   event.city = "Fort Collins"
   event.eventState = "CO"
-  event.zipCode = 80524
+  event.zipcode = 80524
   event.isVirtual = false
   event.meetingLink = nil
   event.eventstatus = true
