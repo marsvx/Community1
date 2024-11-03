@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :reviews
   resources :surveys, only: [:create]
   resources :dependents
-  resources :categories
+  resources :categories, param: :abbv
   resources :questions
   resources :users, param: :username, only: [:index, :new, :create, :show, :edit, :update, :destroy]
   resources :organizations
