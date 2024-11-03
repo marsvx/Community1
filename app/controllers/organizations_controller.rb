@@ -1,5 +1,6 @@
 class OrganizationsController < ApplicationController
   before_action :set_organization, only: %i[ show edit update destroy ]
+  before_action :set_current_admin
 
   # GET /organizations or /organizations.json
   def index
