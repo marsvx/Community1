@@ -1,2 +1,16 @@
-<div id="<%= dom_id organization %>">
-</div>
+<tr>
+    <td><strong><%= link_to organization.email, edit_organization_path(organization.email), class: "link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" %></strong></td>
+    <td><%= organization.org_name %></td>
+    <td><%= organization.street %></td>
+    <td><%= organization.city %></td>
+    <td><%= organization.org_state %></td>
+    <td><%= organization.zipcode %></td>
+    <td><%= organization.phoneNumber %></td>
+    <td><%= organization.webLink %></td>
+    <td><%= organization.servicesSummary %></td>
+    <td><%= organization.avgStartValue %></td>
+    <td><%= organization.admin_username %></td>
+    <td><%= organization.created_at %></td>
+    <td><%= organization.updated_at %></td>
+    <td><%= button_to "Delete", organization, method: :delete, class: 'btn btn-outline-success', onclick: "return confirm('Are you sure you want to delete this organization?');" %></td>
+</tr>

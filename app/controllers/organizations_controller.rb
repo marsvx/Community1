@@ -26,7 +26,7 @@ class OrganizationsController < ApplicationController
 
     respond_to do |format|
       if @organization.save
-        format.html { redirect_to @organization, notice: "Organization was successfully created." }
+        format.html { redirect_to organizations_path, notice: "Organization was successfully added." }
         format.json { render :show, status: :created, location: @organization }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -50,22 +50,27 @@ class OrganizationsController < ApplicationController
 
   # DELETE /organizations/1 or /organizations/1.json
   def destroy
-    @organization.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to organizations_path, status: :see_other, notice: "Organization was successfully destroyed." }
-      format.json { head :no_content }
+    if @organization.destroy
+      respond_to do |format|
+        format.html { redirect_to organizations_path, status: :see_other, notice: "Organization was successfully removed." }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to admindashboard_path, alert: @organization.errors.full_messages.join(", ") }
+        format.json { render json: @organization.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_organization
-      @organization = Organization.find(params[:id])
+      @organization = Organization.find(params[:email])
     end
 
     # Only allow a list of trusted parameters through.
     def organization_params
-      params.fetch(:organization, {})
+      params.require(:organization).permint(:email, :org_name, :street, :city, :org_state, :zipcode, :phoneNumber, :webLink, :servicesSummary)
     end
 end

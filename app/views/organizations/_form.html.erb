@@ -39,42 +39,35 @@
   </div>
   <p></p>
   <div class = "col-mb-3">
-    <%= form.label :org_name, style: "display: block", class: "form-label" %>
+    <%= form.label :org_state, "State", style: "display: block", class: "form-label" %>
     <div class = "input-group">
-      <%= form.text_field :org_name, class: "form-control", placeholder: "ex. CO" %>
+      <%= form.text_field :org_state, class: "form-control", placeholder: "ex. CO" %>
     </div>
   </div>
   <p></p>
   <div class = "col-mb-3">
-    <%= form.label :email, style: "display: block", class: "form-label" %>
-    <div class = "input-group">
-      <%= form.email_field :email, class: "form-control", placeholder: "ex. email@domain.com" %>
-    </div>
-  </div>
-  <p></p>
-  <div class = "col-mb-3">
-    <%= form.label :zipcode, style: "display: block", class: "form-label" %>
+    <%= form.label :zipcode, "Zip Code", style: "display: block", class: "form-label" %>
     <div class = "input-group">
       <%= form.text_field :zipcode, class: "form-control", placeholder: "ex. 80002" %>
     </div>
   </div>
   <p></p>
   <div class = "col-mb-3">
-    <%= form.label :phoneNumber, style: "display: block", class: "form-label" %>
+    <%= form.label :phoneNumber, "Phone Number", style: "display: block", class: "form-label" %>
     <div class = "input-group">
       <%= form.telephone_field :phoneNumber, class: "form-control", placeholder: "ex. (720) 480 6119" %>
     </div>
   </div>
   <p></p>
   <div class = "col-mb-3">
-    <%= form.label :webLink, style: "display: block", class: "form-label" %>
+    <%= form.label :webLink, "Website", style: "display: block", class: "form-label" %>
     <div class = "input-group">
       <%= form.url_field :webLink, class: "form-control", placeholder: "ex. www.domain.com" %>
     </div>
   </div>
   <p></p>
   <div class = "col-mb-3">
-    <%= form.label :servicesSummary, style: "display: block", class: "form-label" %>
+    <%= form.label :servicesSummary, "Services Sumamary", style: "display: block", class: "form-label" %>
     <div class = "input-group">
       <%= form.text_area :servicesSummary, class: "form-control", placeholder: "ex. In this organization we..." %>
     </div>
