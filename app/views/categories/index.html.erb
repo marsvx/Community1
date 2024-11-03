@@ -1,12 +1,18 @@
-<h1>Categories</h1>
-
+<h1 class = "text-center">Categories</h1>
+<%= button_to "Create new category", new_category_path, method: :get, class: "btn btn-alogin btn-lg" %>
+<p></p>
 <div id="categories">
-  <% @categories.each do |category| %>
-    <%= render category %>
-    <p>
-      <%= link_to "Show this category", category %>
-    </p>
-  <% end %>
+  <table class = "table">
+    <thead>
+      <tr>
+        <th scope = "col"><strong>Abbreviation:</strong></th>
+        <th scope = "col"><strong>Category Name:</strong></th>
+      </tr>
+    </thead>
+    <tbody class = "table-group-divider">
+      <% @categories.each do |category| %>
+        <%= render partial: "category", locals: { category: category } %>
+      <% end %>
+    </tbody>
+  </table>
 </div>
-
-<%= link_to "New category", new_category_path %>

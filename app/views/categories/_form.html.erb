@@ -1,20 +1,38 @@
-<%= form_with(model: category) do |form| %>
-  <% if category.errors.any? %>
-    <div class = "alert alert-danger">
-      <ul>
-        <% category.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<div>
+  <%= form_with(model: category) do |form| %>
+    <% if category.errors.any? %>
+      <div class = "alert alert-danger">
+        <ul>
+          <% category.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  <p></p>
+    <div class = "col-mb-3">
+      <%= form.label :abbv, "Abbreviation", style: "display: block", class: "form-label" %>
+      <div class = "input-group">
+        <%= form.text_field :abbv, disabled: category.persisted?, class: "form-control", placeholder: "ex. EDU" %>
+      </div>
+      <div class="col-auto">
+        <span id="passwordHelpInline" class="form-text">Once created, this cannot be changed (limit to 3 letters)</span>
+      </div>
+    </div>
+    <p></p>
+    <div class = "col-mb-3">
+      <%= form.label :cat_name, "Category Name", style: "display: block", class: "form-label" %>
+      <div class = "input-group">
+        <%= form.text_field :cat_name, class: "form-control", placeholder: "ex. Education" %>
+      </div>
+    </div>
+    <p></p>
+
+    <% button_label = category.persisted? ? "Update Category" : "Create Category" %>
+    <% confirmation_message = category.persisted? ? "Are you sure you want to update this category?" : "Are you sure you want to create this category?" %>
+
+    <div class="d-grid gap-2 col-6 mx-auto">
+      <%= form.submit button_label, class: "btn btn-alogin btn-lg", onclick: "return confirm('#{confirmation_message}');" %>
     </div>
   <% end %>
-<p></p>
-  <%= form.label :abbv %>
-  <%= form.text_field :abbv %>
-
-  <%= form.label :cat_name %>
-  <%= form.text_field :cat_name %>
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
