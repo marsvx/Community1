@@ -10,4 +10,8 @@ class Event < ApplicationRecord
         "#{street} #{city}, #{eventState}. #{zipcode}"
       end
     end
+
+    def formatted_event_date
+      eventDate.strftime("%B %d, %Y") if eventDate
+    end
 end

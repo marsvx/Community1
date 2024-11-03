@@ -1,10 +1,12 @@
 class EventsController < ApplicationController
+  include Devise::Controllers::Helpers
   before_action :set_event, only: %i[ show edit update destroy ]
-  before_action :require_login, only: [:new, :create]
+  before_action :require_login, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authorize_user, only: [:edit, :update, :destroy]
 
   # GET /events or /events.json
   def index
-    @events = Event.all
+    @events = Event.order(eventDate: :asc)
 
     #will query the Events table in the database and order by date and time
     @upcoming_events = Event.where('"eventDate" >= ?', Date.today).order('"eventDate"', '"eventTime"').limit(7)
@@ -39,9 +41,9 @@ class EventsController < ApplicationController
     @event.eventDate = event_datetime.to_date
     @event.eventTime = event_datetime.to_time
 
-    #@event.user_id = current_user.id
-    @event.user_id = User.first.id #this is temporary in order to test the event form, should change to above line after user session logic is complete
-    @event.admin_id = Admin.first.id
+    @event.user_id = current_user.id if current_user && !current_user.admin?
+    #@event.user_id = User.first.id #this is temporary in order to test the event form, should change to above line after user session logic is complete
+    @event.admin_id = current_user.id if current_user.admin?
     @event.eventstatus = false
 
 
@@ -74,24 +76,15 @@ class EventsController < ApplicationController
     @event.destroy!
 
     respond_to do |format|
-      format.html { redirect_to events_path, status: :see_other, notice: "Event was successfully destroyed." }
+      format.html { redirect_to events_path, status: :see_other, notice: "Event was successfully deleted." }
       format.json { head :no_content }
     end
   end
 
   private
 
-    def require_login
-      session[:user_id]
-      unless logged_in?
-        flash[:alert] = "You must be logged in to create an event."
-        redirect_to login_path
-      end
-    end
-
     def logged_in?
-      true #this is temporary as the user session logic is still being worked
-      #!!session[:user_id] # This checks if the user is logged in
+      !!session[:user_username] || !!session[:username]
     end
 
     # Use callbacks to share common setup or constraints between actions.
@@ -102,5 +95,11 @@ class EventsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def event_params
       params.require(:event).permit(:title, :eventDescription, :eventDate, :eventTime, :street, :city, :zipcode, :isVirtual, :meetingLink)
+    end
+
+    def authorize_user
+      unless current_user == @event.user || current_user&.admin?
+        redirect_to events_path, alert: "You are not authorized to perform this action."
+      end
     end
 end
