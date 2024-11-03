@@ -206,7 +206,7 @@ Event.find_or_create_by!(title: "Virtual Job Fair", eventDate: Date.today + 7) d
   event.eventState = "CO"
   event.zipcode = 80203
   event.isVirtual = true
-  event.meetingLink = "https://zoom.us/j/1234567890"
+  event.meetingLink = "https://zoom.us"
   event.eventstatus = true
   event.organization_id = "org2@example.com"
   event.user_id = "user2"
