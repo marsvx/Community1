@@ -37,30 +37,45 @@ class CategoriesController < ApplicationController
   # PATCH/PUT /categories/1 or /categories/1.json
   def update
     respond_to do |format|
-      if @category.update(category_params)
-        format.html { redirect_to @category, notice: "Category was successfully updated." }
-        format.json { render :show, status: :ok, location: @category }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @category.errors, status: :unprocessable_entity }
+      begin
+        if @category.update(category_params.except(:abbv))
+          format.html { redirect_to categories_path, notice: "Category was successfully updated." }
+          format.json { render :show, status: :ok, location: @category }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @category.errors, status: :unprocessable_entity }
+        end
+      rescue ActiveRecord::ReadOnlyRecord => e
+        if e.message.include?("Abbreviation cannot be changed once set")
+          format.html { render :edit, alert: "The abbreviation cannot be changed once set." }
+          format.json { render json: { error: "The abbreviation cannot be changed once set." }, status: :unprocessable_entity }
+        else
+          format.html { render :edit, alert: e.message }
+          format.json { render json: { error: e.message }, status: :unprocessable_entity }
+        end
       end
     end
   end
 
   # DELETE /categories/1 or /categories/1.json
   def destroy
-    @category.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to categories_path, status: :see_other, notice: "Category was successfully destroyed." }
-      format.json { head :no_content }
+    if @category.destroy
+      respond_to do |format|
+        format.html { redirect_to categories_path, status: :see_other, notice: "Category was successfully deleted." }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to admindashboard_path, alert: @category.errors.full_messages.join(", ") }
+        format.json { render json: @category.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_category
-      @category = Category.find_by(params[:abbv])
+      @category = Category.find(params[:abbv])
     end
 
     # Only allow a list of trusted parameters through.
