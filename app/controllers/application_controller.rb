@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  helper_method :current_user, :logged_in?
+  helper_method :current_user, :logged_in?, :admin_logged_in?
 =begin
   helper :all
   before_action :authenticate_user!
@@ -18,7 +18,11 @@ class ApplicationController < ActionController::Base
   end
 
   def logged_in?
-    !!current_user
+    session[:user_username].present?
+  end
+
+  def admin_logged_in?
+    session[:admin_username].present?
   end
 
   def require_login
@@ -26,5 +30,13 @@ class ApplicationController < ActionController::Base
       flash[:alert] = "You must be logged in to access this section."
       redirect_to login_path
     end
+  end
+
+  def current_user
+    @current_user ||= if session[:user_username]
+                        User.find_by(username: session[:user_username])
+                      elsif session[:admin_username]
+                        Admin.find_by(username: session[:admin_username])
+                      end    
   end
 end

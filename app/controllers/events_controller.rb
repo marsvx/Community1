@@ -23,6 +23,7 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
+    @event
   end
 
   # POST /events or /events.json
@@ -40,10 +41,8 @@ class EventsController < ApplicationController
     @event.meetingLink = nil unless params[:event][:isVirtual] == "true"
     @event.eventDate = event_datetime.to_date
     @event.eventTime = event_datetime.to_time
-
-    @event.user_id = current_user.id if current_user && !current_user.admin?
-    #@event.user_id = User.first.id #this is temporary in order to test the event form, should change to above line after user session logic is complete
-    @event.admin_id = current_user.id if current_user.admin?
+    @event.user_id = current_user.username if logged_in?
+    @event.admin_id = current_user.username if admin_logged_in?
     @event.eventstatus = false
 
 
@@ -98,7 +97,7 @@ class EventsController < ApplicationController
     end
 
     def authorize_user
-      unless current_user == @event.user || current_user&.admin?
+      unless (current_user == @event.user) || admin_logged_in?
         redirect_to events_path, alert: "You are not authorized to perform this action."
       end
     end
