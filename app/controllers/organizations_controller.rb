@@ -23,6 +23,8 @@ class OrganizationsController < ApplicationController
   # POST /organizations or /organizations.json
   def create
     @organization = Organization.new(organization_params)
+    @organization.admin_username = Current.admin.username
+    @organization.avgStarValue = 0.0
 
     respond_to do |format|
       if @organization.save
@@ -39,7 +41,7 @@ class OrganizationsController < ApplicationController
   def update
     respond_to do |format|
       if @organization.update(organization_params)
-        format.html { redirect_to @organization, notice: "Organization was successfully updated." }
+        format.html { redirect_to organizations_path, notice: "Organization was successfully updated." }
         format.json { render :show, status: :ok, location: @organization }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -71,6 +73,6 @@ class OrganizationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def organization_params
-      params.require(:organization).permint(:email, :org_name, :street, :city, :org_state, :zipcode, :phoneNumber, :webLink, :servicesSummary)
+      params.require(:organization).permit(:email, :org_name, :street, :city, :org_state, :zipcode, :phoneNumber, :webLink, :servicesSummary)
     end
 end

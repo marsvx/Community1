@@ -5,10 +5,10 @@
     <td><%= organization.city %></td>
     <td><%= organization.org_state %></td>
     <td><%= organization.zipcode %></td>
-    <td><%= organization.phoneNumber %></td>
-    <td><%= organization.webLink %></td>
+    <td><%= formatPhoneNumber(organization.phoneNumber) %></td>
+    <td class = "link-cell"><%= link_to organization.webLink, organization.webLink, target: '_blank', rel: 'noopener' %></td>
     <td><%= organization.servicesSummary %></td>
-    <td><%= organization.avgStartValue %></td>
+    <td><%= organization.avgStarValue %></td>
     <td><%= organization.admin_username %></td>
     <td><%= organization.created_at %></td>
     <td><%= organization.updated_at %></td>
