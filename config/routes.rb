@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :categories, param: :abbv
   resources :questions
   resources :users, param: :username, only: [:index, :new, :create, :show, :edit, :update, :destroy]
-  resources :organizations, param: :email
+  resources :organizations, param: :organizationId
   resources :events
   resources :admins, param: :username
 
