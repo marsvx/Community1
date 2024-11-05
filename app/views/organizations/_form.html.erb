@@ -1,17 +1,84 @@
-<%= form_with(model: organization) do |form| %>
-  <% if organization.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(organization.errors.count, "error") %> prohibited this organization from being saved:</h2>
-
-      <ul>
-        <% organization.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<div>
+  <%= form_with(model: organization) do |form| %>
+    <% if organization.errors.any? %>
+      <div class = "alert alert-danger">
+        <ul>
+          <% organization.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  <p></p>
+  <div class = "col-mb-3">
+    <%= form.label :email, style: "display: block", class: "form-label" %>
+    <div class = "input-group">
+      <%= form.text_field :email, class: "form-control", placeholder: "ex. email@domain.com" %>
     </div>
-  <% end %>
-
-  <div>
-    <%= form.submit %>
   </div>
-<% end %>
+  <p></p>
+  <div class = "col-mb-3">
+    <%= form.label :org_name, "Organization Name", style: "display: block", class: "form-label" %>
+    <div class = "input-group">
+      <%= form.text_field :org_name, class: "form-control", placeholder: "ex. Organization" %>
+    </div>
+  </div>
+  <p></p>
+  <div class = "col-mb-3">
+    <%= form.label :street, style: "display: block", class: "form-label" %>
+    <div class = "input-group">
+      <%= form.text_field :street, class: "form-control", placeholder: "ex. 123 Street" %>
+    </div>
+  </div>
+  <p></p>
+  <div class = "col-mb-3">
+    <%= form.label :city, style: "display: block", class: "form-label" %>
+    <div class = "input-group">
+      <%= form.text_field :city, class: "form-control", placeholder: "ex. Denver" %>
+    </div>
+  </div>
+  <p></p>
+  <div class = "col-mb-3">
+    <%= form.label :org_state, "State", style: "display: block", class: "form-label" %>
+    <div class = "input-group">
+      <%= form.text_field :org_state, class: "form-control", placeholder: "ex. CO" %>
+    </div>
+  </div>
+  <p></p>
+  <div class = "col-mb-3">
+    <%= form.label :zipcode, "Zip Code", style: "display: block", class: "form-label" %>
+    <div class = "input-group">
+      <%= form.text_field :zipcode, class: "form-control", placeholder: "ex. 80002" %>
+    </div>
+  </div>
+  <p></p>
+  <div class = "col-mb-3">
+    <%= form.label :phoneNumber, "Phone Number", style: "display: block", class: "form-label" %>
+    <div class = "input-group">
+      <%= form.telephone_field :phoneNumber, class: "form-control", placeholder: "ex. (720) 480 6119" %>
+    </div>
+  </div>
+  <p></p>
+  <div class = "col-mb-3">
+    <%= form.label :webLink, "Website", style: "display: block", class: "form-label" %>
+    <div class = "input-group">
+      <%= form.url_field :webLink, class: "form-control", placeholder: "ex. www.domain.com" %>
+    </div>
+  </div>
+  <p></p>
+  <div class = "col-mb-3">
+    <%= form.label :servicesSummary, "Services Summary", style: "display: block", class: "form-label" %>
+    <div class = "input-group">
+      <%= form.text_area :servicesSummary, class: "form-control", placeholder: "ex. In this organization we..." %>
+    </div>
+  </div>
+  <p></p>
+
+    <% button_label = organization.persisted? ? "Update Organization" : "Create Organization" %>
+    <% confirmation_message = organization.persisted? ? "Are you sure you want to update this organization?" : "Are you sure you want to create this organization?" %>
+    
+    <div class="d-grid gap-2 col-6 mx-auto">
+      <%= form.submit button_label, class: "btn btn-alogin btn-lg", onclick: "return confirm('#{confirmation_message}');" %>
+    </div>
+    <% end %>
+</div>

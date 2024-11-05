@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'pages/about_us'
   get 'pages/survey'
-  resources :classifications
+  resources :classifications, param: :associationID
   resources :favorites
   resources :reviews
   resources :surveys, only: [:create]
@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :categories, param: :abbv
   resources :questions
   resources :users, param: :username, only: [:index, :new, :create, :show, :edit, :update, :destroy]
-  resources :organizations
+  resources :organizations, param: :organizationId
   resources :events
   resources :admins, param: :username
 

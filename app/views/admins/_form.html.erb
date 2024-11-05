@@ -13,7 +13,7 @@
     <div class = "col-mb-3">
       <%= form.label :username, style: "display: block", class: "form-label" %>
       <div class = "input-group">
-        <%= form.text_field :username, disabled: admin.persisted?, class: "form-control", placeholder: "Username" %>
+        <%= form.text_field :username, disabled: admin.persisted?, class: "form-control", placeholder: "ex. Username" %>
       </div>
       <div class="col-auto">
         <span id="passwordHelpInline" class="form-text">Once created, this cannot be changed</span>
@@ -22,21 +22,21 @@
     <div class = "col-mb-3">
       <%= form.label :email, style: "display: block", class: "form-label" %>
       <div class = "input-group">
-        <%= form.text_field :email, class: "form-control", placeholder: "Email@domain.com" %>
+        <%= form.text_field :email, class: "form-control", placeholder: "ex. email@domain.com" %>
       </div>
     </div>
   <p></p>
     <div class = "col-mb-3">
       <%= form.label :firstName, "First Name", style: "display: block", class: "form-label" %>
       <div class = "input-group">
-        <%= form.text_field :firstName, class: "form-control", placeholder: "First Name" %>
+        <%= form.text_field :firstName, class: "form-control", placeholder: "ex. First Name" %>
       </div>
     </div>
   <p></p>
     <div class = "col-mb-3">
       <%= form.label :password, style: "display: block", class: "form-label" %>
       <div class = "input-group">
-          <%= form.password_field :password, class: "form-control", id: "passwordConfirmationField", placeholder: "Password" %>
+          <%= form.password_field :password, class: "form-control", id: "passwordConfirmationField", placeholder: "ex. Password" %>
           <button type = "button" id = "togglePasswordConfirmation" class = "btn btn-outline-secondary">
           <i class = "bi bi-eye-slash" id = "toggleIcon"></i>
           </button>
@@ -46,7 +46,7 @@
     <div class = "col-mb-3">
       <%= form.label :password_confirmation, "Password Confirmation", style: "display: block", class: "form-label" %>
       <div class = "input-group">
-        <%= form.password_field :password_confirmation, class: "form-control", id: "passwordField", placeholder: "Password Confirmation" %>
+        <%= form.password_field :password_confirmation, class: "form-control", id: "passwordField", placeholder: "ex. Password" %>
         <button type = "button" id = "togglePassword" class = "btn btn-outline-secondary">
         <i class = "bi bi-eye-slash" id = "toggleIcon"></i>
         </button>
