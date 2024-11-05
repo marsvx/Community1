@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'pages/about_us'
   get 'pages/survey'
-  resources :classifications
+  resources :classifications, param: :associationID
   resources :favorites
   resources :reviews
   resources :surveys, only: [:create]
