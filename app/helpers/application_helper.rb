@@ -5,6 +5,8 @@ module ApplicationHelper
     controller_name == 'categories' ||
     controller_name == 'organizations' ||
     controller_name == 'classifications'
+
+    controller_path.include?('administrator/')
   end
   
   def formatPhoneNumber(number)
