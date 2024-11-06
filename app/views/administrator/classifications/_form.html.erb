@@ -1,5 +1,5 @@
 <div>
-  <%= form_with(model: classification) do |form| %>
+  <%= form_with(model: [:administrator, classification]) do |form| %>
     <% if classification.errors.any? %>
       <div class = "alert alert-danger">
         <ul>

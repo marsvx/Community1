@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   get 'pages/survey'
 
   namespace :administrator do
-    resources :classifications, param: :associationID
-    resources :categories, param: :abbv
-    resources :organizations, param: :organizationId
+    resources :classifications
+    resources :categories
+    resources :organizations
     resources :admins
   end
   resources :favorites

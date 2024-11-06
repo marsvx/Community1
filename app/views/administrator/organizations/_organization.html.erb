@@ -13,5 +13,5 @@
     <td><%= organization.admin_username %></td>
     <td><%= organization.created_at %></td>
     <td><%= organization.updated_at %></td>
-    <td><%= button_to "Delete", organization, method: :delete, class: 'btn btn-outline-success', onclick: "return confirm('Are you sure you want to delete this organization?');" %></td>
+    <td><%= button_to "Delete", administrator_organization_path(organization), method: :delete, class: 'btn btn-outline-success', onclick: "return confirm('Are you sure you want to delete this organization?');" %></td>
 </tr>

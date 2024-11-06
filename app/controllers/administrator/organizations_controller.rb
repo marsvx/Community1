@@ -69,7 +69,7 @@ module Administrator
     private
       # Use callbacks to share common setup or constraints between actions.
       def set_organization
-        @organization = Organization.find(params[:organizationId])
+        @organization = Organization.find(params[:id])
       end
 
       # Only allow a list of trusted parameters through.

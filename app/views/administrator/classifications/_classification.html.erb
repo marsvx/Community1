@@ -4,5 +4,5 @@
     <td><%= classification.organization.org_name %></td>
     <td><%= classification.created_at %></td>
     <td><%= classification.updated_at %></td>
-    <td><%= button_to "Delete", classification, method: :delete, class: 'btn btn-outline-success', onclick: "return confirm('Are you sure you want to delete this Classification?');" %></td>
+    <td><%= button_to "Delete", administrator_classification_path(classification), method: :delete, class: 'btn btn-outline-success', onclick: "return confirm('Are you sure you want to delete this Classification?');" %></td>
 </tr>
