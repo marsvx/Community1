@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  helper_method :current_user, :logged_in?
+  helper_method :current_user, :logged_in?, :admin_logged_in?
 =begin
   helper :all
   before_action :authenticate_user!
@@ -11,6 +11,10 @@ class ApplicationController < ActionController::Base
 
   def logged_in?
     session[:user_username].present?
+  end
+
+  def admin_logged_in?
+    session[:admin_username].present?
   end
 
   def require_login
