@@ -1,0 +1,22 @@
+<h1 class = "text-center">Classifications</h1>
+<%= button_to "Create new classification", new_administrator_classification_path, method: :get, class: "btn btn-alogin btn-lg" %>
+<p></p>
+<div id="classifications">
+  <table class = "table">
+    <thead>
+      <tr>
+        <th scope = "col"><strong>ID:</strong></th>
+        <th scope = "col"><strong>Categoty:</strong></th>
+        <th scope = "col"><strong>Organization:</strong></th>
+        <th scope = "col"><strong>Created:</strong></th>
+        <th scope = "col"><strong>Last Update:</strong></th>    
+      </tr>
+    </thead>
+    <tbody class = "table-group-divider">
+      <% @classifications.each do |classification| %>
+        <%= render partial: "classification", locals: { classification: classification } %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+

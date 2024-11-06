@@ -1,18 +1,21 @@
 Rails.application.routes.draw do
   get 'pages/about_us'
   get 'pages/survey'
-  resources :classifications, param: :associationID
+
+  namespace :administrator do
+    resources :classifications, param: :associationID
+    resources :categories, param: :abbv
+    resources :organizations, param: :organizationId
+    resources :admins
+  end
   resources :favorites
   resources :reviews
   resources :surveys, only: [:create]
   resources :dependents
-  resources :categories, param: :abbv
   resources :questions
   resources :users, param: :username, only: [:index, :new, :create, :show, :edit, :update, :destroy]
-  resources :organizations, param: :organizationId
   resources :events
-  resources :admins, param: :username
-
+  
   root "pages#home"
   get 'pages/home'
 
@@ -39,12 +42,12 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   #get /admins
-  get "admin", to: "admins#index"
-  get "admindashboard", to: "admins#dashboard"
+  get "admin", to: "administrator/admins#dashboard"
+  get "admindashboard", to: "administrator/admins#dashboard"
 
-  get "adminaccess", to: "asession#new"
-  post "adminaccess", to: "asession#create"
-  delete "adminlogout", to: "asession#destroy"
+  get "adminaccess", to: "administrator/asession#new"
+  post "adminaccess", to: "administrator/asession#create"
+  delete "adminlogout", to: "administrator/asession#destroy"
 
   # User session management
   get "login", to: "users#index"       # Use the index action for displaying login form

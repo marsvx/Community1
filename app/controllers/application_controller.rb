@@ -1,17 +1,9 @@
 class ApplicationController < ActionController::Base
-  helper_method :current_user, :logged_in?, :admin_logged_in?
+  helper_method :current_user, :logged_in?
 =begin
   helper :all
   before_action :authenticate_user!
 =end
-
-  def set_current_admin
-    if session[:username]
-      Current.admin = Admin.find_by(username: session[:username])
-    else
-      redirect_to adminaccess_path
-    end
-  end
 
   def current_user
     @current_user ||= User.find_by(username: session[:user_username]) if session[:user_username]
@@ -19,10 +11,6 @@ class ApplicationController < ActionController::Base
 
   def logged_in?
     session[:user_username].present?
-  end
-
-  def admin_logged_in?
-    session[:admin_username].present?
   end
 
   def require_login
