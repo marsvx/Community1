@@ -14,4 +14,12 @@ class Event < ApplicationRecord
     def formatted_event_date
       eventDate.strftime("%B %d, %Y") if eventDate
     end
+
+    def approved?
+      eventstatus
+    end 
+
+    def self.approved_events
+      where(eventstatus: true)
+    end
 end

@@ -14,7 +14,7 @@ puts "Seeding admins..."
 # Create sample admins
 Admin.find_or_create_by!(username: "admin1") do |admin|
   admin.email = "admin1@example.com"
-  admin.firstname = "Admin"
+  admin.firstName = "Admin"
   admin.password_digest = "adminpass123"
 end
 
@@ -193,7 +193,7 @@ Event.find_or_create_by!(title: "Community Food Drive", eventDate: Date.today + 
   event.isVirtual = false
   event.meetingLink = nil
   event.eventstatus = true
-  event.organization_id = "org1@example.com"
+  #event.organization_id = "org1@example.com"
   event.user_id = "user1"
   event.admin_id = "admin"
 end
@@ -208,7 +208,7 @@ Event.find_or_create_by!(title: "Virtual Job Fair", eventDate: Date.today + 7) d
   event.isVirtual = true
   event.meetingLink = "https://zoom.us"
   event.eventstatus = true
-  event.organization_id = "org2@example.com"
+  #event.organizationId = "org2@example.com"
   event.user_id = "user2"
   event.admin_id = "admin"
 end
@@ -223,7 +223,7 @@ Event.find_or_create_by!(title: "Virtual Tech Meetup", eventDate: Date.today + 5
   event.isVirtual = true
   event.meetingLink = "http://example.com/meetup"
   event.eventstatus = true
-  event.organization_id = "org2@example.com"
+  #event.organizationId = "org2@example.com"
   event.user_id = "user2"
   event.admin_id = "admin"
 end
@@ -238,7 +238,7 @@ Event.find_or_create_by!(title: "Neighborhood Cleanup", eventDate: Date.today + 
   event.isVirtual = false
   event.meetingLink = nil
   event.eventstatus = true
-  event.organization_id = "org3@example.com"
+  #event.organizationId = "org3@example.com"
   event.user_id = "user3"
   event.admin_id = "admin"
 end
@@ -253,7 +253,7 @@ Event.find_or_create_by!(title: "Coding Bootcamp", eventDate: Date.today + 14) d
   event.isVirtual = false
   event.meetingLink = nil
   event.eventstatus = true
-  event.organization_id = "org4@example.com"
+  #event.organizationId = "org4@example.com"
   event.user_id = "user4"
   event.admin_id = "admin"
 end
@@ -268,7 +268,7 @@ Event.find_or_create_by!(title: "Mental Health Awareness Webinar", eventDate: Da
   event.isVirtual = true
   event.meetingLink = "http://example.com/webinar"
   event.eventstatus = true
-  event.organization_id = "org5@example.com"
+  #event.organizationId = "org5@example.com"
   event.user_id = "user5"
   event.admin_id = "admin"
 end
@@ -283,7 +283,7 @@ Event.find_or_create_by!(title: "Back-to-School Supply Drive", eventDate: Date.t
   event.isVirtual = false
   event.meetingLink = nil
   event.eventstatus = true
-  event.organization_id = "org6@example.com"
+  #event.organizationId = "org6@example.com"
   event.user_id = "user6"
   event.admin_id = "admin"
 end
