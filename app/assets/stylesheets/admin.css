@@ -68,6 +68,21 @@
     font-weight: 600;
 }
 
+.link-cell {
+  max-width: 150px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.link-cell a {
+  display: block;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
 @media (max-width: 1200px) {
   .card-list .card-item {
     padding: 15px;

@@ -9,7 +9,8 @@ class EventsController < ApplicationController
     @events = Event.order(eventDate: :asc)
 
     #will query the Events table in the database and order by date and time
-    @upcoming_events = Event.where('"eventDate" >= ?', Date.today).order('"eventDate"', '"eventTime"').limit(7)
+    @upcoming_events = Event.where('"eventDate" >= ? AND eventstatus =?', Date.today, true).order('"eventDate"', '"eventTime"').limit(7)
+    @approved_events = Event.approved_events
   end
 
   # GET /events/1 or /events/1.json

@@ -5,14 +5,6 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
 =end
 
-  def set_current_admin
-    if session[:username]
-      Current.admin = Admin.find_by(username: session[:username])
-    else
-      redirect_to adminaccess_path
-    end
-  end
-
   def current_user
     @current_user ||= User.find_by(username: session[:user_username]) if session[:user_username]
   end

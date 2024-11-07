@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "admins/edit", type: :view do
+RSpec.describe "administrator/admins/edit", type: :view do
   let(:admin) {
     Admin.create!()
   }
@@ -12,7 +12,7 @@ RSpec.describe "admins/edit", type: :view do
   it "renders the edit admin form" do
     render
 
-    assert_select "form[action=?][method=?]", admin_path(admin), "post" do
+    assert_select "form[action=?][method=?]", administrator_admin_path(admin), "post" do
     end
   end
 end
