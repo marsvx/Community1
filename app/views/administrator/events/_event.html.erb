@@ -10,7 +10,7 @@
     <td><%= event.isVirtual ? "Yes" : "No" %></td>
     <td class = "link-cell"><%= event.meetingLink.present? ? link_to(event.meetingLink, event.meetingLink, target: '_blank', rel: 'noopener') : "N/A" %></td>
     <td><%= event.eventstatus ? "Active" : "Inactive" %></td>
-    <td><%= event.organization_id || "N/A" %></td>
+    <td><%= event.organization&.org_name || "N/A" %></td>
     <td><%= event.user_id || "N/A" %></td>
     <td><%= event.admin_id || "N/A" %></td>
     <td><%= event.eventDescription %></td>

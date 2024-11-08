@@ -1,6 +1,5 @@
 module Administrator
   class EventsController < Administrator::BaseController
-    include Devise::Controllers::Helpers
     before_action :set_event, only: %i[ show edit update destroy ]
     before_action :set_current_admin
 
@@ -25,6 +24,7 @@ module Administrator
     # POST /events or /events.json
     def create
       @event = Event.new(event_params)
+      @event.require_user = false
 
       if params[:event][:isVirtual] == "true"
         @event.street = "Virtual"
@@ -83,7 +83,7 @@ module Administrator
 
       # Only allow a list of trusted parameters through.
       def event_params
-        params.require(:event).permit(:eventid, :title, :eventDate, :eventTime, :eventDescription, :street, :city, :eventState, :zipcode, :isVirtual, :meetingLink, :eventstatus, :organization_id)
+        params.require(:event).permit(:title, :eventDate, :eventTime, :eventDescription, :street, :city, :zipcode, :isVirtual, :meetingLink, :eventstatus, :organization_id)
       end
   end
 end
