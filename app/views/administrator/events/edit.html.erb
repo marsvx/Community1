@@ -1,10 +1,9 @@
-<h1>Editing event</h1>
+<h1 class = "text-center">Updating event</h1>
 
 <%= render "form", event: @event %>
 
 <br>
 
-<div>
-  <%= link_to "Show this event", @event %> |
-  <%= link_to "Back to events", events_path %>
+<div class = "d-grid gap-2 col-6 mx-auto">
+  <%= link_to "Back to events", administrator_events_path, method: :get, class: 'btn btn-alogin btn-lg' %>
 </div>

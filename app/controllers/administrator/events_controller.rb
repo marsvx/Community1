@@ -1,7 +1,7 @@
 module Administrator
   class EventsController < Administrator::BaseController
     include Devise::Controllers::Helpers
-    before_action :set_classification, only: %i[ show edit update destroy ]
+    before_action :set_event, only: %i[ show edit update destroy ]
     before_action :set_current_admin
 
     # GET /events or /events.json
@@ -20,9 +20,6 @@ module Administrator
 
     # GET /events/1/edit
     def edit
-      if params[:event][:admin_id] == nil
-        @event.admin_id = Current.admin.username
-      end
     end
 
     # POST /events or /events.json
@@ -59,7 +56,7 @@ module Administrator
     def update
       respond_to do |format|
         if @event.update(event_params)
-          format.html { redirect_to @event, notice: "Event was successfully updated." }
+          format.html { redirect_to administrator_events_path, notice: "Event was successfully updated." }
           format.json { render :show, status: :ok, location: @event }
         else
           format.html { render :edit, status: :unprocessable_entity }
@@ -73,17 +70,12 @@ module Administrator
       @event.destroy!
 
       respond_to do |format|
-        format.html { redirect_to events_path, status: :see_other, notice: "Event was successfully deleted." }
+        format.html { redirect_to administrator_events_path, status: :see_other, notice: "Event was successfully deleted." }
         format.json { head :no_content }
       end
     end
 
     private
-
-      def logged_in?
-        !!session[:user_username] || !!session[:username]
-      end
-
       # Use callbacks to share common setup or constraints between actions.
       def set_event
         @event = Event.find(params[:id])
@@ -91,13 +83,7 @@ module Administrator
 
       # Only allow a list of trusted parameters through.
       def event_params
-        params.require(:event).permit(:title, :eventDescription, :eventDate, :eventTime, :street, :city, :zipcode, :isVirtual, :meetingLink)
-      end
-
-      def authorize_user
-        unless (current_user == @event.user) || admin_logged_in?
-          redirect_to events_path, alert: "You are not authorized to perform this action."
-        end
+        params.require(:event).permit(:eventid, :title, :eventDate, :eventTime, :eventDescription, :street, :city, :eventState, :zipcode, :isVirtual, :meetingLink, :eventstatus, :organization_id)
       end
   end
 end
