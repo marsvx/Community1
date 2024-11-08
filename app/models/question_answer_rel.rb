@@ -1,0 +1,2 @@
+class QuestionAnswerRel < ApplicationRecord
+end
