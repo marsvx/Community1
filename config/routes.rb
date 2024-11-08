@@ -1,17 +1,21 @@
 Rails.application.routes.draw do
   get 'pages/about_us'
   get 'pages/survey'
-  resources :classifications
+
+  namespace :administrator do
+    resources :classifications
+    resources :categories
+    resources :organizations
+    resources :admins
+  end
   resources :favorites
   resources :reviews
   resources :surveys, only: [:create]
   resources :dependents
-  resources :categories
   resources :questions
-  resources :users
-  resources :organizations
+  resources :users, param: :username, only: [:index, :new, :create, :show, :edit, :update, :destroy]
   resources :events
-  resources :admins, param: :username
+  
   root "pages#home"
   get 'pages/home'
 
@@ -28,10 +32,6 @@ Rails.application.routes.draw do
   get 'users/new'
 
 
-
-
-
-
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -42,10 +42,15 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   #get /admins
-  get "admin", to: "admins#index"
-  get "admindashboard", to: "admins#dashboard"
+  get "admin", to: "administrator/admins#dashboard"
+  get "admindashboard", to: "administrator/admins#dashboard"
 
-  get "adminaccess", to: "asession#new"
-  post "adminaccess", to: "asession#create"
-  delete "adminlogout", to: "asession#destroy"
+  get "adminaccess", to: "administrator/asession#new"
+  post "adminaccess", to: "administrator/asession#create"
+  delete "adminlogout", to: "administrator/asession#destroy"
+
+  # User session management
+  get "login", to: "users#index"       # Use the index action for displaying login form
+  post "userlogin", to: "users#login"  # Use the new login action for logging in
+  delete "userlogout", to: "users#destroy" # Use the destroy action for user logout
 end

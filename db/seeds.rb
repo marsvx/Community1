@@ -134,50 +134,50 @@ puts "Seeding users..."
 # Create sample users with valid age ranges
 User.find_or_create_by!(username: "user1") do |user|
   user.email = "user1@example.com"
-  user.firstName = "John"
-  user.ageRange = "19-24"
-  user.hashedPasswd = "password123"
-  user.zipCode = 80202
+  user.first_name = "John"
+  user.age_range = "19-24"
+  user.password_digest = "password123"
+  user.zipcode = 80202
 end
 
 User.find_or_create_by!(username: "user2") do |user|
   user.email = "user2@example.com"
-  user.firstName = "Jane"
-  user.ageRange = "25-34"
-  user.hashedPasswd = "securepass"
-  user.zipCode = 80012
+  user.first_name = "Jane"
+  user.age_range = "25-34"
+  user.password_digest = "securepass"
+  user.zipcode = 80012
 end
 
 user3 = User.find_or_create_by!(username: "user3") do |user|
   user.email = "user3@example.com"
-  user.firstName = "UserThree"
-  user.ageRange = "35-70"
-  user.hashedPasswd = "password123"
-  user.zipCode = 80012
+  user.first_name = "UserThree"
+  user.age_range = "35-70"
+  user.password_digest = "password123"
+  user.zipcode = 80012
 end
 
 user4 = User.find_or_create_by!(username: "user4") do |user|
   user.email = "user4@example.com"
-  user.firstName = "UserFour"
-  user.ageRange = "25-34"
-  user.hashedPasswd = "password123"
-  user.zipCode = 80301
+  user.first_name = "UserFour"
+  user.age_range = "25-34"
+  user.password_digest = "password123"
+  user.zipcode = 80301
 end
 
 user5 = User.find_or_create_by!(username: "user5") do |user|
   user.email = "user5@example.com"
-  user.firstName = "UserFive"
-  user.ageRange = "19-24"
-  user.hashedPasswd = "password123"
-  user.zipCode = nil
+  user.first_name = "UserFive"
+  user.age_range = "19-24"
+  user.password_digest = "password123"
+  user.zipcode = 822276
 end
 
 user6 = User.find_or_create_by!(username: "user6") do |user|
   user.email = "user6@example.com"
-  user.firstName = "UserSix"
-  user.ageRange = "35-70"
-  user.hashedPasswd = "password123"
-  user.zipCode = 80524
+  user.first_name = "UserSix"
+  user.age_range = "35-70"
+  user.password_digest = "password123"
+  user.zipcode = 80524
 end
 
 puts "Seeding events..."
@@ -193,7 +193,7 @@ Event.find_or_create_by!(title: "Community Food Drive", eventDate: Date.today + 
   event.isVirtual = false
   event.meetingLink = nil
   event.eventstatus = true
-  event.organization_id = "org1@example.com"
+  #event.organization_id = "org1@example.com"
   event.user_id = "user1"
   event.admin_id = "admin"
 end
@@ -206,9 +206,9 @@ Event.find_or_create_by!(title: "Virtual Job Fair", eventDate: Date.today + 7) d
   event.eventState = "CO"
   event.zipcode = 80203
   event.isVirtual = true
-  event.meetingLink = "https://zoom.us/j/1234567890"
+  event.meetingLink = "https://zoom.us"
   event.eventstatus = true
-  event.organization_id = "org2@example.com"
+  #event.organizationId = "org2@example.com"
   event.user_id = "user2"
   event.admin_id = "admin"
 end
@@ -223,7 +223,7 @@ Event.find_or_create_by!(title: "Virtual Tech Meetup", eventDate: Date.today + 5
   event.isVirtual = true
   event.meetingLink = "http://example.com/meetup"
   event.eventstatus = true
-  event.organization_id = "org2@example.com"
+  #event.organizationId = "org2@example.com"
   event.user_id = "user2"
   event.admin_id = "admin"
 end
@@ -238,7 +238,7 @@ Event.find_or_create_by!(title: "Neighborhood Cleanup", eventDate: Date.today + 
   event.isVirtual = false
   event.meetingLink = nil
   event.eventstatus = true
-  event.organization_id = "org3@example.com"
+  #event.organizationId = "org3@example.com"
   event.user_id = "user3"
   event.admin_id = "admin"
 end
@@ -253,7 +253,7 @@ Event.find_or_create_by!(title: "Coding Bootcamp", eventDate: Date.today + 14) d
   event.isVirtual = false
   event.meetingLink = nil
   event.eventstatus = true
-  event.organization_id = "org4@example.com"
+  #event.organizationId = "org4@example.com"
   event.user_id = "user4"
   event.admin_id = "admin"
 end
@@ -268,7 +268,7 @@ Event.find_or_create_by!(title: "Mental Health Awareness Webinar", eventDate: Da
   event.isVirtual = true
   event.meetingLink = "http://example.com/webinar"
   event.eventstatus = true
-  event.organization_id = "org5@example.com"
+  #event.organizationId = "org5@example.com"
   event.user_id = "user5"
   event.admin_id = "admin"
 end
@@ -283,7 +283,7 @@ Event.find_or_create_by!(title: "Back-to-School Supply Drive", eventDate: Date.t
   event.isVirtual = false
   event.meetingLink = nil
   event.eventstatus = true
-  event.organization_id = "org6@example.com"
+  #event.organizationId = "org6@example.com"
   event.user_id = "user6"
   event.admin_id = "admin"
 end

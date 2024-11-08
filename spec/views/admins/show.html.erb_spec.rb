@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "admins/show", type: :view do
+RSpec.describe "administrator/admins/show", type: :view do
   before(:each) do
     assign(:admin, Admin.create!())
   end
