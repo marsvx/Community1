@@ -1,6 +1,7 @@
 module Administrator
   class SurveysController < Administrator::BaseController
     before_action :set_survey, only: %i[ show edit update destroy ]
+    before_action :set_current_admin
 
     # GET /surveys or /surveys.json
     def index
@@ -26,7 +27,7 @@ module Administrator
 
       respond_to do |format|
         if @survey.save
-          format.html { redirect_to @survey, notice: "Survey was successfully created." }
+          format.html { redirect_to administrator_surveys_path, notice: "Survey was successfully created." }
           format.json { render :show, status: :created, location: @survey }
         else
           format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +40,7 @@ module Administrator
     def update
       respond_to do |format|
         if @survey.update(survey_params)
-          format.html { redirect_to @survey, notice: "Survey was successfully updated." }
+          format.html { redirect_to administrator_surveys_path, notice: "Survey was successfully updated." }
           format.json { render :show, status: :ok, location: @survey }
         else
           format.html { render :edit, status: :unprocessable_entity }
@@ -53,7 +54,7 @@ module Administrator
       @survey.destroy!
 
       respond_to do |format|
-        format.html { redirect_to surveys_path, status: :see_other, notice: "Survey was successfully destroyed." }
+        format.html { redirect_to administrator_surveys_path, status: :see_other, notice: "Survey was successfully destroyed." }
         format.json { head :no_content }
       end
     end
@@ -66,14 +67,7 @@ module Administrator
 
       # Only allow a list of trusted parameters through.
       def survey_params
-        params.fetch(:survey, {})
-      end
-
-      private
-
-      def survey_params
-        params.permit(:userID_id, :questionID_id, :answer, :dependents, :age)
-
+        params.require(:survey).permit()
       end
   end
 end

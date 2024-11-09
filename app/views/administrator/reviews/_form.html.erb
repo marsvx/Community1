@@ -18,15 +18,14 @@
   <p></p>
   <div class="col-mb-3">
   <%= form.label :organizationID_id, "Organization", style: "display: block", class: "form-label" %>
-  <div class="input-group">
-    <% if review.persisted? %>
-      <%= form.text_field :organizationID_id, value: Organization.find_by(organizationId: review.organizationID_id)&.org_name, class: "form-control", disabled: true %>
-    <% else %>
-      <%= form.collection_select :organizationID_id, Organization.all, :organizationId, :org_name, {}, class: "form-control" %>
-    <% end %>
+    <div class="input-group">
+      <% if review.persisted? %>
+        <%= form.text_field :organizationID_id, value: Organization.find_by(organizationId: review.organizationID_id)&.org_name, class: "form-control", disabled: true %>
+      <% else %>
+        <%= form.collection_select :organizationID_id, Organization.all, :organizationId, :org_name, {}, class: "form-control" %>
+      <% end %>
+    </div>
   </div>
-</div>
-
   <p></p>
   <div class = "col-mb-3">
     <%= form.label :userID_id, "User", style: "display: block", class: "form-label" %>
