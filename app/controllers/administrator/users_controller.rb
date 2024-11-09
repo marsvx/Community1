@@ -1,12 +1,14 @@
 module Administrator
   class UsersController < Administrator::BaseController
     before_action :set_user, only: %i[show edit update destroy]
-    before_action :set_current_user, only: %i[show edit update destroy]
+    before_action :set_current_admin
 
     # GET /users or /users.json
     def index
-      # Render the login form here
-      @user = User.new  # Initialize a new user for the login form
+      @users = User.all
+    end
+
+    def show
     end
 
     # GET /users/new
@@ -14,68 +16,70 @@ module Administrator
       @user = User.new
     end
 
+    def edit
+    end
+
     # POST /users - Profile creation
     def create
       @user = User.new(user_params)
-
       respond_to do |format|
         if @user.save
-          session[:user_username] = @user.username
-          format.html { redirect_to root_path, notice: "Profile successfully created!" }
+          format.html { redirect_to administrator_users_path, notice: "New user was successfully created." }
+          format.json { render :show, status: :created, location: @user }
         else
-          flash.now[:alert] = @user.errors.full_messages.join(", ")
           format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
         end
-      end
-    end
-
-    # POST /userlogin - Login action
-    def login
-      @user = User.find_by(username: params[:username])
-
-      if @user&.authenticate(params[:password])
-        session[:user_username] = @user.username
-        redirect_to root_path, notice: "Welcome back!"
-      else
-        flash.now[:alert] = "Invalid username or password"
-        render :index, status: :unprocessable_entity  # Render the login form again
       end
     end
 
     # PATCH/PUT /users/:username - Profile update
     def update
       respond_to do |format|
-        if @user.update(user_params.except(:username))
-          format.html { redirect_to user_path(username: @user.username), notice: "Profile successfully updated." }
-        else
-          flash.now[:alert] = @user.errors.full_messages.join(", ")
-          format.html { render :edit, status: :unprocessable_entity }
+        begin
+          if @user.update(user_params.except(:username))
+            format.html { redirect_to administrator_users_path, notice: "User successfully updated." }
+          else
+            format.html { render :edit, status: :unprocessable_entity }
+            format.json { render json: @user.errors, status: :unprocessable_entity }
+          end
+        rescue ActiveRecord::ReadOnlyRecord => e
+          if e.message.include?("username cannot be changed once set")
+            format.html { render :edit, alert: "The username cannot be changed once set." }
+            format.json { render json: { error: "The username cannot be changed once set." }, status: :unprocessable_entity }
+          else
+            format.html { render :edit, alert: e.message }
+            format.json { render json: { error: e.message }, status: :unprocessable_entity }
+          end
         end
       end
     end
 
     # DELETE /userlogout - Logout action
     def destroy
-      session[:user_username] = nil
-      redirect_to login_path, notice: "Successfully logged out."
+      if @user.destroy
+        respond_to do |format|
+          format.html { redirect_to administrator_users_path, status: :see_other, notice: "User was successfully deleted." }
+          format.json { head :no_content }
+        end
+      else
+        respond_to do |format|
+          format.html { redirect_to admindashboard_path, alert: @user.errors.full_messages.join(", ") }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
+      end
     end
 
     private
 
     # Set the user based on username
     def set_user
-      @user = User.find_by(username: params[:username])
-      redirect_to users_path, alert: "User not found." if @user.nil?
-    end
-
-    # Set the current logged-in user
-    def set_current_user
-      @current_user = User.find_by(username: session[:user_username]) if session[:user_username]
+      @user = User.find(params[:id])
     end
 
     # Permit trusted parameters
     def user_params
-      params.require(:user).permit(:username, :first_name, :email, :age_range, :password, :password_confirmation, :zipcode)
+      params.require(:user).permit(:username, :email, :first_name, :age_range, :password, :password_confirmation, :zipcode)
     end
   end
 end

@@ -1,10 +1,9 @@
-<h1>Editing user</h1>
+<h1 class = "text-center">Update User Information</h1>
 
 <%= render "form", user: @user %>
 
 <br>
 
-<div>
-  <%= link_to "Show this user", @user %> |
-  <%= link_to "Back to users", users_path %>
+<div class = "d-grid gap-2 col-6 mx-auto">
+  <%= link_to "Back to Users", administrator_users_path, method: :get, class: 'btn btn-alogin btn-lg' %>
 </div>

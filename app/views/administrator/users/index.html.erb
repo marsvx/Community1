@@ -1,126 +1,23 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      text-align: center; 
-    }
-
-    form {
-      border-radius: 35px; 
-      border: 3px solid transparent; 
-      padding: 16px; 
-      background-color: #A4C3B2; 
-      max-width: 600px; 
-      width: 100%; 
-      margin: 0 auto; 
-    }
-
-    h1 {
-      text-align: center; 
-      margin: 0; 
-    }
-
-    input[type=text], input[type=password] {
-      width: 100%;
-      padding: 12px 20px;
-      margin: 8px 0;
-      display: inline-block;
-      border: 1px solid #ccc;
-      box-sizing: border-box;
-      border-radius: 35px; 
-    }
-
-    button, .create-profile-btn, .login-btn {
-      color: white;
-      padding: 14px 20px;
-      margin: 0; 
-      border: none;
-      cursor: pointer;
-      border-radius: 35px;
-      background-color: #6B9080; /* Same background color for both buttons */
-    }
-
-    .login-btn {
-      width: 120px; /* Adjust width as needed */
-      margin-right: 20px; 
-    }
-
-    .create-profile-btn {
-      margin-right: 20px;
-      text-decoration: none; 
-      display: inline-block; 
-    }
-
-    .container {
-      padding: 16px;
-      border-radius: 35px;
-    }
-
-    span.psw {
-      display: block; 
-      text-align: right; 
-      padding-top: 8px;
-      color: #6B9080; 
-      text-decoration: none; 
-      margin-bottom: 25px;
-    }
-
-    label {
-      display: block; 
-      text-align: left; 
-      margin-top: 10px; 
-    }
-
-    .alert {
-      color: red; /* Style for the alert message */
-      margin-bottom: 15px;
-      font-weight: bold;
-    }
-
-    .field-with-errors {
-      color: red; /* Style for field error messages */
-      font-size: 14px;
-      margin-top: 5px;
-    }
-
-    @media screen and (max-width: 300px) {
-      .create-profile-btn, .login-btn {
-         width: 100%; 
-      }
-    }
-  </style>
-</head>
-<body>
-  <%= form_with(url: userlogin_path, local: true) do |form| %>
-    <div class="container">
-      <!-- Display flash alert for login errors -->
-      <% if flash.now[:alert] %>
-        <div class="alert"><%= flash.now[:alert] %></div>
-      <% end %>
-
-      <!-- Username Field -->
-      <label for="username"><b>Username</b></label>
-      <%= form.text_field :username, placeholder: "Enter Username", required: true, class: "form-control" %>
-      <% if @user && @user.errors[:username].any? %>
-        <div class="field-with-errors"><%= @user.errors[:username].join(", ") %></div>
-      <% end %>
-
-      <!-- Password Field -->
-      <label for="password"><b>Password</b></label>
-      <%= form.password_field :password, placeholder: "Enter Password", required: true, class: "form-control" %>
-      <% if @user && @user.errors[:password].any? %>
-        <div class="field-with-errors"><%= @user.errors[:password].join(", ") %></div>
-      <% end %>
-
-      <span class="psw"><a href="forgot_password.html" style="color: #6B9080; text-decoration: none;">Forgot password?</a></span>
-      <div>
-        <a href="<%= new_user_path %>" class="create-profile-btn">Create a Profile</a>
-        <%= form.submit "Login", class: "login-btn" %>
-      </div>
-    </div>
-  <% end %>
-</body>
-</html>
+<h1 class = "text-center">Users</h1>
+<%= button_to "Create new user", new_administrator_user_path, method: :get, class: "btn btn-alogin btn-lg" %>
+<p></p>
+<div id="users">
+  <table class = "table">
+        <thead>
+            <tr>
+                <th scope = "col"><strong>Username:</strong></th>
+                <th scope = "col"><strong>Email:</strong></th>
+                <th scope = "col"><strong>First Name:</strong></th>
+                <th scope = "col"><strong>Age Range:</strong></th>
+                <th scope = "col"><strong>Zip Code:</strong></th>
+                <th scope = "col"><strong>Created:</strong></th>
+                <th scope = "col"><strong>Last Update:</strong></th>
+            </tr>
+        </thead>
+        <tbody class = "table-group-divider">
+            <% @users.each do |user| %>
+              <%= render partial: "user", locals: { user: user} %>
+            <% end %>
+        </tbody>
+    </table>
+</div>
