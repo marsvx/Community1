@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
   get 'pages/about_us'
-  get 'pages/survey'
+  get 'pages/survey', to: 'pages#survey'
   resources :classifications
   resources :favorites
   resources :reviews
   resources :surveys, only: [:create]
+  resources :survey_responses, only: :create
   resources :dependents
   resources :categories
   resources :questions

@@ -1,6 +1,17 @@
 class SurveysController < ApplicationController
   before_action :set_survey, only: %i[ show edit update destroy ]
 
+  def survey
+    survey = Survey.create(name: "Assistance Survey") # Create the survey record
+  
+    if survey.persisted?
+      @survey_service = SurveyService.new(survey.id) # Pass the survey ID to the service
+    else
+      flash[:error] = "Survey could not be created."
+      redirect_to some_path and return
+  end
+  
+
   # GET /surveys or /surveys.json
   def index
     @surveys = Survey.all
@@ -61,17 +72,16 @@ class SurveysController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_survey
       @survey = Survey.find(params[:id])
+      unless @survey
+        redirect_to surveys_path, alert: "Survey not found."
+      end
     end
 
     # Only allow a list of trusted parameters through.
-    def survey_params
-      params.fetch(:survey, {})
-    end
-
     private
 
     def survey_params
-      params.permit(:userID_id, :questionID_id, :answer, :dependents, :age)
-
+      params.require(:survey).permit(:name)
     end
+        
 end

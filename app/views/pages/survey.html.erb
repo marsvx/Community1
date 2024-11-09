@@ -50,39 +50,25 @@
         </script>
 
      <-- End Conditional --> 
+     <-- For each question -->
+     <%= form_with(url: survey_responses_path, method: :post) do |form| %>
+        <% @questions.each do |question| %>
+          <div class="question">
+            <h2><%= question.body %></h2>
+      
+            <% question.answers.each do |answer| %>
+              <div>
+                <%= form.radio_button :answer_id, answer.id, name: "responses[#{question.id}]" %>
+                <%= form.label :answer_id, answer.body, for: "responses_#{question.id}_#{answer.id}" %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      
+        <%= form.submit "Submit Survey" %>
+      <% end %>
 
-
-    < -BEGIN BRANCHING QUESTIONS -->
-    <-- Dependents -->
-    <div id="question2">
-    <label for="dependents">Do you have any dependents?</label><br>
-    <input type="radio" id="dep_pos" name="dependents" value="Yes" required><br><br>
-    <label for="dep_pos">Yes</label><br>
-
-    <input type="radio" id="dep_neg" name="dependents" value="No" required><br><br>
-    <label for="dep_neg">No</label><br>
-
-    </div>
-
-     <-- Age Range -->
-        <div id="question3">
-        <label for="age">What is your age range?</label><br>
-        <input type="radio" id="under_eighteen" name="age" value="Under 18"><br><br>
-        <label for="under_eighteen">Under 18</label><br>
-
-        <input type="radio" id="nineteen_to_sixtyfour" name="age" value="19-64"><br><br>
-        <label for="nineteen_to_sixtyfour">19-64</label><br>
-
-        <input type="radio" id="over_sixtyfive" name="age" value="65+"><br><br>
-        <label for="over_sixtyfive">65+</label><br>
-       
-        button type="button" onclick="showNext()">Next</button>
-        </div>
-
-
-        <!-- Multiple Choice Questions -->
-
-        <button type="submit">Submit Survey</button>
+ 
     </form>
 </body>
 </html>

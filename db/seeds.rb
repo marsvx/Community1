@@ -287,6 +287,56 @@ Event.find_or_create_by!(title: "Back-to-School Supply Drive", eventDate: Date.t
   event.user_id = "user6"
   event.admin_id = "admin"
 end
+puts "Clearing questions & answers..."
+# Clear existing data
+QuestionAnswerRel.delete_all
+Answer.delete_all
+Question.delete_all
 
-puts "Finished seeding events!"
+puts "Seeding Questions..."
+question1 = Question.create(question: "What is your age range?")
+question2 = Question.create(question: "Do you have any dependents?")
+question3 = Question.create(question: "Are you in need of legal assistance?")
+question4 = Question.create(question: "Are you currently in a stable home?")
+question5 = Question.create(question: "Do you have enough food to meet your household needs?")
+question6 = Question.create(question: "Are you or is someone in your household in need of educational support?")
 
+puts "Seeding Answers..."
+answer1 = Answer.create(body: "Yes")
+answer2 = Answer.create(body: "No")
+answer3 = Answer.create(body: "Prefer Not To Answer")
+
+answer4 = Answer.create(body: "Under 18")
+answer5 = Answer.create(body: "19-64")
+answer6 = Answer.create(body: "65+")
+
+puts "Seeding Link Questions and Answers..."
+# Link answers to "What is your age range?" question
+QuestionAnswerRel.create(question: question1, answer: answer4)
+QuestionAnswerRel.create(question: question1, answer: answer5)
+QuestionAnswerRel.create(question: question1, answer: answer6)
+
+# Link answers to "Do you have any dependents?" question
+QuestionAnswerRel.create(question: question2, answer: answer1)
+QuestionAnswerRel.create(question: question2, answer: answer2)
+QuestionAnswerRel.create(question: question2, answer: answer3)
+
+# Link answers to "Are you in need of legal assistance?" question
+QuestionAnswerRel.create(question: question3, answer: answer1)
+QuestionAnswerRel.create(question: question3, answer: answer2)
+QuestionAnswerRel.create(question: question3, answer: answer3)
+
+# Link answers to "Are you currently in a stable home?" question
+QuestionAnswerRel.create(question: question4, answer: answer1)
+QuestionAnswerRel.create(question: question4, answer: answer2)
+QuestionAnswerRel.create(question: question4, answer: answer3)
+
+# Link answers to "Do you have enough food to meet your household needs?" question
+QuestionAnswerRel.create(question: question5, answer: answer1)
+QuestionAnswerRel.create(question: question5, answer: answer2)
+QuestionAnswerRel.create(question: question5, answer: answer3)
+
+# Link answers to "Are you or is someone in your household in need of educational support?" question
+QuestionAnswerRel.create(question: question6, answer: answer1)
+QuestionAnswerRel.create(question: question6, answer: answer2)
+QuestionAnswerRel.create(question: question6, answer: answer3)
