@@ -3,10 +3,10 @@ class CreateUsers < ActiveRecord::Migration[7.1]
     create_table :users, id:false do |t|
       t.string :username, null: false, limit: 15, primary_key: true
       t.string :email, null: false, limit: 255
-      t.string :firstName, null: false, limit: 150
-      t.string :ageRange, null: false, limit: 8
-      t.string :hashedPasswd, null: false, limit: 80
-      t.integer :zipCode
+      t.string :first_name, null: false, limit: 150
+      t.string :age_range, null: false, limit: 8
+      t.string :password_digest, null: false, limit: 80
+      t.integer :zipcode
       t.timestamps
     end
      # unique index for email, note that this is not necessary for username bc an index gets created automatically

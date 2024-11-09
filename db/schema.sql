@@ -27,8 +27,8 @@ CREATE TABLE Users (
     email VARCHAR(255) UNIQUE NOT NULL,
     firstName VARCHAR(150) NOT NULL,
     ageRange VARCHAR(8) NOT NULL,
-    hashedPasswd VARCHAR(80) NOT NULL,
-    zipCode INTEGER
+    password_digest VARCHAR(80) NOT NULL,
+    zipcode INTEGER
 );
 
 CREATE TABLE Admins(
@@ -53,7 +53,7 @@ CREATE TABLE Organizations (
     street VARCHAR(255) NOT NULL,
     city VARCHAR(100) NOT NULL,
     org_state VARCHAR(2) NOT NULL CHECK (org_state = 'CO'),
-    zipcode INTEGER NOT NULL,
+    zipCode INTEGER NOT NULL,
     email VARCHAR(255) PRIMARY KEY,
     phoneNumber VARCHAR(15),
     webLink VARCHAR(2050),
@@ -93,7 +93,7 @@ CREATE TABLE Events(
     street VARCHAR(255) NOT NULL,
     city VARCHAR(100) NOT NULL,
     eventState VARCHAR(2) NOT NULL CHECK (eventState = 'CO'),
-    zipcode INTEGER NOT NULL,
+    zipCode INTEGER NOT NULL,
     isVirtual BOOLEAN NOT NULL,
     meetingLink VARCHAR(2050),
     eventstatus BOOLEAN NOT NULL,

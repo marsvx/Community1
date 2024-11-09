@@ -41,8 +41,13 @@
     <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
       <div class="accordion-body">
         <div class="event-details">
-          <% @events.each do |event| %>
+          <% @approved_events.each do |event| %>
             <%= render event %>
+            <% if event.isVirtual %>
+              <p>
+               <b>Virtual Meeting Link:</b> <%= link_to event.meetingLink, event.meetingLink, target: "_blank", rel: "noopener" %>
+              </p>
+            <% end %>
             <p>
               <%= link_to "Show this event", event, class: "btn btn-link" %>
             </p>
@@ -54,7 +59,7 @@
 </div>
 
 <% if logged_in? %>
-  <%= link_to 'New Event', new_event_path, class: "btn btn-primary" %>
+  <%= link_to 'Create New Event', new_event_path, class: "btn btn-primary" %>
 <% else %>
   <%= link_to 'Create Event', new_event_path, class: "btn btn-primary" %>
 <% end %>

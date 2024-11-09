@@ -33,30 +33,25 @@
       border-radius: 35px; 
     }
 
-    button {
+    button, .create-profile-btn, .login-btn {
       color: white;
       padding: 14px 20px;
       margin: 0; 
       border: none;
       cursor: pointer;
       border-radius: 35px;
+      background-color: #6B9080; /* Same background color for both buttons */
     }
 
     .login-btn {
-      background-color: #6B9080; 
-      width: 120px; 
+      width: 120px; /* Adjust width as needed */
       margin-right: 20px; 
-      border-radius: 35px; 
     }
 
     .create-profile-btn {
-      background-color: #6B9080; 
       margin-right: 20px;
       text-decoration: none; 
-      color: white; 
       display: inline-block; 
-      padding: 14px 20px; 
-      border-radius: 35px;
     }
 
     .container {
@@ -79,6 +74,18 @@
       margin-top: 10px; 
     }
 
+    .alert {
+      color: red; /* Style for the alert message */
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+
+    .field-with-errors {
+      color: red; /* Style for field error messages */
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
     @media screen and (max-width: 300px) {
       .create-profile-btn, .login-btn {
          width: 100%; 
@@ -87,21 +94,33 @@
   </style>
 </head>
 <body>
-  <form action="/action_page.php" method="post">
+  <%= form_with(url: userlogin_path, local: true) do |form| %>
     <div class="container">
-      <label for="uname"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="uname" required>
+      <!-- Display flash alert for login errors -->
+      <% if flash.now[:alert] %>
+        <div class="alert"><%= flash.now[:alert] %></div>
+      <% end %>
 
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
+      <!-- Username Field -->
+      <label for="username"><b>Username</b></label>
+      <%= form.text_field :username, placeholder: "Enter Username", required: true, class: "form-control" %>
+      <% if @user && @user.errors[:username].any? %>
+        <div class="field-with-errors"><%= @user.errors[:username].join(", ") %></div>
+      <% end %>
+
+      <!-- Password Field -->
+      <label for="password"><b>Password</b></label>
+      <%= form.password_field :password, placeholder: "Enter Password", required: true, class: "form-control" %>
+      <% if @user && @user.errors[:password].any? %>
+        <div class="field-with-errors"><%= @user.errors[:password].join(", ") %></div>
+      <% end %>
 
       <span class="psw"><a href="forgot_password.html" style="color: #6B9080; text-decoration: none;">Forgot password?</a></span>
       <div>
         <a href="<%= new_user_path %>" class="create-profile-btn">Create a Profile</a>
-        <button type="submit" class="login-btn">Login</button>
+        <%= form.submit "Login", class: "login-btn" %>
       </div>
     </div>
-  </form>
-
+  <% end %>
 </body>
 </html>
