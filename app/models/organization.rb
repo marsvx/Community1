@@ -9,5 +9,5 @@ class Organization < ApplicationRecord
     has_many :events, class_name: 'Event'
     has_many :favorites, class_name: 'Favorite'
     has_many :users, class_name: 'User', through: :favorites
-    has_many :reviews, class_name: 'Review'
+    has_many :reviews, class_name: 'Review', foreign_key: :organizationID_id
 end
