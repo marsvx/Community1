@@ -2,12 +2,13 @@ class User < ApplicationRecord
   has_secure_password
 
   # Associations
-  has_many :dependents, class_name: 'Dependent'
-  has_many :favorites, class_name: 'Favorite'
+  has_many :dependents, class_name: 'Dependent', foreign_key: :userID_id, dependent: :destroy
+  has_many :favorites, class_name: 'Favorite', foreign_key: :userID_id, primary_key: 'username', dependent: :destroy
   has_many :favorite_organizations, class_name: 'Organization', through: :favorites
-  has_many :reviews, class_name: 'Review'
+  has_many :reviews, class_name: 'Review', foreign_key: :userID_id, dependent: :destroy
   has_many :reviewed_organizations, class_name: 'Organization', through: :reviews
-  has_many :surveys, class_name: 'Survey'
+  has_many :surveys, class_name: 'Survey', foreign_key: :userID_id, dependent: :destroy
+  has_many :eventsw,  class_name: 'Event', foreign_key: :user_id, dependent: :destroy
   #this is an array that holds our age ranges
   AGE_RANGES = ['Under 18', '19 - 24', '25 - 34', '35 - 70', '70 and over']
   
@@ -30,7 +31,12 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :age_range, presence: true  # Ensure age_range is present
   validates :zipcode, presence: true     # Ensure zipcode is present
-  validates :password_digest, presence: true, length: { minimum: 6 }  # Ensure password has a minimum length
+  validates :password, presence: true,
+  format: {
+    with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}\z/,
+    message: "must be at least 8 characters long, contain at least one lowercase letter, one uppercase letter, one number, and one special character"
+  }
+
 
   private
 

@@ -7,6 +7,11 @@ Rails.application.routes.draw do
     resources :categories
     resources :organizations
     resources :admins
+    resources :events
+    resources :questions
+    resources :reviews
+    resources :surveys
+    resources :users
   end
   resources :favorites
   resources :reviews
@@ -16,6 +21,7 @@ Rails.application.routes.draw do
   resources :questions
   resources :users, param: :username, only: [:index, :new, :create, :show, :edit, :update, :destroy]
   resources :events
+  resources :organizations
   
   root "pages#home"
   get 'pages/home'
