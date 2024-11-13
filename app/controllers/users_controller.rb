@@ -28,19 +28,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # POST /userlogin - Login action
-  def login
-    @user = User.find_by(username: params[:username])
-
-    if @user&.authenticate(params[:password])
-      session[:user_username] = @user.username
-      redirect_to root_path, notice: "Welcome back!"
-    else
-      flash.now[:alert] = "Invalid username or password"
-      render :index, status: :unprocessable_entity  # Render the login form again
-    end
-  end
-
   # PATCH/PUT /users/:username - Profile update
   def update
     respond_to do |format|
@@ -53,10 +40,22 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /userlogout - Logout action
+  # DELETE  - User delete action
   def destroy
-    session[:user_username] = nil
-    redirect_to login_path, notice: "Successfully logged out."
+    if session[:user_username] == @user.username
+      session[:user_username] = nil
+    end
+    if @user.destroy
+      respond_to do |format|
+        format.html { redirect_to root_path, status: :see_other, notice: "User was successfully deleted." }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to root_path, alert: @user.errors.full_messages.join(", ") }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   private
@@ -65,11 +64,6 @@ class UsersController < ApplicationController
   def set_user
     @user = User.find_by(username: params[:username])
     redirect_to users_path, alert: "User not found." if @user.nil?
-  end
-
-  # Set the current logged-in user
-  def set_current_user
-    @current_user = User.find_by(username: session[:user_username]) if session[:user_username]
   end
 
   # Permit trusted parameters

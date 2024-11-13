@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
 =end
 
   before_action :set_current_user
+  helper_method :logged_in?
 
 
   def current_user
