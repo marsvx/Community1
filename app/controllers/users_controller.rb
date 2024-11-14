@@ -37,19 +37,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # POST /userlogin - Login action
-  def login
-    @user = User.find_by(username: params[:username])
-
-    if @user&.authenticate(params[:password])
-      session[:user_username] = @user.username
-      redirect_to root_path, notice: "Welcome back!"
-    else
-      flash.now[:alert] = "Invalid username or password"
-      render :index, status: :unprocessable_entity  # Render the login form again
-    end
-  end
-
   # PATCH/PUT /users/:username - Profile update
   def update
     respond_to do |format|
@@ -64,7 +51,7 @@ class UsersController < ApplicationController
   end
   
 
-  # DELETE /userlogout - Logout action
+  # DELETE  - User delete action
   def destroy
     if session[:user_username] == @user.username
       session[:user_username] = nil
@@ -88,11 +75,6 @@ class UsersController < ApplicationController
   def set_user
     @user = User.find_by(username: params[:username])
     redirect_to users_path, alert: "User not found." if @user.nil?
-  end
-
-  # Set the current logged-in user
-  def set_current_user
-    @current_user = User.find_by(username: session[:user_username]) if session[:user_username]
   end
 
   # Permit trusted parameters
