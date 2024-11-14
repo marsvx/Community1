@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_29_215645) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_13_223900) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,6 +21,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_29_215645) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
+  end
+
+  create_table "answers", primary_key: "answerID", force: :cascade do |t|
+    t.string "answer", limit: 150, null: false
+    t.string "admin_username", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "categories", primary_key: "abbv", id: { type: :string, limit: 5 }, force: :cascade do |t|
@@ -143,17 +150,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_29_215645) do
   end
 
   add_foreign_key "classifications", "categories", column: "categoryabbr_id", primary_key: "abbv"
-  add_foreign_key "classifications", "organizations", column: "organizationID_id", primary_key: "organizationId"
-  add_foreign_key "dependents", "users", column: "userID_id", primary_key: "username", on_update: :cascade
-  add_foreign_key "events", "admins", primary_key: "username", on_delete: :nullify
-  add_foreign_key "events", "organizations", primary_key: "organizationId"
-  add_foreign_key "events", "users", primary_key: "username", on_update: :cascade
-  add_foreign_key "favorites", "organizations", column: "organizationID_id", primary_key: "organizationId"
-  add_foreign_key "favorites", "users", column: "userID_id", primary_key: "username", on_update: :cascade
-  add_foreign_key "reviews", "admins", column: "adminID_id", primary_key: "username", on_delete: :nullify
-  add_foreign_key "reviews", "organizations", column: "organizationID_id", primary_key: "organizationId"
-  add_foreign_key "reviews", "users", column: "userID_id", primary_key: "username", on_update: :cascade
+  add_foreign_key "classifications", "organizations", column: "organizationID_id", primary_key: "email"
+  add_foreign_key "dependents", "users", column: "userID_id", primary_key: "username"
+  add_foreign_key "events", "admins", primary_key: "username"
+  add_foreign_key "events", "organizations", primary_key: "email"
+  add_foreign_key "events", "users", primary_key: "username"
+  add_foreign_key "favorites", "organizations", column: "organizationID_id", primary_key: "email"
+  add_foreign_key "favorites", "users", column: "userID_id", primary_key: "username"
+  add_foreign_key "reviews", "admins", column: "adminID_id", primary_key: "username"
+  add_foreign_key "reviews", "organizations", column: "organizationID_id", primary_key: "email"
+  add_foreign_key "reviews", "users", column: "userID_id", primary_key: "username"
   add_foreign_key "surveys", "questions", column: "questionID_id", primary_key: "questionID"
-  add_foreign_key "surveys", "users", column: "userID_id", primary_key: "username", on_update: :cascade
-  
+  add_foreign_key "surveys", "users", column: "userID_id", primary_key: "username"
 end
