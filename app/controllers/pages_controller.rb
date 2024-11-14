@@ -29,7 +29,7 @@ class PagesController < ApplicationController
   end
 
   def survey
-    survey = Survey.new(name: "Assistance Survey")
+    survey = Survey.new
   
     if survey.save
       @survey_service = SurveyService.new(survey.id)

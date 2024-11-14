@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_13_223900) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_14_221223) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -25,7 +25,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_13_223900) do
 
   create_table "answers", primary_key: "answerID", force: :cascade do |t|
     t.string "answer", limit: 150, null: false
-    t.string "admin_username", null: false
+    t.string "admin_username"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -108,7 +108,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_13_223900) do
 
   create_table "questions", primary_key: "questionID", force: :cascade do |t|
     t.string "question", limit: 150, null: false
-    t.string "admin_username", null: false
+    t.string "admin_username"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -128,7 +128,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_13_223900) do
     t.index ["userID_id"], name: "index_reviews_on_userID_id"
   end
 
-  create_table "surveys", primary_key: "surveyID", force: :cascade do |t|
+  create_table "surveys", id: :bigint, default: -> { "nextval('\"surveys_surveyID_seq\"'::regclass)" }, force: :cascade do |t|
     t.string "userID_id"
     t.integer "questionID_id"
     t.string "answer", limit: 255

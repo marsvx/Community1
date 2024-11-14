@@ -1,74 +1,67 @@
-<!DOCTYPE html>
-<! -- Survey Created for COmmunity Resource -->
+<!-- Survey Created for Community Resource -->
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Survey Form</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Survey Form</title>
 </head>
+<!-- Add stylesheet here (CSS) -->
 
--- add stylesheet here (CSS)
-
-<! -- !!WARNING!! Do NOT modify the function here, it is for the entire survey -->
-<script defer> 
-
-    // going to change this to branching logic and more scaleable.
-    function showNext() {
-    document.getElementById("question1").style.display = "none";
-    document.getElementById("question2").style.display = "block";
+<!-- !!WARNING!! Do NOT modify the function here, it is for the entire survey -->
+<script defer>
+// going to change this to branching logic and more scalable.
+function showNext() {
+  document.getElementById("question1").style.display = "none";
+  document.getElementById("question2").style.display = "block";
 }
 </script>
-  
-<! -- !!END WARNING!!  -->
 
-
+<!-- !!END WARNING!! -->
 <body>
-    <h1>Survey Form</h1>
-    <form action="<%= survey_path %>" method="POST"> 
-     <%= hidden_field_tag :userID_id, current_user.id %> <!-- logged in user -->
-     <%= hidden_field_tag :questionID_id, 1 %> <!-- question 1 -->
-
-      <div id="question1">
+  <h1>Survey Form</h1>
+  <form action="<%= surveys_path %>" method="POST">
+    <% if current_user %>
+      <%= hidden_field_tag :userID_id, current_user.id %> <!-- logged in user -->
+    <% else %>
+      <%= hidden_field_tag :userID_id, nil %> <!-- or leave blank for anonymous -->
+    <% end %>
+    <%= hidden_field_tag :questionID_id, 1 %> <!-- question 1 -->
+    
+    <div id="question1">
       <label for="safety_check">Are you safe?</label><br>
-      
+
       <!-- Yes option -->
       <input type="radio" id="safe_pos" name="safety_check" value="yes" onclick="showNext()">
       <label for="safe_pos">Yes</label><br>
 
       <!-- No Option with Redirection -->
-        <input type="radio" id="safe_neg" name="safety_check" value="no" onclick="redirectToPage()">
-        <label for="safe_neg">No</label><br>
-
+      <input type="radio" id="safe_neg" name="safety_check" value="no" onclick="redirectToPage()">
+      <label for="safe_neg">No</label><br>
       <button type="button" onclick="showNext()">Next</button>
-      </div>
-
-      <!-- Conditional Section Based on Safety Check (Shows if No is selected) -->
-      <script>
-        function redirectToPage() {
+    </div>
+    
+    <!-- Conditional Section Based on Safety Check (Shows if No is selected) -->
+    <script>
+      function redirectToPage() {
         window.location.href = "https://www.example.com"; // Change this URL to your target page
-        }  
-        </script>
+      }
+    </script>
+    
+    <!-- For each question -->
+    <% @questions.each do |question| %>
+      <div class="question">
+        <h2><%= question.question %></h2> <!-- Display the question text -->
 
-     <-- End Conditional --> 
-     <-- For each question -->
-     <%= form_with(url: survey_responses_path, method: :post) do |form| %>
-        <% @questions.each do |question| %>
-          <div class="question">
-            <h2><%= question.body %></h2>
-      
-            <% question.answers.each do |answer| %>
-              <div>
-                <%= form.radio_button :answer_id, answer.id, name: "responses[#{question.id}]" %>
-                <%= form.label :answer_id, answer.body, for: "responses_#{question.id}_#{answer.id}" %>
-              </div>
-            <% end %>
+        <% question.answers.each do |answer| %>
+          <div>
+            <%= radio_button_tag "responses[#{question.id}]", answer.id %>
+            <%= label_tag "responses_#{question.id}_#{answer.id}", answer.answer %>
           </div>
         <% end %>
-      
-        <%= form.submit "Submit Survey" %>
-      <% end %>
+      </div>
+    <% end %>
 
- 
-    </form>
+    <%= submit_tag "Submit Survey" %>
+  </form>
 </body>
 </html>
