@@ -287,7 +287,9 @@ Event.find_or_create_by!(title: "Back-to-School Supply Drive", eventDate: Date.t
   event.user_id = "user6"
   event.admin_id = "admin"
 end
+
 puts "Clearing questions & answers..."
+
 # Clear existing data
 QuestionAnswerRel.delete_all
 Answer.delete_all

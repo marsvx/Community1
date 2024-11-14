@@ -1,9 +1,9 @@
 # app/services/survey_service.rb
 class SurveyService
-    def initialize(survey_id)
-      @survey = Survey.find_by(survey_id)
-      raise ActiveRecord::RecordNotFound, "Survey not found with id #{survey_id}" unless @survey
-    end
+  def initialize(survey_id)
+    @survey = Survey.find_by(id: survey_id)
+    raise ActiveRecord::RecordNotFound, "Survey not found with id #{survey_id}" unless @survey
+  end
   
     def conduct_survey
       Question.find_each do |question|
