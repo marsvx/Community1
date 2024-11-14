@@ -8,7 +8,6 @@ class ApplicationController < ActionController::Base
   before_action :set_current_user
   helper_method :logged_in?
 
-
   def current_user
     @current_user ||= User.find_by(username: session[:user_username]) if session[:user_username]
   end
