@@ -66,9 +66,20 @@ class UsersController < ApplicationController
 
   # DELETE /userlogout - Logout action
   def destroy
-    session[:user_username] = nil  # Clear the session variable
-    reset_session                  # Clear all session data
-    redirect_to root_path, notice: "Successfully logged out."
+    if session[:user_username] == @user.username
+      session[:user_username] = nil
+    end
+    if @user.destroy
+      respond_to do |format|
+        format.html { redirect_to root_path, status: :see_other, notice: "User was successfully deleted." }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to root_path, alert: @user.errors.full_messages.join(", ") }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   private
