@@ -1,4 +1,4 @@
 class QuestionAnswerRel < ApplicationRecord
-  belongs_to :question, foreign_key: "question_ID"
-  belongs_to :answer, foreign_key: "answer_ID"
+  belongs_to :question, foreign_key: "questionID"
+  belongs_to :answer, foreign_key: "answerID"
 end

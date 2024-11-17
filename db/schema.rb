@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_14_221223) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_17_203849) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -104,6 +104,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_14_221223) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "questionID", null: false
+    t.integer "answerID", null: false
   end
 
   create_table "questions", primary_key: "questionID", force: :cascade do |t|
@@ -157,6 +159,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_14_221223) do
   add_foreign_key "events", "users", primary_key: "username"
   add_foreign_key "favorites", "organizations", column: "organizationID_id", primary_key: "email"
   add_foreign_key "favorites", "users", column: "userID_id", primary_key: "username"
+  add_foreign_key "question_answer_rels", "answers", column: "answerID", primary_key: "answerID"
+  add_foreign_key "question_answer_rels", "questions", column: "questionID", primary_key: "questionID"
   add_foreign_key "reviews", "admins", column: "adminID_id", primary_key: "username"
   add_foreign_key "reviews", "organizations", column: "organizationID_id", primary_key: "email"
   add_foreign_key "reviews", "users", column: "userID_id", primary_key: "username"
