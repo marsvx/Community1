@@ -17,8 +17,17 @@ Rails.application.routes.draw do
     resources :surveys
     resources :users
   end
+
+
   resources :favorites
-  resources :reviews
+
+  resources :organizations do
+    resources :reviews, only: [:index, :new, :create]  # Allow adding and viewing reviews for organizations
+    member do
+      get 'explore', to: 'pages#explore', as: 'explore'
+    end
+  end
+
   resources :surveys, only: [:create]
   resources :dependents
   resources :questions
@@ -26,7 +35,6 @@ Rails.application.routes.draw do
   resources :events
   resources :organizations
   resources :password_resets, only: [:new, :create, :edit, :update]
-
   root "pages#home"
   get 'pages/home'
 
