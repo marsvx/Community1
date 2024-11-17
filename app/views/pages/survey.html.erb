@@ -33,7 +33,7 @@
     <!-- Conditional Section Based on Safety Check (Shows if No is selected) -->
     <script>
       function redirectToPage() {
-        window.location.href = "https://www.example.com"; // Change this URL to your target page. 
+        window.location.href = "http://localhost:3000/safety-check"; // Change this URL to your target page. 
       }
     </script>
     
@@ -41,7 +41,8 @@
     <!-- For each question 
     ** NOTE: 
     Each answer belongs to a question via questionanswerrel.
-    Please seed or add for additional questions and answers.-->
+    Please seed or add for additional questions and answers.
+    ** Would like to alter this so this appears AFTER conditional above. -->
     <% @questions.each do |question| %>
       <div class="question">
         <h2><%= question.question %></h2> <!-- Display the question text -->
