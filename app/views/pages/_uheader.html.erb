@@ -32,6 +32,9 @@
             <%= link_to 'Create a profile', new_user_path, class: 'nav-link' %>
           </li>
         <% end %>
+        <li class="nav-item">
+            <%= link_to 'Contact Us', contactus_path, class: 'nav-link' %>
+          </li>
       </ul>
       <% if logged_in? %>
         <ul class="navbar-nav ms-auto"> <!-- ms-auto pushes this to the right -->

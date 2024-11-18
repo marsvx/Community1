@@ -75,7 +75,9 @@ Rails.application.routes.draw do
   # Update route for the PATCH request to submit the form and update the password
   patch 'password_resets/:user_id/edit/:token', to: 'password_resets#update'
 
+  get 'contactus', to: 'contact_form#new'
+  resources :contact_form, only: [:create]
+
   #route for search functionality
   get 'search', to: 'search#index'
-
 end
