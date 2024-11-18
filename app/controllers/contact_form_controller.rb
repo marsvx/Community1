@@ -1,9 +1,5 @@
 class ContactFormController < ApplicationController
     def create
-        if Current.user != nil
-            @name = Current.user.name
-            @email = Current.user.email
-        end
         contact_params = params.require(:contact_form).permit(:name, :email, :message)
         NotifierMailer.simple_message(contact_params).deliver_now
         flash[:notice] = "Thank you for contacting us, we will get back to you soon."
