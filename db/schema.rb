@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_17_085747) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_19_135323) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,19 +23,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_17_085747) do
     t.index ["email"], name: "index_admins_on_email", unique: true
   end
 
-  create_table "categories", primary_key: "abbv", id: { type: :string, limit: 5 }, force: :cascade do |t|
-    t.string "cat_name", limit: 100, null: false
+  create_table "answers", primary_key: "answerID", force: :cascade do |t|
+    t.string "answer", limit: 150, null: false
+    t.string "admin_username"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "classifications", primary_key: "associationID", force: :cascade do |t|
-    t.integer "organizationID_id"
-    t.string "categoryabbr_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["categoryabbr_id"], name: "index_classifications_on_categoryabbr_id"
-    t.index ["organizationID_id"], name: "index_classifications_on_organizationID_id"
   end
 
   create_table "dependents", primary_key: "dependentId", force: :cascade do |t|
@@ -107,6 +99,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_17_085747) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "questionID", null: false
+    t.integer "answerID", null: false
   end
 
   create_table "questions", primary_key: "questionID", force: :cascade do |t|
@@ -131,7 +125,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_17_085747) do
     t.index ["userID_id"], name: "index_reviews_on_userID_id"
   end
 
-  create_table "surveys", primary_key: "surveyID", force: :cascade do |t|
+  create_table "surveys", id: :bigint, default: -> { "nextval('\"surveys_surveyID_seq\"'::regclass)" }, force: :cascade do |t|
     t.string "userID_id"
     t.integer "questionID_id"
     t.string "answer", limit: 255
@@ -163,6 +157,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_17_085747) do
   add_foreign_key "password_resets", "users", primary_key: "username"
   add_foreign_key "reviews", "admins", column: "adminID_id", primary_key: "username", on_delete: :nullify
   add_foreign_key "reviews", "organizations", column: "organizationID_id", primary_key: "organizationId"
+  add_foreign_key "question_answer_rels", "answers", column: "answerID", primary_key: "answerID"
+  add_foreign_key "question_answer_rels", "questions", column: "questionID", primary_key: "questionID"
   add_foreign_key "reviews", "users", column: "userID_id", primary_key: "username"
   add_foreign_key "surveys", "questions", column: "questionID_id", primary_key: "questionID"
   add_foreign_key "surveys", "users", column: "userID_id", primary_key: "username"

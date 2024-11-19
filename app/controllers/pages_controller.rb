@@ -33,4 +33,17 @@ class PagesController < ApplicationController
     session[:explore_category] = 'legal_resources'
     @organizations = Organization.joins(:categories).where(categories: { abbv: 'LEGL' })
   end
-end
+  
+  def survey
+    survey = Survey.new
+  
+    if survey.save
+      @survey_service = SurveyService.new(survey.id)
+      # Preload data needed for the survey view
+      @questions = Question.includes(:answers)
+    else
+      flash[:error] = "Survey could not be created: #{survey.errors.full_messages.join(", ")}"
+      redirect_to root_path # Use a valid path here
+    end
+  end
+end  
