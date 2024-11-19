@@ -14,8 +14,17 @@ Rails.application.routes.draw do
     resources :surveys
     resources :users
   end
+
+
   resources :favorites
-  resources :reviews
+
+  resources :organizations do
+    resources :reviews, only: [:index, :new, :create, :destroy]  # Allow adding and viewing reviews for organizations
+    member do
+      get 'explore', to: 'pages#explore', as: 'explore'
+    end
+  end
+
   resources :surveys, only: [:create]
   resources :survey_responses, only: :create
   resources :dependents
@@ -23,7 +32,8 @@ Rails.application.routes.draw do
   resources :users, param: :username, only: [:index, :new, :create, :show, :edit, :update, :destroy]
   resources :events
   resources :organizations
-  
+  resources :password_resets, only: [:new, :create, :edit, :update]
+  resources :user_organizations, only: [:show]
   root "pages#home"
   get 'pages/home'
 
@@ -62,4 +72,17 @@ Rails.application.routes.draw do
   # Safety check on survey
   get '/safety-check', to: 'safety_check#index', as: 'safety_check'
 
+  get 'forgot_password', to: 'password_resets#new', as: :forgot_password
+  
+  # Edit route for the GET request to display the form
+  get 'password_resets/:user_id/edit/:token', to: 'password_resets#edit', as: :custom_edit_password_reset
+
+  # Update route for the PATCH request to submit the form and update the password
+  patch 'password_resets/:user_id/edit/:token', to: 'password_resets#update'
+
+  get 'contactus', to: 'contact_form#new'
+  resources :contact_form, only: [:create]
+
+  #route for search functionality
+  get 'search', to: 'search#index'
 end

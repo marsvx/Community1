@@ -5,29 +5,35 @@ class PagesController < ApplicationController
   end
   
   def food
-    @organizations = Organization.all
+    session[:explore_category] = 'food'
+    @organizations = Organization.joins(:categories).where(categories: { abbv: 'FOOD' })
   end
 
   def housing
-    @organizations = Organization.all
+    session[:explore_category] = 'housing'
+    @organizations = Organization.joins(:categories).where(categories: { abbv: 'HSG' })
   end
 
   def healthcare
-    @organizations = Organization.all
+    session[:explore_category] = 'healthcare'
+    @organizations = Organization.joins(:categories).where(categories: { abbv: 'HLTH' })
   end
 
   def education
-    @organizations = Organization.all
+    session[:explore_category] = 'education'
+    @organizations = Organization.joins(:categories).where(categories: { abbv: 'EDU' })
   end
 
   def childcare
-    @organizations = Organization.all
+    session[:explore_category] = 'childcare'
+    @organizations = Organization.joins(:categories).where(categories: { abbv: 'CHLD' })
   end
 
   def legal_resources
-    @organizations = Organization.all
+    session[:explore_category] = 'legal_resources'
+    @organizations = Organization.joins(:categories).where(categories: { abbv: 'LEGL' })
   end
-
+  
   def survey
     survey = Survey.new
   
@@ -41,5 +47,3 @@ class PagesController < ApplicationController
     end
   end
 end  
-
-

@@ -32,6 +32,9 @@
             <%= link_to 'Create a profile', new_user_path, class: 'nav-link' %>
           </li>
         <% end %>
+        <li class="nav-item">
+            <%= link_to 'Contact Us', contactus_path, class: 'nav-link' %>
+          </li>
       </ul>
       <% if logged_in? %>
         <ul class="navbar-nav ms-auto"> <!-- ms-auto pushes this to the right -->
@@ -40,20 +43,20 @@
               Account
             </a>
             <ul class="dropdown-menu custom-dropdown-bg" aria-labelledby="accountDropdown">
-              <li><%= link_to 'Profile', "#", class: 'dropdown-item' %></li>
-              <li><%= link_to 'Dependents', "#", class: 'dropdown-item' %></li>
-              <li><%= link_to 'Favorites', "#", class: 'dropdown-item' %></li>
-              <li><%= link_to 'Surveys', "#", class: 'dropdown-item' %></li>
-              <li><%= link_to 'Settings', "#", class: 'dropdown-item' %></li>
+              <li><%= link_to 'Profile', user_path(current_user.username), class: 'dropdown-item' %></li>
+              <li><%= link_to 'Dependents', dependents_path, class: 'dropdown-item' %></li>
+              <li><%= link_to 'Favorites', favorites_path, class: 'dropdown-item' %></li>
+              <li><%= link_to 'Surveys', surveys_path, class: 'dropdown-item' %></li>
+              <li><%= link_to 'Settings', edit_user_path(current_user.username), class: 'dropdown-item' %></li>
               <li><%= link_to 'Logout', logout_path, method: :delete, class: 'dropdown-item' %></li>
             </ul>
           </li>
         </ul>
       <% end %>
-      <form class="d-flex ms-3" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+        <%= form_with(url: search_path, method: :get, local: true, html: { class: 'd-flex ms-3', role: 'search' }) do |form| %>
+          <%= form.text_field :query, placeholder: 'Search', class: 'form-control me-2', aria: { label: 'Search' }, required: true %>
+        <%= form.submit 'Search', class: 'btn btn-outline-success' %>
+      <% end %>
     </div>
   </div>
 </nav>
